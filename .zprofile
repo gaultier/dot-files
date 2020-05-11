@@ -1,6 +1,6 @@
 export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 export EDITOR=nvim
-export LANG="en_US.UTF-8"
 export HISTSIZE=1000000
 export ARCHFLAGS="-arch x86_64"
 
@@ -14,3 +14,4 @@ export PATH="/usr/local/opt/openjdk/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export DOCKER_BUILDKIT=1
 export COMPOSE_DOCKER_CLI_BUILD=1 
+export CFLAGS="-I/usr/local/include/"

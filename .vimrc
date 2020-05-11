@@ -78,16 +78,16 @@ autocmd BufRead,BufNewFile *.nasm setfiletype asm
 set laststatus=2
 " Reset
 set statusline=
-set statusline+=%#PmenuSel#
 set statusline+=%#LineNr#
 set statusline+=\ %f
 " Middle separator
-set statusline+=%=
+set statusline+=\ %=
 set statusline+=\ %p%%
 set statusline+=\ %l:%c
 
 " Remove split bar
-set fillchars+=vert:\ 
+set fillchars=vert:\ 
+set fillchars+=stl:\-
 
 let g:rustfmt_autosave = 1
 
@@ -253,7 +253,7 @@ Plug 'https://github.com/tommcdo/vim-lion'
 Plug 'https://github.com/kana/vim-operator-user'
 " Plug 'dense-analysis/ale'
 " Plug 'https://github.com/Valloric/YouCompleteMe'
-" Plug 'https://github.com/rhysd/vim-clang-format'
+Plug 'https://github.com/rhysd/vim-clang-format'
 " Plug 'https://github.com/luochen1990/rainbow'
 " Plug 'https://github.com/tpope/vim-fireplace', { 'for': 'clojure' }
 " Plug 'https://github.com/venantius/vim-cljfmt', { 'for': 'clojure' }
@@ -264,7 +264,6 @@ Plug 'https://github.com/christoomey/vim-tmux-navigator'
 Plug 'https://github.com/tpope/vim-unimpaired'
 Plug 'wellle/targets.vim'
 Plug 'https://github.com/tpope/vim-surround'
-Plug 'jpalardy/vim-slime'
 Plug 'arzg/vim-colors-xcode'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'

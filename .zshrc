@@ -89,7 +89,7 @@ alias ydl="youtube-dl -f mp4 --restrict-filenames"
 if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
 alias k=kubectl
 alias d=docker
-alias dnuke="docker ps | awk 'NR > 1 {print $1}' | xargs docker stop -t 0"
+alias dnuke="docker ps | awk 'NR > 1 {print \$1}' | xargs docker stop -t 0"
 alias knuke="test $(kubectl config current-context) = 'docker-desktop' && kubectl delete po,svc,ingress,configmap,deploy,replicaset,secret,jobs,cronjobs,ns,statefulsets,role,rolebinding,clusterrole --force --all --grace-period 0 --all-namespaces --ignore-not-found --cascade"
 alias e=$EDITOR
 alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
@@ -105,3 +105,4 @@ prompt pure
 
 # opam configuration
 test -r /Users/pgaultier/.opam/opam-init/init.zsh && . /Users/pgaultier/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+export PATH="/usr/local/opt/llvm/bin:$PATH"
