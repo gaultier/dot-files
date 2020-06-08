@@ -241,7 +241,7 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " Plugins
 call plug#begin('~/.vim/plugged')
 
-Plug 'https://github.com/junegunn/fzf.vim.git'
+Plug 'https://github.com/junegunn/fzf.vim'
 Plug 'https://github.com/markonm/traces.vim'
 Plug 'https://github.com/mbbill/undotree'
 Plug 'https://github.com/tpope/vim-abolish'
