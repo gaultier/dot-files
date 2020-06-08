@@ -94,6 +94,7 @@ alias knuke="test $(kubectl config current-context) = 'docker-desktop' && kubect
 alias e=$EDITOR
 alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
+fpath+=$HOME/.zsh/pure
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 fpath=( "$HOME/.zfunctions" $fpath )
 
