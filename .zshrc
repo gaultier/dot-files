@@ -101,6 +101,7 @@ fpath=( "$HOME/.zfunctions" $fpath )
 # opam configuration
 # test -r /Users/pgaultier/.opam/opam-init/init.zsh && . /Users/pgaultier/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
+fpath+=$HOME/.zsh/pure
 autoload -U promptinit; promptinit
 prompt pure
 

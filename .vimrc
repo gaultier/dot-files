@@ -1,4 +1,4 @@
-let mapleader = '§'
+let mapleader = '`'
 set mouse=a
 set nomodeline
 set modelines=0
@@ -9,7 +9,7 @@ set expandtab
 let tabstop=4
 set shiftwidth=4
 syntax on
-colorscheme default
+" colorscheme default
 
 " pop-up menu options
 highlight Pmenu guibg=NONE
@@ -24,12 +24,10 @@ set ttyfast
 set autowrite
 filetype plugin indent on
 
-if has('nvim')
-    set termguicolors
-endif
+set termguicolors
 
 " autocmd FileType js,ts,tsx ClangFormatAutoDisable
-" autocmd FileType c,cpp,proto ClangFormatAutoEnable
+autocmd FileType c,cpp,proto ClangFormatAutoEnable
 
 nnoremap <leader>cp :let @+ = expand("%:p")<CR>
 nnoremap <leader>cr :let @+ = expand("%")<CR>
@@ -241,6 +239,7 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " Plugins
 call plug#begin('~/.vim/plugged')
 
+Plug 'junegunn/fzf'
 Plug 'https://github.com/junegunn/fzf.vim'
 Plug 'https://github.com/markonm/traces.vim'
 Plug 'https://github.com/mbbill/undotree'
