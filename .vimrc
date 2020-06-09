@@ -9,7 +9,7 @@ set expandtab
 let tabstop=4
 set shiftwidth=4
 syntax on
-colorscheme default
+" colorscheme default
 
 " pop-up menu options
 highlight Pmenu guibg=NONE
