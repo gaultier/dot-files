@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/pgaultier/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -86,7 +86,7 @@ source $ZSH/oh-my-zsh.sh
 
 alias ydl="youtube-dl -f mp4 --restrict-filenames"
 
-if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
+if [ kubectl ]; then source <(kubectl completion zsh); fi
 alias k=kubectl
 alias d=docker
 alias dnuke="docker ps | awk 'NR > 1 {print \$1}' | xargs docker stop -t 0"
@@ -98,13 +98,8 @@ fpath+=$HOME/.zsh/pure
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 fpath=( "$HOME/.zfunctions" $fpath )
 
-# opam configuration
-# test -r /Users/pgaultier/.opam/opam-init/init.zsh && . /Users/pgaultier/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
-
 fpath+=$HOME/.zsh/pure
 autoload -U promptinit; promptinit
 prompt pure
 
-# opam configuration
-test -r /Users/pgaultier/.opam/opam-init/init.zsh && . /Users/pgaultier/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 export PATH="/usr/local/opt/llvm/bin:$PATH"
