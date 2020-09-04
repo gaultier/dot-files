@@ -23,12 +23,17 @@ export CFLAGS="-I/usr/local/include/"
 autoload -Uz compinit
 compinit
 
+ autoload -U up-line-or-beginning-search
+ zle -N up-line-or-beginning-search
+ autoload -U down-line-or-beginning-search
+ zle -N down-line-or-beginning-search
+
 # Set up FZF (Ctrl-T and Ctrl-R)
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Custom key bindings
-bindkey '^[[A' up-line-or-search # up arrow
-bindkey '^[[B' down-line-or-search # down arrow
+bindkey '^[[A' up-line-or-beginning-search # up arrow
+bindkey '^[[B' down-line-or-beginning-search # down arrow
 bindkey '^A' beginning-of-line
 bindkey '^E' end-of-line
 bindkey '^W' backward-kill-word
