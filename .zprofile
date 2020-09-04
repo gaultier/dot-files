@@ -1,3 +1,4 @@
+export PROMPT='%(?..%F{red}✘ %? )%f%F{blue}%B%~%b %(!.#.❯) %f'
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export EDITOR=nvim
@@ -12,6 +13,7 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH=$PATH:$GOPATH/bin:~/go/bin
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/opt/llvm/bin:$PATH"
 export DOCKER_BUILDKIT=1
 export COMPOSE_DOCKER_CLI_BUILD=1 
 export CFLAGS="-I/usr/local/include/"
