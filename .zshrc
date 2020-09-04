@@ -42,6 +42,11 @@ bindkey '^[[1;5C' forward-word # Ctrl + right arrow
 bindkey '^[[1;5D' backward-word # Ctrl + left arrow
 
 # Install stuff if not present already
+if [ ! -d $HOME/.config/nvim ]; then
+    mkdir -p $HOME/.config/nvim
+    ln -s $HOME/.vimrc $HOME/.config/nvim/init.vim
+fi
+
 if [ kubectl ]; then source <(kubectl completion zsh); fi
 
 if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
