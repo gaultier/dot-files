@@ -9,7 +9,6 @@ set expandtab
 let tabstop=4
 set shiftwidth=4
 syntax on
-" colorscheme default
 
 " pop-up menu options
 highlight Pmenu guibg=NONE
@@ -20,31 +19,17 @@ set pumblend=30
 set foldcolumn=0
 set nocursorline
 set ttyfast
-" Save when running :make
 set autowrite
 filetype plugin indent on
 
 set termguicolors
 
-" autocmd FileType js,ts,tsx ClangFormatAutoDisable
 autocmd FileType c,cpp,proto ClangFormatAutoEnable
 
 nnoremap <leader>cp :let @+ = expand("%:p")<CR>
 nnoremap <leader>cr :let @+ = expand("%")<CR>
 nnoremap <leader>cf :let @+ = expand("%:t")<CR>
 
-" let g:ycm_server_python_interpreter="/usr/local/bin/python3"
-" let g:ycm_confirm_extra_conf = 0
-" let g:ycm_use_ultisnips_completer = 0
-" let g:ycm_collect_identifiers_from_tags_files = 1
-" let g:ycm_autoclose_preview_window_after_completion = 1
-" nnoremap <leader>yi  :YcmCompleter GoToInclude<CR>
-" nnoremap <leader>yt  :YcmCompleter GetType<CR>
-" nnoremap <leader>yg :YcmCompleter GoTo<CR>
-" nnoremap <leader>yq :YcmCompleter FixIt<CR>
-" nnoremap <leader>yd :YcmDiags<CR>
-" nnoremap <leader>cc :cclose<CR>
-" nnoremap <leader>co :copen<CR>
 nnoremap <leader>yy "+y<CR>
 
 set rtp+=/usr/local/opt/fzf
@@ -64,13 +49,6 @@ set splitbelow
 set splitright
 
 autocmd BufRead,BufNewFile *.nasm setfiletype asm
-" autocmd BufRead,BufNewFile nginx.conf setfiletype conf
-" autocmd BufRead,BufNewFile *yml* setfiletype yaml
-" autocmd BufRead,BufNewFile *.yml.template setfiletype yaml
-" autocmd BufRead,BufNewFile *.yaml setfiletype yaml
-" autocmd BufRead,BufNewFile *.ts setfiletype javascript
-" autocmd BufRead,BufNewFile Dockerfile* setfiletype Dockerfile
-
 
 " Status bar
 set laststatus=2
@@ -250,13 +228,7 @@ Plug 'https://github.com/tommcdo/vim-exchange'
 Plug 'https://github.com/airblade/vim-gitgutter'
 Plug 'https://github.com/tommcdo/vim-lion'
 Plug 'https://github.com/kana/vim-operator-user'
-" Plug 'dense-analysis/ale'
-" Plug 'https://github.com/Valloric/YouCompleteMe'
 Plug 'https://github.com/rhysd/vim-clang-format'
-" Plug 'https://github.com/luochen1990/rainbow'
-" Plug 'https://github.com/tpope/vim-fireplace', { 'for': 'clojure' }
-" Plug 'https://github.com/venantius/vim-cljfmt', { 'for': 'clojure' }
-" Plug 'https://github.com/bhurlow/vim-parinfer.git', { 'for': 'clojure' }
 Plug 'git://github.com/tpope/vim-repeat.git'
 Plug 'https://github.com/jremmen/vim-ripgrep'
 Plug 'https://github.com/christoomey/vim-tmux-navigator'
