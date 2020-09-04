@@ -238,7 +238,6 @@ Plug 'https://github.com/tpope/vim-surround'
 Plug 'arzg/vim-colors-xcode'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
-Plug 'mhinz/vim-startify'
 Plug 'ziglang/zig.vim'
 " Plug 'neovim/nvim-lsp'
 
