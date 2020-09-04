@@ -53,6 +53,16 @@ if [ ! -f "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim ]; 
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 fi
 
+# Dot files
+if [ ! -d $HOME/.cfg ]; then
+    echo ".cfg" >> $HOME/.gitignore
+    git clone --bare https://github.com/gaultier/dot-files.git --depth 1
+    alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+    config config --local status.showUntrackedFiles no
+    config checkout
+    config reset --hard
+fi
+
 # Aliases
 alias ydl="youtube-dl -f mp4 --restrict-filenames"
 alias k=kubectl
@@ -61,7 +71,6 @@ alias dnuke="docker ps | awk 'NR > 1 {print \$1}' | xargs docker stop -t 0"
 alias knuke="test $(kubectl config current-context) = 'docker-desktop' && kubectl delete po,svc,ingress,configmap,deploy,replicaset,secret,jobs,cronjobs,ns,statefulsets,role,rolebinding,clusterrole --force --all --grace-period 0 --all-namespaces --ignore-not-found --cascade"
 alias e=$EDITOR
 alias l='ls -latr'
-alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias gst='git status'
 alias gco='git checkout'
 alias gd='git diff'
@@ -71,4 +80,5 @@ alias gsu='git submodule update --init --recursive'
 alias gc='git clone --recurse'
 alias gb='git branch'
 alias -g ...='../..'
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
