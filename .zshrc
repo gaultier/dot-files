@@ -60,7 +60,6 @@ if [ ! -d $HOME/.cfg ]; then
     alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
     config config --local status.showUntrackedFiles no
     config checkout
-    config reset --hard
 fi
 
 # Aliases
