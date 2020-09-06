@@ -40,6 +40,7 @@ bindkey '^W' backward-kill-word
 bindkey '^Z' kill-word
 bindkey '^[[1;5C' forward-word # Ctrl + right arrow
 bindkey '^[[1;5D' backward-word # Ctrl + left arrow
+bindkey '^r' history-incremental-search-backward
 
 # Install stuff if not present already
 if [ ! -d $HOME/.config/nvim ]; then
@@ -47,7 +48,11 @@ if [ ! -d $HOME/.config/nvim ]; then
     ln -s $HOME/.vimrc $HOME/.config/nvim/init.vim
 fi
 
-if [ kubectl ]; then source <(kubectl completion zsh); fi
+if type kubectl > /dev/null ; then 
+    source <(kubectl completion zsh);
+    alias k=kubectl
+    alias knuke="test $(kubectl config current-context) = 'docker-desktop' && kubectl delete po,svc,ingress,configmap,deploy,replicaset,secret,jobs,cronjobs,ns,statefulsets,role,rolebinding,clusterrole --force --all --grace-period 0 --all-namespaces --ignore-not-found --cascade"
+fi
 
 if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
     git clone --depth 1 --recurse https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
@@ -61,7 +66,7 @@ fi
 # Dot files
 if [ ! -d $HOME/.cfg ]; then
     echo ".cfg" >> $HOME/.gitignore
-    git clone --bare https://github.com/gaultier/dot-files.git --depth 1
+    git clone --bare https://github.com/gaultier/dot-files.git --depth 1 .cfg
     alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
     config config --local status.showUntrackedFiles no
     config checkout
@@ -69,10 +74,8 @@ fi
 
 # Aliases
 alias ydl="youtube-dl -f mp4 --restrict-filenames"
-alias k=kubectl
 alias d=docker
 alias dnuke="docker ps | awk 'NR > 1 {print \$1}' | xargs docker stop -t 0"
-alias knuke="test $(kubectl config current-context) = 'docker-desktop' && kubectl delete po,svc,ingress,configmap,deploy,replicaset,secret,jobs,cronjobs,ns,statefulsets,role,rolebinding,clusterrole --force --all --grace-period 0 --all-namespaces --ignore-not-found --cascade"
 alias e=$EDITOR
 alias l='ls -latr'
 alias gst='git status'
@@ -83,6 +86,8 @@ alias gl='git pull'
 alias gsu='git submodule update --init --recursive'
 alias gc='git clone --recurse'
 alias gb='git branch'
+alias g='git'
+alias gcam='git commit -am'
 alias -g ...='../..'
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
