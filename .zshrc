@@ -88,6 +88,7 @@ alias gc='git clone --recurse'
 alias gb='git branch'
 alias g='git'
 alias gcam='git commit -am'
+alias gpsup='git push -u origin $(git branch)'
 alias -g ...='../..'
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
