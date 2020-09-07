@@ -1,5 +1,5 @@
 # Env
-export PROMPT='%(?..%F{red}✘ %? )%f%F{blue}%B%~%b %(!.#.❯) %f'
+export PROMPT='%(?..%F{red}✘ %? )%f%F{blue}%B%~%b %(!.#.›) %f'
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export EDITOR=nvim
