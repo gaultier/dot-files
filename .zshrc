@@ -3,6 +3,14 @@ export PROMPT='%(?..%F{red}✘ %? )%f%F{blue}%B%~%b %(!.#.›) %f'
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export EDITOR=nvim
+setopt EXTENDED_HISTORY
+setopt EXTENDED_HISTORY
+setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt share_history
+setopt extended_history       # record timestamp of command in HISTFILE
+export HISTFILE=$HOME/.zsh_history
+export HISTFILESIZE=1000000
 export HISTSIZE=1000000
 export ARCHFLAGS="-arch x86_64"
 
@@ -40,7 +48,8 @@ bindkey '^W' backward-kill-word
 bindkey '^Z' kill-word
 bindkey '^[[1;5C' forward-word # Ctrl + right arrow
 bindkey '^[[1;5D' backward-word # Ctrl + left arrow
-bindkey '^r' history-incremental-search-backward
+# bindkey '^r' history-incremental-search-backward
+bindkey -s '^R' 'history | fzf\n'
 
 # Install stuff if not present already
 if [ ! -d $HOME/.config/nvim ]; then
