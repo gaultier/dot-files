@@ -236,9 +236,10 @@ Plug 'https://github.com/tpope/vim-unimpaired'
 Plug 'wellle/targets.vim'
 Plug 'https://github.com/tpope/vim-surround'
 Plug 'arzg/vim-colors-xcode'
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
 Plug 'ziglang/zig.vim'
+Plug 'fatih/vim-go'
 " Plug 'neovim/nvim-lsp'
 
 " Initialize plugin system

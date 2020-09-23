@@ -49,7 +49,7 @@ bindkey '^Z' kill-word
 bindkey '^[[1;5C' forward-word # Ctrl + right arrow
 bindkey '^[[1;5D' backward-word # Ctrl + left arrow
 # bindkey '^r' history-incremental-search-backward
-bindkey -s '^R' 'history | fzf\n'
+# bindkey -s '^R' 'history | fzf\n'
 
 # Install stuff if not present already
 if [ ! -d $HOME/.config/nvim ]; then
@@ -97,6 +97,7 @@ alias gc='git clone --recurse'
 alias gb='git branch'
 alias g='git'
 alias gcam='git commit -am'
+alias gca='git commit -a'
 alias gpsup=' git push --set-upstream origin $(git branch)'
 alias gwip='git add .; git commit -am "[wip]"'
 alias -g ...='../..'
