@@ -9,6 +9,14 @@ setopt HIST_FIND_NO_DUPS
 setopt HIST_IGNORE_ALL_DUPS
 setopt share_history
 setopt extended_history       # record timestamp of command in HISTFILE
+unsetopt menu_complete   # do not autoselect the first completion entry
+unsetopt flowcontrol
+setopt auto_menu         # show completion menu on successive tab press
+setopt complete_in_word
+setopt always_to_end
+zstyle ':completion:*:*:*:*:*' menu select # highlight current item on tab completion
+# hyphen insensitive, case insensitive completion
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
 export HISTFILE=$HOME/.zsh_history
 export HISTFILESIZE=1000000
 export HISTSIZE=1000000
@@ -23,6 +31,8 @@ export PATH=$PATH:$GOPATH/bin:~/go/bin
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/opt/llvm/bin:$PATH"
+export PATH="/usr/local/opt/ice/libexec/bin:$PATH"
+export PATH="/usr/local/opt/ice/libexec/bin:$PATH"
 export DOCKER_BUILDKIT=1
 export COMPOSE_DOCKER_CLI_BUILD=1
 export CFLAGS="-I/usr/local/include/"

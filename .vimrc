@@ -63,7 +63,6 @@ set statusline+=\ %l:%c
 
 " Remove split bar
 set fillchars=vert:\ 
-set fillchars+=stl:\-
 
 let g:rustfmt_autosave = 1
 
@@ -129,8 +128,8 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+" Use k to show documentation in preview window.
+nnoremap <silent> k :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
