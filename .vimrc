@@ -1,4 +1,9 @@
 let mapleader = '`'
+set noswapfile
+" Enable persistent undo so that undo history persists across vim sessions
+set undofile
+set undodir=~/.vim/undo
+
 set mouse=a
 set nomodeline
 set modelines=0
@@ -8,21 +13,45 @@ set encoding=utf-8
 set expandtab
 let tabstop=4
 set shiftwidth=4
+set splitbelow
+set splitright
 syntax on
-
 " pop-up menu options
 highlight Pmenu guibg=NONE
 set wildoptions=pum
 set pumblend=30
-
-
 set foldcolumn=0
 set nocursorline
 set ttyfast
 set autowrite
+set autoread
+" increase the history limit of
+set history=1000
+" No annoying sound on errors
+set noerrorbells
+set novisualbell
+set termguicolors
+set grepprg=rg
+set updatetime=50
+set selection=inclusive
+" Display 5 lines above/below the cursor when scrolling with a mouse.
+set scrolloff=5
+" Highlight matching pairs of brackets. Use the '%' character to jump between pairs
+set matchpairs+=<:>
+" set 256 color
+set t_Co=256
+" set terminal gui colors
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+" Use system clipboard
+if has('unnamedplus')
+  set clipboard=unnamed,unnamedplus
+endi
 filetype plugin indent on
 
-set termguicolors
 
 autocmd FileType c,cpp,proto ClangFormatAutoEnable
 
@@ -37,16 +66,10 @@ set rtp+=/usr/local/opt/fzf
 nnoremap <c-p> :FZF<cr>
 nnoremap <c-g> :Rg<cr>
 
-set grepprg=rg
 nmap <leader>l :nohl<CR>:lclose<CR>:cclose<CR>
-set selection=inclusive
 let g:indentLine_char = '┊'
-
-set updatetime=50
 let g:gitgutter_enabled = 1
 
-set splitbelow
-set splitright
 
 autocmd BufRead,BufNewFile *.nasm setfiletype asm
 
