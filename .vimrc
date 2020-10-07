@@ -38,6 +38,7 @@ set selection=inclusive
 set scrolloff=5
 " Highlight matching pairs of brackets. Use the '%' character to jump between pairs
 set matchpairs+=<:>
+highlight Comment cterm=italic
 " set 256 color
 set t_Co=256
 " set terminal gui colors
@@ -51,6 +52,25 @@ if has('unnamedplus')
   set clipboard=unnamed,unnamedplus
 endi
 filetype plugin indent on
+" Status bar
+set laststatus=2
+" Reset
+set statusline=
+set statusline+=%#LineNr#
+set statusline+=\ %f
+" Middle separator
+set statusline+=\ %=
+set statusline+=\ %p%%
+set statusline+=\ %l:%c
+
+" Remove split bar
+set fillchars=vert:\ 
+set hidden
+
+" Some servers have issues with backup files, see #649.
+set nobackup
+set nowritebackup
+
 
 
 autocmd FileType c,cpp,proto ClangFormatAutoEnable
@@ -73,19 +93,6 @@ let g:gitgutter_enabled = 1
 
 autocmd BufRead,BufNewFile *.nasm setfiletype asm
 
-" Status bar
-set laststatus=2
-" Reset
-set statusline=
-set statusline+=%#LineNr#
-set statusline+=\ %f
-" Middle separator
-set statusline+=\ %=
-set statusline+=\ %p%%
-set statusline+=\ %l:%c
-
-" Remove split bar
-set fillchars=vert:\ 
 
 let g:rustfmt_autosave = 1
 
@@ -94,13 +101,6 @@ let g:xcodedark_emph_idents = 0
 let g:xcodedark_emph_types = 0
 
 " Coc config
-" TextEdit might fail if hidden is not set.
-set hidden
-
-" Some servers have issues with backup files, see #649.
-set nobackup
-set nowritebackup
-
 " Give more space for displaying messages.
 set cmdheight=2
 
