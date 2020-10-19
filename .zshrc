@@ -29,7 +29,7 @@ export REGISTRY_URI=926410074249.dkr.ecr.eu-central-1.amazonaws.com
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
-export PATH="/usr/local/opt/llvm/bin:$PATH"
+# export PATH="/usr/local/opt/llvm/bin:$PATH"
 export PATH="/usr/local/opt/ice/libexec/bin:$PATH"
 export PATH="/usr/local/opt/ice/libexec/bin:$PATH"
 export DOCKER_BUILDKIT=1
@@ -113,4 +113,3 @@ alias gwip='git add .; git commit -am "[wip]"'
 alias gcl='git clone --depth 1 --recurse'
 alias -g ...='../..'
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-
