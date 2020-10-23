@@ -50,6 +50,11 @@ compinit
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Custom key bindings
+# Edit the current command line in $EDITOR
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '\C-x\C-e' edit-command-line
+
 bindkey '^[[A' up-line-or-beginning-search # up arrow
 bindkey '^[[B' down-line-or-beginning-search # down arrow
 bindkey '^A' beginning-of-line
