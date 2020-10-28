@@ -29,9 +29,14 @@ export REGISTRY_URI=926410074249.dkr.ecr.eu-central-1.amazonaws.com
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/opt/llvm/bin:$PATH"
 # export PATH="/usr/local/opt/llvm/bin:$PATH"
 export PATH="/usr/local/opt/ice/libexec/bin:$PATH"
 export PATH="/usr/local/opt/ice/libexec/bin:$PATH"
+export LDFLAGS="-L/usr/local/opt/llvm/lib"
+export CPPFLAGS="-I/usr/local/opt/llvm/include"
+export CXXFLAGS="$CPPFLAGS"
+export CFLAGS="$CPPFLAGS"
 export DOCKER_BUILDKIT=1
 export COMPOSE_DOCKER_CLI_BUILD=1
 export CFLAGS="-I/usr/local/include/"
@@ -96,25 +101,6 @@ if [ ! -d $HOME/.cfg ]; then
     config checkout
 fi
 
-# Aliases
-alias ydl="youtube-dl -f mp4 --restrict-filenames"
-alias d=docker
-alias dnuke="docker ps | awk 'NR > 1 {print \$1}' | xargs docker stop -t 0"
-alias e=$EDITOR
-alias l='ls -latr'
-alias gst='git status'
-alias gco='git checkout'
-alias gd='git diff'
-alias gp='git push'
-alias gl='git pull'
-alias gsu='git submodule update --init --recursive'
-alias gc='git clone --recurse'
-alias gb='git branch'
-alias g='git'
-alias gcam='git commit -am'
-alias gca='git commit -a'
 alias gpsup='git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)'
-alias gwip='git add .; git commit -am "[wip]"'
-alias gcl='git clone --depth 1 --recurse'
-alias -g ...='../..'
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+
+source $HOME/.aliases
