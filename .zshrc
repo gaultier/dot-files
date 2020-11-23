@@ -33,14 +33,15 @@ export PATH="/usr/local/opt/llvm/bin:$PATH"
 # export PATH="/usr/local/opt/llvm/bin:$PATH"
 export PATH="/usr/local/opt/ice/libexec/bin:$PATH"
 export PATH="/usr/local/opt/ice/libexec/bin:$PATH"
-export LDFLAGS="-L/usr/local/opt/llvm/lib"
-export CPPFLAGS="-I/usr/local/opt/llvm/include"
+export LDFLAGS="-L/usr/local/lib -L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib"
+export CPPFLAGS="-I/usr/local/include -I/usr/local/opt/llvm/include" 
 export CXXFLAGS="$CPPFLAGS"
 export CFLAGS="$CPPFLAGS"
 export DOCKER_BUILDKIT=1
 export COMPOSE_DOCKER_CLI_BUILD=1
 export CFLAGS="-I/usr/local/include/"
 export PATH=$PATH:$GOPATH/bin:$HOME/go/bin
+export SCCACHE_REDIS="redis://host.docker.internal"
 
 # Load autocompletions
 autoload -Uz compinit
@@ -66,10 +67,6 @@ bindkey '^A' beginning-of-line
 bindkey '^E' end-of-line
 bindkey '^W' backward-kill-word
 bindkey '^Z' kill-word
-bindkey '^[[1;5C' forward-word # Ctrl + right arrow
-bindkey '^[[1;5D' backward-word # Ctrl + left arrow
-# bindkey '^r' history-incremental-search-backward
-# bindkey -s '^R' 'history | fzf\n'
 
 # Install stuff if not present already
 if [ ! -d $HOME/.config/nvim ]; then
@@ -101,6 +98,26 @@ if [ ! -d $HOME/.cfg ]; then
     config checkout
 fi
 
+# Aliases
+alias ydl="youtube-dl -f mp4 --restrict-filenames"
+alias d=docker
+alias dnuke="docker ps | awk 'NR > 1 {print \$1}' | xargs docker stop -t 0"
+alias e=$EDITOR
+alias l='ls -latr'
+alias gst='git status'
+alias gsti='git status --ignore-submodules'
+alias gco='git checkout'
+alias gd='git diff'
+alias gp='git push'
+alias gl='git pull'
+alias gsu='git submodule update --init --recursive'
+alias gc='git clone --recurse'
+alias gb='git branch'
+alias g='git'
+alias gcam='git commit -am'
+alias gca='git commit -a'
+alias gwip='git add .; git commit -am "[wip]"'
+alias gcl='git clone --depth 1 --recurse'
 alias gpsup='git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)'
-
-source $HOME/.aliases
+alias ...='cd ../..'
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
