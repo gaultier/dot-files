@@ -18,8 +18,8 @@ zstyle ':completion:*:*:*:*:*' menu select # highlight current item on tab compl
 # hyphen insensitive, case insensitive completion
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
 export HISTFILE=$HOME/.zsh_history
-export HISTFILESIZE=1000000
-export HISTSIZE=1000000
+export HISTFILESIZE=1000000000
+export HISTSIZE=1000000000
 export ARCHFLAGS="-arch x86_64"
 
 export FZF_DEFAULT_COMMAND="fd --type f"
@@ -67,6 +67,8 @@ bindkey '^A' beginning-of-line
 bindkey '^E' end-of-line
 bindkey '^W' backward-kill-word
 bindkey '^Z' kill-word
+bindkey '^[[1;5C' forward-word # Ctrl + right arrow
+bindkey '^[[1;5D' backward-word # Ctrl + left arrow
 
 # Install stuff if not present already
 if [ ! -d $HOME/.config/nvim ]; then
