@@ -41,11 +41,11 @@ set matchpairs+=<:>
 highlight Comment cterm=italic
 " set 256 color
 set t_Co=256
+let &t_ut=''
 " set terminal gui colors
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
 endif
 " Use system clipboard
 if has('unnamedplus')

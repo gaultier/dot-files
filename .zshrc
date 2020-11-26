@@ -3,6 +3,7 @@ export PROMPT='%(?..%F{red}✘ %? )%f%F{blue}%B%~%b %(!.#.›) %f'
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export EDITOR=nvim
+export VISUAL=nvim
 setopt EXTENDED_HISTORY
 setopt EXTENDED_HISTORY
 setopt HIST_FIND_NO_DUPS
@@ -33,8 +34,11 @@ export PATH="/usr/local/opt/llvm/bin:$PATH"
 # export PATH="/usr/local/opt/llvm/bin:$PATH"
 export PATH="/usr/local/opt/ice/libexec/bin:$PATH"
 export PATH="/usr/local/opt/ice/libexec/bin:$PATH"
-export LDFLAGS="-L/usr/local/lib -L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib"
-export CPPFLAGS="-I/usr/local/include -I/usr/local/opt/llvm/include" 
+export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
+export LD_LIBRARY_PATH="/usr/local/lib:/usr/local/opt/llvm/lib:/usr/local/opt/llvm/lib:/usr/local/opt/mysql@5.6/lib"
+export LDFLAGS="-L/usr/local/lib -L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib -L/usr/local/opt/mysql@5.6/lib"
+export CPPFLAGS="-I/usr/local/include -I/usr/local/opt/llvm/include -I/usr/local/opt/mysql@5.6/include"
+export C_INCLUDE_PATH="/usr/local/include:/usr/local/opt/llvm/include:/usr/local/opt/mysql@5.6/include"
 export CXXFLAGS="$CPPFLAGS"
 export CFLAGS="$CPPFLAGS"
 export DOCKER_BUILDKIT=1
@@ -123,3 +127,4 @@ alias gcl='git clone --depth 1 --recurse'
 alias gpsup='git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)'
 alias ...='cd ../..'
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+if [ -e /Users/pgaultier/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/pgaultier/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
