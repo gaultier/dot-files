@@ -23,8 +23,6 @@ export HISTFILESIZE=1000000000
 export HISTSIZE=1000000000
 export ARCHFLAGS="-arch x86_64"
 
-export FZF_DEFAULT_COMMAND="fd --type f"
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export REGISTRY_URI=926410074249.dkr.ecr.eu-central-1.amazonaws.com
 
 export PATH="$HOME/.cargo/bin:$PATH"
@@ -56,9 +54,6 @@ compinit
  autoload -U down-line-or-beginning-search
  zle -N down-line-or-beginning-search
 
-# Set up FZF (Ctrl-T and Ctrl-R)
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 # Custom key bindings
 # Edit the current command line in $EDITOR
 autoload -U edit-command-line
@@ -73,6 +68,32 @@ bindkey '^W' backward-kill-word
 bindkey '^Z' kill-word
 bindkey '^[[1;5C' forward-word # Ctrl + right arrow
 bindkey '^[[1;5D' backward-word # Ctrl + left arrow
+
+search_history() {
+  local selected num
+  setopt localoptions noglobsubst noposixbuiltins pipefail no_aliases 2> /dev/null
+  selected=( $(fc -rl 1 | awk '{if (!seen[$2]++) {print $0} }' | fzy) )
+  local ret=$?
+  if [ -n "$selected" ]; then
+    num=$selected[1]
+    if [ -n "$num" ]; then
+      zle vi-fetch-history -n $num
+    fi
+  fi
+  zle reset-prompt
+  return $ret
+}
+zle -N search_history
+bindkey '^R' search_history
+
+search_files() {
+  LBUFFER="${LBUFFER}$(fd -t f | fzy)"
+  local ret=$?
+  zle reset-prompt
+  return $ret
+}
+zle -N search_files
+bindkey '^T' search_files
 
 # Install stuff if not present already
 if [ ! -d $HOME/.config/nvim ]; then
