@@ -71,7 +71,8 @@ set hidden
 set nobackup
 set nowritebackup
 
-
+nmap <c-k> <C-w>k
+nmap <c-j> <C-w>j
 
 autocmd FileType c,cpp,proto ClangFormatAutoEnable
 
@@ -253,7 +254,7 @@ Plug 'https://github.com/kana/vim-operator-user'
 Plug 'https://github.com/rhysd/vim-clang-format'
 Plug 'git://github.com/tpope/vim-repeat.git'
 Plug 'https://github.com/jremmen/vim-ripgrep'
-Plug 'https://github.com/christoomey/vim-tmux-navigator'
+" Plug 'https://github.com/christoomey/vim-tmux-navigator'
 Plug 'https://github.com/tpope/vim-unimpaired'
 Plug 'wellle/targets.vim'
 Plug 'https://github.com/tpope/vim-surround'
