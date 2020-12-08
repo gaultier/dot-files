@@ -4,12 +4,14 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export EDITOR=nvim
 export VISUAL=nvim
-setopt EXTENDED_HISTORY
-setopt EXTENDED_HISTORY
-setopt HIST_FIND_NO_DUPS
-setopt HIST_IGNORE_ALL_DUPS
-setopt share_history
 setopt extended_history       # record timestamp of command in HISTFILE
+setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt hist_ignore_dups       # ignore duplicated commands history list
+setopt hist_ignore_space      # ignore commands that start with space
+setopt hist_verify            # show command with history expansion to user before running it
+setopt share_history          # share command history data
+setopt hist_find_no_dups
+setopt hist_ignore_all_dups
 unsetopt menu_complete   # do not autoselect the first completion entry
 unsetopt flowcontrol
 setopt auto_menu         # show completion menu on successive tab press
@@ -19,8 +21,8 @@ zstyle ':completion:*:*:*:*:*' menu select # highlight current item on tab compl
 # hyphen insensitive, case insensitive completion
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
 export HISTFILE=$HOME/.zsh_history
-export HISTFILESIZE=1000000000
 export HISTSIZE=1000000000
+export SAVEHIST=100000
 export ARCHFLAGS="-arch x86_64"
 
 export REGISTRY_URI=926410074249.dkr.ecr.eu-central-1.amazonaws.com
@@ -29,13 +31,12 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/opt/llvm/bin:$PATH"
-# export PATH="/usr/local/opt/llvm/bin:$PATH"
 export PATH="/usr/local/opt/ice/libexec/bin:$PATH"
 export PATH="/usr/local/opt/ice/libexec/bin:$PATH"
 export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
 export LD_LIBRARY_PATH="/usr/local/lib:/usr/local/opt/llvm/lib:/usr/local/opt/llvm/lib:/usr/local/opt/mysql@5.6/lib"
-export LDFLAGS="-L/usr/local/lib -L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib -L/usr/local/opt/mysql@5.6/lib"
-export CPPFLAGS="-I/usr/local/include -I/usr/local/opt/llvm/include -I/usr/local/opt/mysql@5.6/include"
+export LDFLAGS="-L/usr/lib/ -L/usr/local/lib/ -L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib -L/usr/local/opt/mysql@5.6/lib"
+export CPPFLAGS="-I/usr/include/ -I/usr/local/include -I/usr/local/opt/llvm/include -I/usr/local/opt/mysql@5.6/include" 
 export C_INCLUDE_PATH="/usr/local/include:/usr/local/opt/llvm/include:/usr/local/opt/mysql@5.6/include"
 export CXXFLAGS="$CPPFLAGS"
 export CFLAGS="$CPPFLAGS"
