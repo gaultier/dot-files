@@ -83,9 +83,12 @@ nnoremap <leader>cf :let @+ = expand("%:t")<CR>
 nnoremap <leader>yy "+y<CR>
 
 set rtp+=/usr/local/opt/fzf
-
+let g:fzf_preview_window = ['right:50%', 'ctrl-/']
 nnoremap <c-p> :FZF<cr>
 nnoremap <c-g> :Rg<cr>
+nnoremap <c-l> :Lines<cr>
+nnoremap <c-_> :GFiles<cr>
+nnoremap <leader>d :GFiles?<cr>
 
 nmap <leader>l :nohl<CR>:lclose<CR>:cclose<CR>
 let g:indentLine_char = '┊'
@@ -93,6 +96,7 @@ let g:gitgutter_enabled = 1
 
 
 autocmd BufRead,BufNewFile *.nasm setfiletype asm
+autocmd BufRead,BufNewFile *.ice setfiletype cpp
 
 
 let g:rustfmt_autosave = 1
@@ -240,8 +244,6 @@ nmap <leader>qf  <Plug>(coc-fix-current)
 " Plugins
 call plug#begin('~/.vim/plugged')
 
-Plug 'junegunn/fzf'
-Plug 'https://github.com/junegunn/fzf.vim'
 Plug 'https://github.com/markonm/traces.vim'
 Plug 'https://github.com/mbbill/undotree'
 Plug 'https://github.com/tpope/vim-abolish'
@@ -253,7 +255,6 @@ Plug 'https://github.com/tommcdo/vim-lion'
 Plug 'https://github.com/kana/vim-operator-user'
 Plug 'https://github.com/rhysd/vim-clang-format'
 Plug 'git://github.com/tpope/vim-repeat.git'
-Plug 'https://github.com/jremmen/vim-ripgrep'
 " Plug 'https://github.com/christoomey/vim-tmux-navigator'
 Plug 'https://github.com/tpope/vim-unimpaired'
 Plug 'wellle/targets.vim'
@@ -263,7 +264,16 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
 Plug 'ziglang/zig.vim'
 Plug 'fatih/vim-go'
+Plug 'https://github.com/tpope/vim-fugitive'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 " Plug 'neovim/nvim-lsp'
+
+" Override :Rg
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --hidden --column --line-number --no-heading --color=always --smart-case '.<q-args> , 1,
+  \   fzf#vim#with_preview(), <bang>0)
 
 " Initialize plugin system
 call plug#end()

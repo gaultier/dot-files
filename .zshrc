@@ -45,6 +45,8 @@ export COMPOSE_DOCKER_CLI_BUILD=1
 export CFLAGS="-I/usr/local/include/"
 export PATH=$PATH:$GOPATH/bin:$HOME/go/bin
 export SCCACHE_REDIS="redis://host.docker.internal"
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 
 # Load autocompletions
 autoload -Uz compinit
