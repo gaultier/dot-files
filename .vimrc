@@ -19,7 +19,7 @@ syntax on
 " pop-up menu options
 highlight Pmenu guibg=NONE
 set wildoptions=pum
-set pumblend=30
+set pumblend=10
 set foldcolumn=0
 set nocursorline
 set ttyfast
