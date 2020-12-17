@@ -259,10 +259,9 @@ Plug 'git://github.com/tpope/vim-repeat.git'
 Plug 'https://github.com/tpope/vim-unimpaired'
 Plug 'wellle/targets.vim'
 Plug 'https://github.com/tpope/vim-surround'
-Plug 'arzg/vim-colors-xcode'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
-Plug 'ziglang/zig.vim'
+" Plug 'ziglang/zig.vim'
 Plug 'fatih/vim-go'
 Plug 'https://github.com/tpope/vim-fugitive'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -272,7 +271,7 @@ Plug 'junegunn/fzf.vim'
 " Override :Rg
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
-  \   'rg --hidden --column --line-number --no-heading --color=always --smart-case '.<q-args> , 1,
+  \   'rg --hidden --column --line-number --no-heading --color=always --smart-case --hidden -- '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview(), <bang>0)
 
 " Initialize plugin system
