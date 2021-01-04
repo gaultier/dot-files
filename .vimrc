@@ -271,7 +271,7 @@ Plug 'junegunn/fzf.vim'
 " Override :Rg
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
-  \   'rg --hidden --column --line-number --no-heading --color=always --smart-case --hidden -- '.shellescape(<q-args>), 1,
+  \   'rg --hidden --column --line-number --no-heading --color=always --smart-case --hidden '. <q-args>, 1,
   \   fzf#vim#with_preview(), <bang>0)
 
 " Initialize plugin system
