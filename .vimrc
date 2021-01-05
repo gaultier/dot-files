@@ -266,6 +266,7 @@ Plug 'fatih/vim-go'
 Plug 'https://github.com/tpope/vim-fugitive'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'https://github.com/tpope/vim-abolish'
 " Plug 'neovim/nvim-lsp'
 
 " Override :Rg
