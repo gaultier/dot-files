@@ -86,7 +86,7 @@ set rtp+=/usr/local/opt/fzf
 let g:fzf_preview_window = ['right:50%', 'ctrl-/']
 nnoremap <c-p> :FZF<cr>
 nnoremap <c-g> :Rg<cr>
-nnoremap <c-l> :Lines<cr>
+" nnoremap <c-l> :Lines<cr>
 nnoremap <c-_> :GFiles<cr>
 nnoremap <leader>d :GFiles?<cr>
 
