@@ -214,6 +214,8 @@ colors:
   #  text: '0xeaeaea'
   #  background: '0x404040'
 
+
+
   # Normal colors
   normal:
     black:   '0x383b45'
@@ -224,6 +226,7 @@ colors:
     magenta: '0xb73999'
     cyan:    '0x00aba4'
     white:   '0xe7e8eb'
+    gray: '0x8884c5'
 
   # Bright colors
   bright:
@@ -235,6 +238,7 @@ colors:
     magenta: '0xb73999'
     cyan:    '0x00aba4'
     white:   '0xe7e8eb'
+    gray: '0x8884c5'
 
   # Dim colors
   #
@@ -258,7 +262,10 @@ colors:
   # Example:
   #   `- { index: 16, color: '0xff00ff' }`
   #
-  #indexed_colors: []
+  # indexed_colors:     
+  # - index: 37
+  #   color: '0x94c66e'
+
 
 # Visual Bell
 #

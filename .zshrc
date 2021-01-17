@@ -31,14 +31,12 @@ export REGISTRY_URI=926410074249.dkr.ecr.eu-central-1.amazonaws.com
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
-export PATH="/usr/local/opt/llvm/bin:$PATH"
 export PATH="/usr/local/opt/ice/libexec/bin:$PATH"
 export PATH="/usr/local/opt/ice/libexec/bin:$PATH"
-export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
-export LD_LIBRARY_PATH="/usr/local/lib:/usr/local/opt/llvm/lib:/usr/local/opt/llvm/lib:/usr/local/opt/mysql@5.6/lib"
-export LDFLAGS="-L/usr/lib/ -L/usr/local/lib/ -L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib -L/usr/local/opt/mysql@5.6/lib"
-export CPPFLAGS="-I/usr/include/ -I/usr/local/include -I/usr/local/opt/llvm/include -I/usr/local/opt/mysql@5.6/include" 
-export C_INCLUDE_PATH="/usr/local/include:/usr/local/opt/llvm/include:/usr/local/opt/mysql@5.6/include"
+export LD_LIBRARY_PATH="/usr/local/lib"
+export LDFLAGS="-L/usr/lib/ -L/usr/local/lib/ "
+export CPPFLAGS="-I/usr/include/ -I/usr/local/include " 
+export C_INCLUDE_PATH="/usr/local/include"
 export CXXFLAGS="$CPPFLAGS"
 export CFLAGS="$CPPFLAGS"
 export DOCKER_BUILDKIT=1
@@ -74,31 +72,31 @@ bindkey '^Z' kill-word
 bindkey '^[[1;5C' forward-word # Ctrl + right arrow
 bindkey '^[[1;5D' backward-word # Ctrl + left arrow
 
-search_history() {
-  local selected num
-  setopt localoptions noglobsubst noposixbuiltins pipefail no_aliases 2> /dev/null
-  selected=( $(fc -rl 1 | awk '{if (!seen[$2]++) {print $0} }' | fzy) )
-  local ret=$?
-  if [ -n "$selected" ]; then
-    num=$selected[1]
-    if [ -n "$num" ]; then
-      zle vi-fetch-history -n $num
-    fi
-  fi
-  zle reset-prompt
-  return $ret
-}
-zle -N search_history
-bindkey '^R' search_history
+# search_history() {
+#   local selected num
+#   setopt localoptions noglobsubst noposixbuiltins pipefail no_aliases 2> /dev/null
+#   selected=( $(fc -rl 1 | awk '{if (!seen[$2]++) {print $0} }' | fzy) )
+#   local ret=$?
+#   if [ -n "$selected" ]; then
+#     num=$selected[1]
+#     if [ -n "$num" ]; then
+#       zle vi-fetch-history -n $num
+#     fi
+#   fi
+#   zle reset-prompt
+#   return $ret
+# }
+# zle -N search_history
+# bindkey '^R' search_history
 
-search_files() {
-  LBUFFER="${LBUFFER}$(fd -t f | fzy)"
-  local ret=$?
-  zle reset-prompt
-  return $ret
-}
-zle -N search_files
-bindkey '^T' search_files
+# search_files() {
+#   LBUFFER="${LBUFFER}$(fd -t f | fzy)"
+#   local ret=$?
+#   zle reset-prompt
+#   return $ret
+# }
+# zle -N search_files
+# bindkey '^T' search_files
 
 # Install stuff if not present already
 if [ ! -d $HOME/.config/nvim ]; then
@@ -112,23 +110,19 @@ if type kubectl > /dev/null ; then
     alias knuke="test $(kubectl config current-context) = 'docker-desktop' && kubectl delete po,svc,ingress,configmap,deploy,replicaset,secret,jobs,cronjobs,ns,statefulsets,role,rolebinding,clusterrole --force --all --grace-period 0 --all-namespaces --ignore-not-found --cascade"
 fi
 
-if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
-    git clone --depth 1 --recurse https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-fi
-
 if [ ! -f "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim ]; then
     sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 fi
 
 # Dot files
-if [ ! -d $HOME/.cfg ]; then
-    echo ".cfg" >> $HOME/.gitignore
-    git clone --bare https://github.com/gaultier/dot-files.git --depth 1 .cfg
-    alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-    config config --local status.showUntrackedFiles no
-    config checkout
-fi
+# if [ ! -d $HOME/.cfg ]; then
+#     echo ".cfg" >> $HOME/.gitignore
+#     git clone --bare https://github.com/gaultier/dot-files.git --depth 1 .cfg
+#     alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+#     config config --local status.showUntrackedFiles no
+#     config checkout
+# fi
 
 # Aliases
 alias ydl="youtube-dl -f mp4 --restrict-filenames"
@@ -152,5 +146,8 @@ alias gwip='git add .; git commit -am "[wip]"'
 alias gcl='git clone --depth 1 --recurse'
 alias gpsup='git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)'
 alias ...='cd ../..'
+alias fd=fdfind
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 if [ -e /Users/pgaultier/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/pgaultier/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+source /opt/pkg/share/fzf/shell/key-bindings.zsh
