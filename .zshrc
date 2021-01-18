@@ -146,7 +146,10 @@ alias gwip='git add .; git commit -am "[wip]"'
 alias gcl='git clone --depth 1 --recurse'
 alias gpsup='git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)'
 alias ...='cd ../..'
-alias fd=fdfind
+if [ ! `which fdfind >/dev/null 2>&1` ]; then 
+  alias fd=fdfind
+fi
+
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 if [ -e /Users/pgaultier/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/pgaultier/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
