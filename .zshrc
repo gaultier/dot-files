@@ -146,7 +146,7 @@ alias gwip='git add .; git commit -am "[wip]"'
 alias gcl='git clone --depth 1 --recurse'
 alias gpsup='git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)'
 alias ...='cd ../..'
-if [ ! `which fdfind >/dev/null 2>&1` ]; then 
+if [ `which fdfind >/dev/null 2>&1` ]; then 
   alias fd=fdfind
 fi
 
