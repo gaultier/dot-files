@@ -1,0 +1,13 @@
+.cfg
+build/
+.build/
+compile_commands.json
+.clangd
+notmycode/**
+go
+.sccache*
+CMakeFiles
+.cache/
+etc/local.conf
+.ignore
+.nvimlog
