@@ -17,3 +17,5 @@
 		file-style = yellow
 [url "ssh://git@gitlab.ppro.com/"]
 			insteadOf = https://gitlab.ppro.com/
+[url "git@gitlab.ppro.com:"]
+	insteadOf = https://gitlab.ppro.com/

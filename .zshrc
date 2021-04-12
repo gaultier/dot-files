@@ -33,10 +33,18 @@ export PATH="/usr/local/opt/openjdk/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/opt/ice/libexec/bin:$PATH"
 export PATH="/usr/local/opt/ice/libexec/bin:$PATH"
-export LD_LIBRARY_PATH="/usr/local/lib:/opt/pkg/lib/"
-export LDFLAGS="-L/usr/lib/ -L/usr/local/lib/ -L/opt/pkg/lib"
-export CPPFLAGS="-I/usr/include/ -I/usr/local/include -I/opt/pkg/include " 
-export C_INCLUDE_PATH="/usr/local/include:/opt/pkg/include"
+export PATH="/usr/local/rmg/buildenv/:$PATH"
+export PATH="/usr/local/rmg/bin/:$PATH"
+export PATH="/usr/local/opt/icu4c/bin:$PATH"
+export PATH="/usr/local/opt/icu4c/sbin:$PATH"
+export PATH="/usr/local/opt/llvm/bin:$PATH"
+export COMPILEHOST=build.dev.techops.eu
+export RMG_BUILDENV_PROJECT_DIRS="$HOME/projects"
+export LD_LIBRARY_PATH="/usr/local/lib:/usr/local/opt/openssl@1.1/lib"
+export LDFLAGS="-L/usr/local/lib/ -L/usr/local/opt/openssl@1.1/lib -L/usr/local/opt/icu4c/lib"
+export CPPFLAGS="-I/usr/local/include -I/usr/local/opt/openssl@1.1/include -I/usr/local/opt/icu4c/include" 
+export PKG_CONFIG_PATH="/usr/local/opt/icu4c/lib/pkgconfig:$PKG_CONFIG_PATH"
+export C_INCLUDE_PATH=""
 export CXXFLAGS="$CPPFLAGS"
 export CFLAGS="$CPPFLAGS"
 export DOCKER_BUILDKIT=1
@@ -46,7 +54,8 @@ export PATH=$PATH:$GOPATH/bin:$HOME/go/bin
 export SCCACHE_REDIS="redis://host.docker.internal"
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
-export MANPAGER="nvim -c 'set ft=man' -"
+export COMPOSE_DOCKER_CLI_BUILD=1 
+export DOCKER_BUILDKIT=1
 
 # Load autocompletions
 autoload -Uz compinit
@@ -151,5 +160,11 @@ if [ `which fdfind >/dev/null 2>&1` ]; then
 fi
 
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias vim=nvim
 
-if [ -f /opt/pkg/share/fzf/shell/key-bindings.zsh ]; then source /opt/pkg/share/fzf/shell/key-bindings.zsh; fi
+# if [ -f /opt/pkg/share/fzf/shell/key-bindings.zsh ]; then source /opt/pkg/share/fzf/shell/key-bindings.zsh; fi
+source /usr/local/opt/fzf/shell/completion.zsh
+source /usr/local/opt/fzf/shell/key-bindings.zsh
+export PATH="/usr/local/opt/python@3.7/bin:$PATH"
+
+if [ -f ~/.gitlabtoken ]; then source ~/.gitlabtoken; fi
