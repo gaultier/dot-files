@@ -11,3 +11,4 @@ CMakeFiles
 etc/local.conf
 .ignore
 .nvimlog
+__pycache__

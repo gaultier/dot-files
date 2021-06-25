@@ -1,5 +1,6 @@
 # Env
 export PROMPT='%(?..%F{red}✘ %? )%f%F{blue}%B%~%b %(!.#.›) %f'
+export TERM=screen-256color
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export EDITOR=nvim
@@ -40,9 +41,9 @@ export PATH="/usr/local/opt/icu4c/sbin:$PATH"
 export PATH="/usr/local/opt/llvm/bin:$PATH"
 export COMPILEHOST=build.dev.techops.eu
 export RMG_BUILDENV_PROJECT_DIRS="$HOME/projects"
-export LD_LIBRARY_PATH="/usr/local/lib:/usr/local/opt/openssl@1.1/lib"
-export LDFLAGS="-L/usr/local/lib/ -L/usr/local/opt/openssl@1.1/lib -L/usr/local/opt/icu4c/lib"
-export CPPFLAGS="-I/usr/local/include -I/usr/local/opt/openssl@1.1/include -I/usr/local/opt/icu4c/include" 
+export LD_LIBRARY_PATH="/usr/local/lib:/usr/local/opt/openssl@1.1/lib:/usr/local/opt/mysql@5.6/lib/"
+export LDFLAGS="-L/usr/local/lib/ -L/usr/local/opt/openssl@1.1/lib -L/usr/local/opt/icu4c/lib -L/usr/local/opt/mysql@5.6/lib/ -L/usr/local/opt/llvm/lib"
+export CPPFLAGS="-I/usr/local/include -I/usr/local/opt/openssl@1.1/include -I/usr/local/opt/icu4c/include -I /usr/local/opt/mysql@5.6/include/ -I/usr/local/opt/llvm/include" 
 export PKG_CONFIG_PATH="/usr/local/opt/icu4c/lib/pkgconfig:$PKG_CONFIG_PATH"
 export C_INCLUDE_PATH=""
 export CXXFLAGS="$CPPFLAGS"
@@ -166,5 +167,8 @@ alias vim=nvim
 source /usr/local/opt/fzf/shell/completion.zsh
 source /usr/local/opt/fzf/shell/key-bindings.zsh
 export PATH="/usr/local/opt/python@3.7/bin:$PATH"
+export JAVA_HOME=/usr/local/opt/openjdk/
 
 if [ -f ~/.gitlabtoken ]; then source ~/.gitlabtoken; fi
+
+
