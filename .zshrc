@@ -172,3 +172,4 @@ export JAVA_HOME=/usr/local/opt/openjdk/
 if [ -f ~/.gitlabtoken ]; then source ~/.gitlabtoken; fi
 
 
+export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"

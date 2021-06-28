@@ -590,3 +590,5 @@ key_bindings:
   - { key: H,         mods: Alt, chars: "\x1bh"                       } # Alt + h
   - { key: J,         mods: Alt, chars: "\x1bj"                       } # Alt + j
   - { key: Z,         mods: Alt, chars: "\x1bz"                       } # Alt + z
+  - { key: Minus,     mods: Alt, chars: "\x1b-"                       } # Alt + -
+  - { key: Backslash, mods: Alt|Shift, chars: "\x1b|"                       } # Alt + |
