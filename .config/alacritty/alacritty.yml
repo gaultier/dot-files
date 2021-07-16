@@ -3,14 +3,14 @@
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
-#env:
+env:
   # TERM variable
   #
   # This value is used to set the `$TERM` environment variable for
   # each instance of Alacritty. If it is not present, alacritty will
   # check the local terminfo database and use `alacritty` if it is
   # available, otherwise `xterm-256color` is used.
-  #TERM: xterm-256color
+  TERM: xterm-256color
 
 window:
   # Window dimensions (changes require restart)
@@ -184,10 +184,28 @@ font:
 
 # Colors (Tomorrow Night Bright)
 colors:
-  # Default colors
   primary:
-    background: '0x292c36'
-    foreground: '0xe7e8eb'
+    background: '0xffffff'
+    foreground: '0x4d4d4c'
+  normal:
+    red:     '0xc82829'
+    green:   '0xb9ca4a'
+    orange: '0xf5871f'
+    yellow:  '0xeab700'
+    blue:    '0x4271ae'
+    green: '0x718c00'
+    cyan: '0x3e999f'
+    magenta: '0x8959a8'
+  selection:
+    text: '0xd6d6d6'
+    background: '0x404040'
+  #cursor:
+    # background: '0x404040'
+# colors:
+  # Default colors
+  # primary:
+    # background: '0x292c36'
+    # foreground: '0xe7e8eb'
 
     # Bright and dim foreground colors
     #
@@ -217,28 +235,28 @@ colors:
 
 
   # Normal colors
-  normal:
-    black:   '0x383b45'
-    red:     '0xbb383a'
-    green:   '0x94c66e'
-    yellow:  '0xd28e5d'
-    blue:    '0x8884c5'
-    magenta: '0xb73999'
-    cyan:    '0x00aba4'
-    white:   '0xe7e8eb'
-    gray: '0x8884c5'
+  # normal:
+  #   black:   '0x383b45'
+  #   red:     '0xbb383a'
+  #   green:   '0x94c66e'
+  #   yellow:  '0xd28e5d'
+  #   blue:    '0x8884c5'
+  #   magenta: '0xb73999'
+  #   cyan:    '0x00aba4'
+  #   white:   '0xe7e8eb'
+  #   gray: '0x8884c5'
 
   # Bright colors
-  bright:
-    black:   '0x7f869e'
-    red:     '0xbb383a'
-    green:   '0x94c66e'
-    yellow:  '0xd28e5d'
-    blue:    '0x8884c5'
-    magenta: '0xb73999'
-    cyan:    '0x00aba4'
-    white:   '0xe7e8eb'
-    gray: '0x8884c5'
+  # bright:
+  #   black:   '0x7f869e'
+  #   red:     '0xbb383a'
+  #   green:   '0x94c66e'
+  #   yellow:  '0xd28e5d'
+  #   blue:    '0x8884c5'
+  #   magenta: '0xb73999'
+  #   cyan:    '0x00aba4'
+  #   white:   '0xe7e8eb'
+  #   gray: '0x8884c5'
 
   # Dim colors
   #
@@ -574,21 +592,24 @@ key_bindings:
   #- { key: PageDown,  mods: Shift,   action: ScrollPageDown, mode: ~Alt       }
   #- { key: Home,      mods: Shift,   action: ScrollToTop,    mode: ~Alt       }
   #- { key: End,       mods: Shift,   action: ScrollToBottom, mode: ~Alt       }
-  - { key: Period,    mods: Alt, chars: "\x1b."                       } # Alt + .
-  - { key: Comma,     mods: Alt, chars: "\x1b,"                       } # Alt + ,
-  - { key: Key1,      mods: Alt, chars: "\x1b1"                       } # Alt + 1
-  - { key: Key2,      mods: Alt, chars: "\x1b2"                       } # Alt + 2
-  - { key: Key3,      mods: Alt, chars: "\x1b3"                       } # Alt + 3
-  - { key: Key4,      mods: Alt, chars: "\x1b4"                       } # Alt + 4
-  - { key: Key5,      mods: Alt, chars: "\x1b5"                       } # Alt + 5
-  - { key: Key6,      mods: Alt, chars: "\x1b6"                       } # Alt + 6
-  - { key: Key7,      mods: Alt, chars: "\x1b7"                       } # Alt + 7
-  - { key: Key8,      mods: Alt, chars: "\x1b8"                       } # Alt + 8
-  - { key: Key9,      mods: Alt, chars: "\x1b9"                       } # Alt + 9
-  - { key: L,         mods: Alt, chars: "\x1bl"                       } # Alt + l
-  - { key: K,         mods: Alt, chars: "\x1bk"                       } # Alt + k
-  - { key: H,         mods: Alt, chars: "\x1bh"                       } # Alt + h
-  - { key: J,         mods: Alt, chars: "\x1bj"                       } # Alt + j
-  - { key: Z,         mods: Alt, chars: "\x1bz"                       } # Alt + z
-  - { key: Minus,     mods: Alt, chars: "\x1b-"                       } # Alt + -
-  - { key: Backslash, mods: Alt|Shift, chars: "\x1b|"                       } # Alt + |
+  - { key: Period,    mods: Alt,       chars: "\x1b."                       } 
+  - { key: Comma,     mods: Alt,       chars: "\x1b,"                       } 
+  - { key: Key1,      mods: Alt,       chars: "\x1b1"                       } 
+  - { key: Key2,      mods: Alt,       chars: "\x1b2"                       } 
+  - { key: Key3,      mods: Alt,       chars: "\x1b3"                       } 
+  - { key: Key4,      mods: Alt,       chars: "\x1b4"                       } 
+  - { key: Key5,      mods: Alt,       chars: "\x1b5"                       } 
+  - { key: Key6,      mods: Alt,       chars: "\x1b6"                       } 
+  - { key: Key7,      mods: Alt,       chars: "\x1b7"                       } 
+  - { key: Key8,      mods: Alt,       chars: "\x1b8"                       } 
+  - { key: Key9,      mods: Alt,       chars: "\x1b9"                       } 
+  - { key: L,         mods: Alt,       chars: "\x1bl"                       } 
+  - { key: K,         mods: Alt,       chars: "\x1bk"                       } 
+  - { key: H,         mods: Alt,       chars: "\x1bh"                       } 
+  - { key: J,         mods: Alt,       chars: "\x1bj"                       } 
+  - { key: Z,         mods: Alt,       chars: "\x1bz"                       } 
+  - { key: N,         mods: Alt,       chars: "\x1bn"                       } 
+  - { key: R,         mods: Alt,       chars: "\x1br"                       } 
+  - { key: T,         mods: Alt,       chars: "\x1bt"                       } 
+  - { key: Minus,     mods: Alt,       chars: "\x1b-"                       } 
+  - { key: Backslash, mods: Alt|Shift, chars: "\x1b|"                       } 
