@@ -276,8 +276,8 @@ command! -bang -nargs=* Rg
   \   'rg --hidden --column --line-number --no-heading --color=always --smart-case --hidden '. <q-args>, 1,
   \   fzf#vim#with_preview(), <bang>0)
 
-# git clone https://github.com/chriskempson/tomorrow-theme ~/code/notmycode/tomorrow-theme
-# ln -s ~/code/notmycode/tomorrow-theme/vim/colors/Tomorrow.vim
+" git clone https://github.com/chriskempson/tomorrow-theme ~/code/notmycode/tomorrow-theme
+" ln -s ~/code/notmycode/tomorrow-theme/vim/colors/Tomorrow.vim
 source $HOME/.vim/Tomorrow.vim
 
 " Initialize plugin system
