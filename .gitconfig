@@ -15,6 +15,8 @@
 		line-numbers = true
 		commit-style = yellow
 		file-style = yellow
+	  syntax-theme = Github
+
 [url "ssh://git@gitlab.ppro.com/"]
 			insteadOf = https://gitlab.ppro.com/
 [url "git@gitlab.ppro.com:"]

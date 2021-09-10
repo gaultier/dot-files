@@ -1,3 +1,6 @@
+syntax enable
+set background=light
+
 let mapleader = '`'
 set noswapfile
 " Enable persistent undo so that undo history persists across vim sessions
@@ -30,7 +33,6 @@ set history=1000
 " No annoying sound on errors
 set noerrorbells
 set novisualbell
-set termguicolors
 set grepprg=rg
 set updatetime=50
 set selection=inclusive
@@ -39,15 +41,7 @@ set scrolloff=5
 " Highlight matching pairs of brackets. Use the '%' character to jump between pairs
 set matchpairs+=<:>
 highlight Comment cterm=italic
-" set 256 color
-set t_Co=256
-let &t_ut=''
 highlight clear SignColumn
-" set teminal gui colors
-if exists('+termguicolors')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-endif
 " Use system clipboard
 if has('unnamedplus')
   set clipboard=unnamed,unnamedplus
@@ -242,6 +236,13 @@ nmap <leader>qf  <Plug>(coc-fix-current)
 " nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 " Coc config end
 
+let g:tmux_navigator_no_mappings = 1
+nnoremap <silent> ^[h :TmuxNavigateLeft<cr>
+nnoremap <silent> <M-j> <C-w>j
+nnoremap <silent> <A-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <A-l> <C-w>l
+" nnoremap <silent> <M-j> :TmuxNavigatePrevious<cr>
+
 " Plugins
 call plug#begin('~/.vim/plugged')
 
@@ -268,6 +269,7 @@ Plug 'https://github.com/tpope/vim-fugitive'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'https://github.com/tpope/vim-abolish'
+Plug 'altercation/vim-colors-solarized'
 " Plug 'neovim/nvim-lsp'
 
 " Override :Rg
@@ -276,11 +278,7 @@ command! -bang -nargs=* Rg
   \   'rg --hidden --column --line-number --no-heading --color=always --smart-case --hidden '. <q-args>, 1,
   \   fzf#vim#with_preview(), <bang>0)
 
-" git clone https://github.com/chriskempson/tomorrow-theme ~/code/notmycode/tomorrow-theme
-" ln -s ~/code/notmycode/tomorrow-theme/vim/colors/Tomorrow.vim
-source $HOME/.vim/Tomorrow.vim
-
 " Initialize plugin system
 call plug#end()
 
-
+colorscheme solarized
