@@ -80,8 +80,9 @@ nnoremap <leader>yy "+y<CR>
 set rtp+=/usr/local/opt/fzf
 let g:fzf_preview_window = ['right:50%', 'ctrl-/']
 nnoremap <c-p> :FZF<cr>
-nnoremap <c-g> :Rg<cr>
-" nnoremap <c-l> :Lines<cr>
+
+nnoremap <c-R> :source ~/.vimrc<cr>
+nnoremap <c-g> :lua vim.fn['fzf#vim#grep']('rg --column --line-number --no-heading --color=always -w -- ' .. vim.fn['expand']('<cword>'), 1, vim.fn['fzf#vim#with_preview'](),0) <cr>
 nnoremap <c-_> :GFiles<cr>
 nnoremap <leader>d :GFiles?<cr>
 

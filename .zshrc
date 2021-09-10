@@ -136,6 +136,7 @@ fi
 # fi
 
 # Aliases
+alias utc=~/bin/utc.lua
 alias ydl="youtube-dl -f mp4 --restrict-filenames"
 alias d=docker
 alias dnuke="docker ps | awk 'NR > 1 {print \$1}' | xargs docker stop -t 0"
