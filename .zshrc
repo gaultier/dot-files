@@ -166,8 +166,8 @@ alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias vim=nvim
 
 # if [ -f /opt/pkg/share/fzf/shell/key-bindings.zsh ]; then source /opt/pkg/share/fzf/shell/key-bindings.zsh; fi
-source /usr/local/opt/fzf/shell/completion.zsh
-source /usr/local/opt/fzf/shell/key-bindings.zsh
+[ -f /usr/local/opt/fzf/shell/completion.zsh ] && source /usr/local/opt/fzf/shell/completion.zsh
+[ -f /usr/local/opt/fzf/shell/key-bindings.zsh ] && source /usr/local/opt/fzf/shell/key-bindings.zsh
 export PATH="/usr/local/opt/python@3.7/bin:$PATH"
 export JAVA_HOME=/usr/local/opt/openjdk/
 
