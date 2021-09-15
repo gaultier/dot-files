@@ -260,6 +260,8 @@ nnoremap <silent> <A-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <A-l> <C-w>l
 " nnoremap <silent> <M-j> :TmuxNavigatePrevious<cr>
 
+let g:go_doc_keywordprg_enabled = 0
+
 " Plugins
 call plug#begin('~/.vim/plugged')
 
@@ -299,6 +301,3 @@ command! -bang -nargs=* Rg
 call plug#end()
 
 colorscheme solarized
-
-" Use K to show documentation in preview window.
-nmap <silent> K :call <SID>show_documentation()<CR>

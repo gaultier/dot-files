@@ -11,7 +11,7 @@ fi
 
 if which pkgin >/dev/null 2>/dev/null; then
   sudo pkgin update
-  sudo pkgin upgrade
+  sudo pkgin -y upgrade
 fi
 
 if which pacman >/dev/null 2>/dev/null; then
