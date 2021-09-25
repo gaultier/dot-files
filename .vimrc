@@ -81,7 +81,7 @@ set rtp+=/usr/local/opt/fzf
 let g:fzf_preview_window = ['right:50%', 'ctrl-/']
 nnoremap <c-p> :FZF<cr>
 
-nnoremap <c-R> :source ~/.vimrc<cr>
+nnoremap <S-c-R> :source ~/.vimrc<cr>
 nnoremap <c-g> :lua vim.fn['fzf#vim#grep']('rg --column --line-number --no-heading --color=always -w -- ' .. vim.fn['expand']('<cword>'), 1, vim.fn['fzf#vim#with_preview'](),0) <cr>
 nnoremap <c-_> :GFiles<cr>
 nnoremap <leader>d :GFiles?<cr>
@@ -260,6 +260,8 @@ nnoremap <silent> <A-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <A-l> <C-w>l
 " nnoremap <silent> <M-j> :TmuxNavigatePrevious<cr>
 
+let g:go_doc_keywordprg_enabled = 0
+
 " Plugins
 call plug#begin('~/.vim/plugged')
 
@@ -281,7 +283,7 @@ Plug 'https://github.com/tpope/vim-surround'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
 " Plug 'ziglang/zig.vim'
-" Plug 'fatih/vim-go'
+Plug 'fatih/vim-go'
 Plug 'https://github.com/tpope/vim-fugitive'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'

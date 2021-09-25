@@ -1,12 +1,11 @@
 # Env
 export PROMPT='%(?..%F{red}✘ %? )%f%F{blue}%B%~%b %(!.#.›) %f'
-export TERM=screen-256color
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export EDITOR=nvim
 export VISUAL=nvim
 export BAT_THEME=GitHub
-WORDCHARS='~!#$%^&*(){}[]<>?.+;-'
+WORDCHARS='~!#$%^&*(){}[]<>?.+;-_'
 setopt extended_history       # record timestamp of command in HISTFILE
 setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
 setopt hist_ignore_dups       # ignore duplicated commands history list
@@ -25,13 +24,9 @@ zstyle ':completion:*:*:*:*:*' menu select # highlight current item on tab compl
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
 export HISTFILE=$HOME/.zsh_history
 export HISTSIZE=1000000000
-export SAVEHIST=100000
-export ARCHFLAGS="-arch x86_64"
-
-export REGISTRY_URI=926410074249.dkr.ecr.eu-central-1.amazonaws.com
+export SAVEHIST=1000000000
 
 export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="/usr/local/opt/openjdk/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/opt/ice/libexec/bin:$PATH"
 export PATH="/usr/local/opt/ice/libexec/bin:$PATH"
@@ -40,7 +35,9 @@ export PATH="/usr/local/rmg/bin/:$PATH"
 export PATH="/usr/local/opt/icu4c/bin:$PATH"
 export PATH="/usr/local/opt/icu4c/sbin:$PATH"
 export PATH="/usr/local/opt/llvm/bin:$PATH"
-export COMPILEHOST=build.dev.techops.eu
+export PATH=$PATH:$GOPATH/bin:$HOME/go/bin
+export PATH="/usr/local/opt/python@3.7/bin:$PATH"
+export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 export RMG_BUILDENV_PROJECT_DIRS="$HOME/projects"
 export LD_LIBRARY_PATH="/usr/local/lib:/usr/local/opt/openssl@1.1/lib:/usr/local/opt/mysql@5.6/lib/:/usr/local/opt/curl/lib:/usr/local/rmg/lib"
 export LDFLAGS="-L/usr/local/lib/ -L/usr/local/opt/openssl@1.1/lib -L/usr/local/opt/icu4c/lib -L/usr/local/opt/mysql@5.6/lib/ -L/usr/local/opt/llvm/lib -L/usr/local/rmg/lib/"
@@ -52,12 +49,9 @@ export CFLAGS="$CPPFLAGS"
 export DOCKER_BUILDKIT=1
 export COMPOSE_DOCKER_CLI_BUILD=1
 export CFLAGS="$CPPFLAGS"
-export PATH=$PATH:$GOPATH/bin:$HOME/go/bin
 export SCCACHE_REDIS="redis://host.docker.internal"
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
-export COMPOSE_DOCKER_CLI_BUILD=1 
-export DOCKER_BUILDKIT=1
 
 # Load autocompletions
 autoload -Uz compinit
@@ -82,32 +76,6 @@ bindkey '^W' backward-kill-word
 bindkey '^Z' kill-word
 bindkey '^[[1;5C' forward-word # Ctrl + right arrow
 bindkey '^[[1;5D' backward-word # Ctrl + left arrow
-
-# search_history() {
-#   local selected num
-#   setopt localoptions noglobsubst noposixbuiltins pipefail no_aliases 2> /dev/null
-#   selected=( $(fc -rl 1 | awk '{if (!seen[$2]++) {print $0} }' | fzy) )
-#   local ret=$?
-#   if [ -n "$selected" ]; then
-#     num=$selected[1]
-#     if [ -n "$num" ]; then
-#       zle vi-fetch-history -n $num
-#     fi
-#   fi
-#   zle reset-prompt
-#   return $ret
-# }
-# zle -N search_history
-# bindkey '^R' search_history
-
-# search_files() {
-#   LBUFFER="${LBUFFER}$(fd -t f | fzy)"
-#   local ret=$?
-#   zle reset-prompt
-#   return $ret
-# }
-# zle -N search_files
-# bindkey '^T' search_files
 
 # Install stuff if not present already
 if [ ! -d $HOME/.config/nvim ]; then
@@ -158,21 +126,15 @@ alias gwip='git add .; git commit -am "[wip]"'
 alias gcl='git clone --depth 1 --recurse'
 alias gpsup='git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)'
 alias ...='cd ../..'
-if [ `which fdfind >/dev/null 2>&1` ]; then 
+if which fdfind >/dev/null 2>&1; then 
   alias fd=fdfind
 fi
 
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias vim=nvim
 
-# if [ -f /opt/pkg/share/fzf/shell/key-bindings.zsh ]; then source /opt/pkg/share/fzf/shell/key-bindings.zsh; fi
 [ -f /usr/local/opt/fzf/shell/completion.zsh ] && source /usr/local/opt/fzf/shell/completion.zsh
 [ -f /usr/local/opt/fzf/shell/key-bindings.zsh ] && source /usr/local/opt/fzf/shell/key-bindings.zsh
-export PATH="/usr/local/opt/python@3.7/bin:$PATH"
-export JAVA_HOME=/usr/local/opt/openjdk/
-
-if [ -f ~/.gitlabtoken ]; then source ~/.gitlabtoken; fi
-
 
 export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 
