@@ -135,3 +135,9 @@ alias vim=nvim
 
 [ -f /usr/local/opt/fzf/shell/completion.zsh ] && source /usr/local/opt/fzf/shell/completion.zsh
 [ -f /usr/local/opt/fzf/shell/key-bindings.zsh ] && source /usr/local/opt/fzf/shell/key-bindings.zsh
+
+export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
+
+if which startx >/dev/null 2>&1 && [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+  exec startx
+fi
