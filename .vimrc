@@ -1,5 +1,7 @@
 syntax enable
-set background=light
+" set background=dark
+" set background=light
+let g:challenger_deep_termcolors=16
 
 let mapleader = '`'
 set noswapfile
@@ -289,6 +291,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'https://github.com/tpope/vim-abolish'
 Plug 'altercation/vim-colors-solarized'
+Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 " Plug 'neovim/nvim-lsp'
 
 " Override :Rg
@@ -300,4 +303,5 @@ command! -bang -nargs=* Rg
 " Initialize plugin system
 call plug#end()
 
-colorscheme solarized
+" colorscheme solarized
+colorscheme challenger_deep
