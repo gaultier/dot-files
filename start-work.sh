@@ -19,6 +19,10 @@ if which pacman >/dev/null 2>/dev/null; then
   sudo pacman -Syu
 fi
 
+if which rustup >/dev/null 2>/dev/null; then
+   rustup update
+fi
+
 if which cargo >/dev/null 2>/dev/null; then
   # Requires: cargo install cargo-update
   cargo install-update -a
