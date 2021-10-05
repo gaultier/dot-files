@@ -7,6 +7,7 @@ if which brew >/dev/null 2>&1; then
  brew update
  brew upgrade
  brew cleanup
+ brew autoremove
 fi
 
 if which pkgin >/dev/null 2>/dev/null; then
