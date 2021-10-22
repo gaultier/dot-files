@@ -20,7 +20,7 @@ if which pacman >/dev/null 2>/dev/null; then
 fi
 
 if which rustup >/dev/null 2>/dev/null; then
-   rustup update
+   rustup update stable
 fi
 
 if which cargo >/dev/null 2>/dev/null; then
