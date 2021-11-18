@@ -13,6 +13,7 @@ fi
 if which pkgin >/dev/null 2>/dev/null; then
   sudo pkgin update
   sudo pkgin -y upgrade
+  sudo pkgin -y autoremove
 fi
 
 if which pacman >/dev/null 2>/dev/null; then
