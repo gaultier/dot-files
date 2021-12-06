@@ -110,14 +110,15 @@ set updatetime=300
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
 
+set signcolumn=yes
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
-if has("nvim-0.5.0") || has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
+" if has("nvim-0.5.0") || has("patch-8.1.1564")
+"   " Recently vim can merge signcolumn and number column into one
+"   set signcolumn=number
+" else
+"   set signcolumn=yes
+" endif
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -256,10 +257,10 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " Coc config end
 
 let g:tmux_navigator_no_mappings = 1
-nnoremap <silent> ^[h :TmuxNavigateLeft<cr>
-nnoremap <silent> <M-j> <C-w>j
-nnoremap <silent> <A-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <A-l> <C-w>l
+nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
 " nnoremap <silent> <M-j> :TmuxNavigatePrevious<cr>
 
 let g:go_doc_keywordprg_enabled = 0
@@ -267,14 +268,12 @@ let g:go_doc_keywordprg_enabled = 0
 " Plugins
 call plug#begin('~/.vim/plugged')
 
-Plug 'https://github.com/markonm/traces.vim'
 Plug 'https://github.com/mbbill/undotree'
 Plug 'https://github.com/tpope/vim-abolish'
 Plug 'https://github.com/tpope/vim-commentary'
 Plug 'https://github.com/tpope/vim-eunuch'
 Plug 'https://github.com/tommcdo/vim-exchange'
 Plug 'https://github.com/airblade/vim-gitgutter'
-Plug 'https://github.com/tommcdo/vim-lion'
 Plug 'https://github.com/kana/vim-operator-user'
 Plug 'https://github.com/rhysd/vim-clang-format'
 Plug 'git://github.com/tpope/vim-repeat.git'
@@ -284,21 +283,20 @@ Plug 'wellle/targets.vim'
 Plug 'https://github.com/tpope/vim-surround'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
-" Plug 'ziglang/zig.vim'
 Plug 'fatih/vim-go'
 Plug 'https://github.com/tpope/vim-fugitive'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'https://github.com/tpope/vim-abolish'
-Plug 'altercation/vim-colors-solarized'
+" Plug 'altercation/vim-colors-solarized'
 Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 " Plug 'neovim/nvim-lsp'
 
 " Override :Rg
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --hidden --column --line-number --no-heading --color=always --smart-case --hidden '. <q-args>, 1,
-  \   fzf#vim#with_preview(), <bang>0)
+" command! -bang -nargs=* Rg
+"   \ call fzf#vim#grep(
+"   \   'rg --hidden --column --line-number --no-heading --color=always --smart-case --hidden '. <q-args>, 1,
+"   \   fzf#vim#with_preview(), <bang>0)
 
 " Initialize plugin system
 call plug#end()

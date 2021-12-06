@@ -141,3 +141,4 @@ export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 if which startx >/dev/null 2>&1 && [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
   exec startx
 fi
+SAM_CLI_TELEMETRY=0
