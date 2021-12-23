@@ -293,10 +293,10 @@ Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 " Plug 'neovim/nvim-lsp'
 
 " Override :Rg
-" command! -bang -nargs=* Rg
-"   \ call fzf#vim#grep(
-"   \   'rg --hidden --column --line-number --no-heading --color=always --smart-case --hidden '. <q-args>, 1,
-"   \   fzf#vim#with_preview(), <bang>0)
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --hidden --column --line-number --no-heading --color=always --smart-case --hidden '. <q-args>, 1,
+  \   fzf#vim#with_preview(), <bang>0)
 
 " Initialize plugin system
 call plug#end()
