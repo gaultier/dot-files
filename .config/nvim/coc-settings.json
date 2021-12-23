@@ -12,10 +12,7 @@
         "go"
       ],
       "initializationOptions": {
-        "usePlaceholders": true,
-        "buildFlags": [
-          "-tags=unit,integration"
-        ]
+        "usePlaceholders": true
       }
     },
     "clangd": {
