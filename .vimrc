@@ -1,7 +1,8 @@
 syntax enable
+highlight Pmenu ctermfg=grey ctermbg=black
 " set background=dark
 " set background=light
-let g:challenger_deep_termcolors=16
+" let g:challenger_deep_termcolors=16
 
 let mapleader = '`'
 set noswapfile
@@ -256,11 +257,11 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 " Coc config end
 
-let g:tmux_navigator_no_mappings = 1
-nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
+" let g:tmux_navigator_no_mappings = 1
+" nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
+" nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
+" nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
+" nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
 " nnoremap <silent> <M-j> :TmuxNavigatePrevious<cr>
 
 let g:go_doc_keywordprg_enabled = 0
@@ -277,7 +278,7 @@ Plug 'https://github.com/airblade/vim-gitgutter'
 Plug 'https://github.com/kana/vim-operator-user'
 Plug 'https://github.com/rhysd/vim-clang-format'
 Plug 'git://github.com/tpope/vim-repeat.git'
-Plug 'https://github.com/christoomey/vim-tmux-navigator'
+" Plug 'https://github.com/christoomey/vim-tmux-navigator'
 Plug 'https://github.com/tpope/vim-unimpaired'
 Plug 'wellle/targets.vim'
 Plug 'https://github.com/tpope/vim-surround'
@@ -289,7 +290,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'https://github.com/tpope/vim-abolish'
 " Plug 'altercation/vim-colors-solarized'
-Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
+" Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 " Plug 'neovim/nvim-lsp'
 
 " Override :Rg
@@ -302,4 +303,4 @@ command! -bang -nargs=* Rg
 call plug#end()
 
 " colorscheme solarized
-colorscheme challenger_deep
+" colorscheme challenger_deep
