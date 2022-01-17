@@ -2,6 +2,11 @@ local wezterm = require 'wezterm';
 
 return {
   color_scheme = "ChallengerDeep",
+  font = wezterm.font_with_fallback({
+          "SauceCodePro Nerd Font",
+          "JetBrains Mono",
+  }),
+  font_size = 12.0,
   keys = {
     {key="z", mods="ALT", action="TogglePaneZoomState"},
     {key="l", mods="ALT", action=wezterm.action{ActivatePaneDirection="Right"}},
