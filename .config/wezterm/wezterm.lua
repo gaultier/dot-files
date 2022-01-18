@@ -8,6 +8,8 @@ return {
   }),
   font_size = 12.0,
   keys = {
+    {key=".", mods="ALT", action=wezterm.action{ActivateTabRelative=1}},
+    {key=",", mods="ALT", action=wezterm.action{ActivateTabRelative=-1}},
     {key="z", mods="ALT", action="TogglePaneZoomState"},
     {key="l", mods="ALT", action=wezterm.action{ActivatePaneDirection="Right"}},
     {key="h", mods="ALT", action=wezterm.action{ActivatePaneDirection="Left"}},
