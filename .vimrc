@@ -1,5 +1,6 @@
 syntax enable
 highlight Pmenu ctermfg=grey ctermbg=black
+autocmd Signal SIGUSR1 quit
 " set background=dark
 " set background=light
 " let g:challenger_deep_termcolors=16
@@ -59,10 +60,10 @@ set statusline+=\ %f
 " Middle separator
 set statusline+=\ %=
 set statusline+=\ %p%%
-set statusline+=\ %l:%c
 
-" Remove split bar
-set fillchars=vert:\ 
+" Make split bar prettier
+set fillchars=stlnc:⚊,vert:\│ 
+highlight VertSplit cterm=NONE
 set hidden
 
 " Some servers have issues with backup files, see #649.
@@ -289,6 +290,8 @@ Plug 'https://github.com/tpope/vim-fugitive'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'https://github.com/tpope/vim-abolish'
+Plug 'vlime/vlime'
+Plug 'bhurlow/vim-parinfer'
 " Plug 'altercation/vim-colors-solarized'
 " Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 " Plug 'neovim/nvim-lsp'
