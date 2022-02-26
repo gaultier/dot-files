@@ -143,3 +143,4 @@ if which startx >/dev/null 2>&1 && [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 
 fi
 SAM_CLI_TELEMETRY=0
 export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
+export GOPATH=~/go
