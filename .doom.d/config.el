@@ -37,15 +37,49 @@
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
-(setq display-time-format "[%F %T %Z]")
+(setq display-time-format "[⏰ %F %H:%M %Z]")
+;; (defface egoge-display-time
+;;     '((t :foreground "black"
+;;        :background "aquamarine"
+;;        :weight bold
+;;        :underline t)))
+
+;; (setq display-time-string-forms
+;;       (list '(:eval (propertize (format-time-string "⏰ %F %T %Z"))
+;;               'face (egoge-display-time))))
 (display-time-mode 1) ; show time in modeline
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/notes/")
+
+
 (after! org
   (setq org-log-done (quote time))
-  (org-clock-persistence-insinuate))
+  (org-clock-persistence-insinuate)
+  (setq org-publish-project-alist
+          `(("pages"
+             :base-directory "~/notes/"
+             :base-extension "org"
+             :recursive t
+             :html-doctype "html5"
+             :html-html5-fancy t
+             :auto-sitemap t
+             :auto-preamble t
+             :sitemap-title "Notes"
+             :sitemap-filename "index.org"
+             :sitemap-sort-files anti-chronologically
+             :publishing-directory "~/notes/public/"
+             :publishing-function org-html-publish-to-html)
+
+            ("static"
+             :base-directory "~/notes/"
+             :base-extension "css\\|txt\\|jpg\\|gif\\|png"
+             :recursive t
+             :publishing-directory  "~/notes/public/"
+             :publishing-function org-publish-attachment)
+
+            ("me" :components ("pages" "static")))))
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
