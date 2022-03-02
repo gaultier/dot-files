@@ -57,6 +57,11 @@
 (after! org
   (setq org-log-done (quote time))
   (org-clock-persistence-insinuate)
+  (use-package org-bullets
+    :custom
+    (org-bullets-bullet-list '("◉" "☯" "○" "☯" "✸" "☯" "✿" "☯" "✜" "☯" "◆" "☯" "▶"))
+    (org-ellipsis "⤵")
+    :hook (org-mode . org-bullets-mode))
   (setq org-publish-project-alist
           `(("pages"
              :base-directory "~/notes/"
@@ -79,7 +84,15 @@
              :publishing-directory  "~/notes/public/"
              :publishing-function org-publish-attachment)
 
-            ("me" :components ("pages" "static")))))
+            ("me" :components ("pages" "static"))))
+
+  (setq-default prettify-symbols-alist '(("#+BEGIN_SRC" . "†")
+                                         ("#+END_SRC" . "†")
+                                         ("#+begin_src" . "†")
+                                         ("#+end_src" . "†")
+                                         ("=>" . "⇨")))
+ (setq prettify-symbols-unprettify-at-point 'right-edge)
+ (add-hook 'org-mode-hook 'prettify-symbols-mode))
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
@@ -113,3 +126,5 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+
