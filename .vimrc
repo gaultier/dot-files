@@ -1,8 +1,9 @@
 syntax enable
-highlight Pmenu ctermfg=grey ctermbg=black
+set termguicolors
+" highlight Pmenu ctermfg=grey ctermbg=black
 autocmd Signal SIGUSR1 quit
 " set background=dark
-" set background=light
+set background=light
 " let g:challenger_deep_termcolors=16
 
 let mapleader = '`'
@@ -293,6 +294,7 @@ Plug 'https://github.com/tpope/vim-abolish'
 Plug 'vlime/vlime'
 Plug 'bhurlow/vim-parinfer'
 " Plug 'altercation/vim-colors-solarized'
+Plug 'morhetz/gruvbox'
 " Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 " Plug 'neovim/nvim-lsp'
 
@@ -305,5 +307,6 @@ command! -bang -nargs=* Rg
 " Initialize plugin system
 call plug#end()
 
+autocmd vimenter * ++nested colorscheme gruvbox
 " colorscheme solarized
 " colorscheme challenger_deep

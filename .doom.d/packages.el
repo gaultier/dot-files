@@ -49,3 +49,7 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 (package! org-bullets)
+(package! protobuf-mode)
+(package! ob-mermaid)
+(package! mermaid-mode)
+(package! flycheck-clj-kondo)

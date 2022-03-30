@@ -1,7 +1,8 @@
 local wezterm = require 'wezterm';
 
 return {
-  color_scheme = "ChallengerDeep",
+  color_scheme = "Gruvbox Light",
+  -- color_scheme = "ChallengerDeep",
   font = wezterm.font_with_fallback({
       "SauceCodePro Nerd Font",
       "JetBrains Mono",
@@ -18,5 +19,6 @@ return {
     {key="k", mods="ALT", action=wezterm.action{ActivatePaneDirection="Up"}},
     {key="-", mods="ALT", action=wezterm.action{SplitVertical={domain="CurrentPaneDomain"}}},
     {key="\\", mods="ALT", action=wezterm.action{SplitHorizontal={domain="CurrentPaneDomain"}}},
+    {key="x", mods="ALT", action=wezterm.action{CloseCurrentPane={confirm=true}}},
   }
 }
