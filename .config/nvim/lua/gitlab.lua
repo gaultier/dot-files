@@ -29,7 +29,7 @@ function open_gitlab_url_at_point()
 end
 
 function copy_gitlab_url_at_point()
-  os.execute('echo "' .. gitlab_url_at_point(get_current_line()) .. '" | pbcopy')
+  vim.fn.setreg('*', gitlab_url_at_point(get_current_line()))
 end
 
 -- vim.api.nvim_add_user_command('GitlabUrlAtPointOpen', open_gitlab_url_at_point)

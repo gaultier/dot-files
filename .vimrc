@@ -4,6 +4,7 @@ set termguicolors
 autocmd Signal SIGUSR1 quit
 " set background=dark
 set background=light
+lua require('gitlab')
 " let g:challenger_deep_termcolors=16
 
 let mapleader = '`'
