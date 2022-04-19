@@ -1,6 +1,7 @@
 local wezterm = require 'wezterm';
 
 return {
+  exit_behavior = "Close",
   color_scheme = "Gruvbox Light",
   -- color_scheme = "ChallengerDeep",
   font = wezterm.font_with_fallback({

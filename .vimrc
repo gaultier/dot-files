@@ -7,7 +7,8 @@ set background=light
 lua require('gitlab')
 " let g:challenger_deep_termcolors=16
 
-let mapleader = '`'
+let mapleader = ' '
+let maplocalleader = ' '
 set noswapfile
 " Enable persistent undo so that undo history persists across vim sessions
 set undofile
@@ -296,6 +297,7 @@ Plug 'vlime/vlime'
 Plug 'bhurlow/vim-parinfer'
 " Plug 'altercation/vim-colors-solarized'
 Plug 'morhetz/gruvbox'
+Plug 'Olical/conjure'
 " Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 " Plug 'neovim/nvim-lsp'
 

@@ -15,9 +15,14 @@ function get_git_current_branch()
   return string.sub(exec_and_get_output_cmd('git rev-parse --abbrev-ref HEAD'), 0, -2) -- Trim newline
 end
 
+function get_path_from_git_root()
+  return string.sub(exec_and_get_output_cmd('git rev-parse --show-prefix'), 0, -2) -- Trim newline
+end
+
 function gitlab_url_at_point(start_y, end_y)
+  local path_from_git_root = get_path_from_git_root()
   local file_path = vim.fn.expand('%')
-  local url = 'https://gitlab.ppro.com/' .. get_gitlab_project_path() .. '/-/tree/' .. get_git_current_branch() .. '/' .. file_path .. '#L' .. start_y
+  local url = 'https://gitlab.ppro.com/' .. get_gitlab_project_path() .. '/-/tree/' .. get_git_current_branch() .. '/' .. path_from_git_root .. file_path .. '#L' .. start_y
   if end_y then
       url = url .. '-' .. end_y
   end
