@@ -45,5 +45,5 @@ function open_gitlab_url(cmd)
   os.execute('open "' .. gitlab_url_at_point(cmd.line1, cmd.line2, cmd.fargs[1]) .. '"')
 end
 
-vim.api.nvim_add_user_command('GitlabUrlCopy', copy_gitlab_url, {range=true, nargs=1})
-vim.api.nvim_add_user_command('GitlabUrlOpen', open_gitlab_url, {range=true, nargs=1})
+vim.api.nvim_create_user_command('GitlabUrlCopy', copy_gitlab_url, {range=true, nargs=1})
+vim.api.nvim_create_user_command('GitlabUrlOpen', open_gitlab_url, {range=true, nargs=1})
