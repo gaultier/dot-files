@@ -1,11 +1,12 @@
 syntax enable
 set termguicolors
+set smartcase
+set ignorecase
 " highlight Pmenu ctermfg=grey ctermbg=black
 autocmd Signal SIGUSR1 quit
 " set background=dark
 set background=light
 lua require('gitlab')
-" let g:challenger_deep_termcolors=16
 
 let mapleader = ' '
 let maplocalleader = ' '
@@ -36,7 +37,7 @@ set ttyfast
 set autowrite
 set autoread
 " increase the history limit of
-set history=1000
+set history=10000
 " No annoying sound on errors
 set noerrorbells
 set novisualbell
@@ -54,15 +55,16 @@ if has('unnamedplus')
   set clipboard=unnamed,unnamedplus
 endi
 filetype plugin indent on
-" Status bar
-set laststatus=2
+
+set laststatus=3
 " Reset
 set statusline=
 set statusline+=%#LineNr#
 set statusline+=\ %f
 " Middle separator
 set statusline+=\ %=
-set statusline+=\ %p%%
+set statusline+=\ %p%% 
+set statusline+=\ │\ %{strftime('%c')}
 
 " Make split bar prettier
 set fillchars=stlnc:⚊,vert:\│ 
