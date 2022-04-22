@@ -60,6 +60,7 @@ if has('unnamedplus')
 endi
 filetype plugin indent on
 
+" Shared statusline
 set laststatus=3
 " Reset
 set statusline=
@@ -111,6 +112,15 @@ autocmd BufRead,BufNewFile *.ice setfiletype cpp
 let g:rustfmt_autosave = 1
 
 " Coc config
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocActionAsync('format')
+
+" Autoformat
+augroup mygroup
+  autocmd!
+  autocmd BufWritePost *.json,*.ts call CocAction('format')
+augroup end
+
 " Give more space for displaying messages.
 set cmdheight=2
 

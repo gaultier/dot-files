@@ -15,7 +15,7 @@
 		line-numbers = true
 		commit-style = yellow
 		file-style = yellow
-	  syntax-theme = Github
+	  syntax-theme = gruvbox-light
 
 [url "ssh://git@gitlab.ppro.com/"]
 			insteadOf = https://gitlab.ppro.com/
