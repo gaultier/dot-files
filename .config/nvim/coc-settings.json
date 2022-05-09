@@ -1,5 +1,11 @@
 {
   "languageserver": {
+    "kotlin": {
+      "command": "~/code/notmycode/kotlin-language-server/server/build/install/server/bin/kotlin-language-server",
+      "filetypes": [
+        "kotlin"
+      ]
+    },
     "golang": {
       "command": "gopls",
       "rootPatterns": [

@@ -27,6 +27,7 @@ export HISTSIZE=1000000000
 export SAVEHIST=1000000000
 
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/code/notmycode/odin/:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/opt/ice/libexec/bin:$PATH"
 export PATH="/usr/local/opt/ice/libexec/bin:$PATH"

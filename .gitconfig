@@ -21,3 +21,5 @@
 			insteadOf = https://gitlab.ppro.com/
 [url "git@gitlab.ppro.com:"]
 	insteadOf = https://gitlab.ppro.com/
+[init]
+	defaultBranch = master

@@ -11,6 +11,8 @@ autocmd Signal SIGUSR1 quit
 " set background=dark
 set background=light
 lua require('gitlab')
+lua require('term')
+lua require('colors')
 
 let mapleader = ' '
 let maplocalleader = ' '
@@ -73,7 +75,7 @@ set statusline+=\ │\ %{strftime('%c')}
 
 " Make split bar prettier
 set fillchars=stlnc:⚊,vert:\│ 
-highlight VertSplit cterm=NONE
+highlight WinSeparator cterm=NONE gui=NONE
 set hidden
 
 " Some servers have issues with backup files, see #649.
@@ -312,11 +314,13 @@ Plug 'https://github.com/tpope/vim-abolish'
 Plug 'vlime/vlime'
 " Plug 'bhurlow/vim-parinfer'
 Plug 'eraserhd/parinfer-rust'
-" Plug 'altercation/vim-colors-solarized'
+Plug 'altercation/vim-colors-solarized'
 Plug 'morhetz/gruvbox'
 Plug 'Olical/conjure'
-" Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
+Plug 'janet-lang/janet.vim'
+Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 " Plug 'neovim/nvim-lsp'
+Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh' }
 
 " Override :Rg
 command! -bang -nargs=* Rg
@@ -328,5 +332,5 @@ command! -bang -nargs=* Rg
 call plug#end()
 
 autocmd vimenter * ++nested colorscheme gruvbox
-" colorscheme solarized
+colorscheme solarized
 " colorscheme challenger_deep
