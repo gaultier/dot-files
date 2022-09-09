@@ -12,7 +12,7 @@ autocmd Signal SIGUSR1 quit
 set background=light
 lua require('gitlab')
 lua require('term')
-lua require('colors')
+lua require('pg_colors')
 
 let mapleader = ' '
 let maplocalleader = ' '
@@ -75,6 +75,7 @@ set statusline+=\ │\ %{strftime('%c')}
 
 " Make split bar prettier
 set fillchars=stlnc:⚊,vert:\│ 
+highlight VertSplit cterm=NONE gui=NONE
 highlight WinSeparator cterm=NONE gui=NONE
 set hidden
 
@@ -90,6 +91,7 @@ autocmd FileType c,cpp,proto ClangFormatAutoEnable
 nnoremap <leader>cp :let @+ = expand("%:p")<CR>
 nnoremap <leader>cr :let @+ = expand("%")<CR>
 nnoremap <leader>cf :let @+ = expand("%:t")<CR>
+nnoremap <leader>e :vs ~/.vimrc<CR>
 
 nnoremap <leader>yy "+y<CR>
 
@@ -300,7 +302,6 @@ Plug 'https://github.com/airblade/vim-gitgutter'
 Plug 'https://github.com/kana/vim-operator-user'
 Plug 'https://github.com/rhysd/vim-clang-format'
 Plug 'git://github.com/tpope/vim-repeat.git'
-" Plug 'https://github.com/christoomey/vim-tmux-navigator'
 Plug 'https://github.com/tpope/vim-unimpaired'
 Plug 'wellle/targets.vim'
 Plug 'https://github.com/tpope/vim-surround'
@@ -311,14 +312,8 @@ Plug 'https://github.com/tpope/vim-fugitive'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'https://github.com/tpope/vim-abolish'
-Plug 'vlime/vlime'
-" Plug 'bhurlow/vim-parinfer'
-Plug 'eraserhd/parinfer-rust'
-Plug 'altercation/vim-colors-solarized'
 Plug 'morhetz/gruvbox'
 Plug 'Olical/conjure'
-Plug 'janet-lang/janet.vim'
-Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 " Plug 'neovim/nvim-lsp'
 Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh' }
 
@@ -331,6 +326,4 @@ command! -bang -nargs=* Rg
 " Initialize plugin system
 call plug#end()
 
-autocmd vimenter * ++nested colorscheme gruvbox
-colorscheme solarized
-" colorscheme challenger_deep
+colorscheme gruvbox

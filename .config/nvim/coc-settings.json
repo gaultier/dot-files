@@ -1,10 +1,16 @@
 {
   "languageserver": {
     "kotlin": {
-      "command": "~/code/notmycode/kotlin-language-server/server/build/install/server/bin/kotlin-language-server",
+      "command": "~/notmycode/kotlin-language-server/server/build/install/server/bin/kotlin-language-server",
       "filetypes": [
         "kotlin"
       ]
+    },
+    "terraform": {
+      "command": "terraform-ls",
+      "args": ["serve"],
+      "filetypes": ["terraform", "tf"],
+      "initializationOptions": {}
     },
     "golang": {
       "command": "gopls",
