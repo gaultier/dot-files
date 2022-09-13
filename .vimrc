@@ -86,7 +86,7 @@ set nowritebackup
 nmap <c-k> <C-w>k
 nmap <c-j> <C-w>j
 
-autocmd FileType c,cpp,proto ClangFormatAutoEnable
+autocmd FileType c,cpp ClangFormatAutoEnable
 
 nnoremap <leader>cp :let @+ = expand("%:p")<CR>
 nnoremap <leader>cr :let @+ = expand("%")<CR>
