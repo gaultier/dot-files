@@ -63,10 +63,10 @@ filetype plugin indent on
 set laststatus=3
 " Reset
 set statusline=
-set statusline=%F:%l:%c:%o%=\ │\ %p%%\ │\ %{strftime('%c')} 
+set statusline=%#LineNr#%F:%l:%c:%o%=\ │\ %p%%\ │\ %{strftime('%c')} 
 func Refresh_Statusline(timer)
   set statusline=
-  set statusline=%F:%l:%c:%o%=\ │\ %p%%\ │\ %{strftime('%c')} 
+  set statusline=%#LineNr#%F:%l:%c:%o%=\ │\ %p%%\ │\ %{strftime('%c')} 
 endfunc
 call timer_start(1000, 'Refresh_Statusline', {'repeat': -1})
 
