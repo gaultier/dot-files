@@ -10,9 +10,6 @@ let g:loaded_perl_provider = 0
 autocmd Signal SIGUSR1 quit
 " set background=dark
 set background=light
-lua require('gitlab')
-lua require('term')
-lua require('pg_colors')
 
 let mapleader = ' '
 let maplocalleader = ' '
@@ -66,12 +63,7 @@ filetype plugin indent on
 set laststatus=3
 " Reset
 set statusline=
-set statusline+=%#LineNr#
-set statusline+=\ %f
-" Middle separator
-set statusline+=\ %=
-set statusline+=\ %p%% 
-set statusline+=\ │\ %{strftime('%c')}
+set statusline=%F:%l:%c:%o%=\ │\ %p%%\ │\ %{strftime('%c')} 
 
 " Make split bar prettier
 set fillchars=stlnc:⚊,vert:\│ 
