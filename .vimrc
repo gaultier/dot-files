@@ -87,6 +87,7 @@ nmap <c-k> <C-w>k
 nmap <c-j> <C-w>j
 
 autocmd FileType c,cpp ClangFormatAutoEnable
+autocmd FileType proto ClangFormatAutoDisable
 
 nnoremap <leader>cp :let @+ = expand("%:p")<CR>
 nnoremap <leader>cr :let @+ = expand("%")<CR>
@@ -289,6 +290,16 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " nnoremap <silent> <M-j> :TmuxNavigatePrevious<cr>
 
 let g:go_doc_keywordprg_enabled = 0
+
+
+function! s:copy_gitlab_url()
+  let file_path = expand('%:p')
+  let line=line('.')
+   call jobstart(['/Users/pgaultier/code/c/nvim/gitlab-url-copy', file_path, line], {})
+endfunction
+
+nmap <leader>x :call <SID>copy_gitlab_url()<cr>
+
 
 " Plugins
 call plug#begin('~/.vim/plugged')
