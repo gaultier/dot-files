@@ -112,8 +112,6 @@ autocmd BufRead,BufNewFile *.nasm setfiletype asm
 autocmd BufRead,BufNewFile *.ice setfiletype cpp
 
 
-let g:rustfmt_autosave = 1
-
 " Coc config
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocActionAsync('format')
@@ -233,14 +231,12 @@ nmap <leader>qf  <Plug>(coc-fix-current)
 " omap ac <Plug>(coc-classobj-a)
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.
-if has('nvim-0.4.0') || has('patch-8.2.0750')
-  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-endif
+nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 
 " Use CTRL-S for selections ranges.
 " Requires 'textDocument/selectionRange' support of language server.
@@ -290,16 +286,28 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 let g:go_doc_keywordprg_enabled = 0
 
 
-function! s:copy_gitlab_url()
+function! s:ncopy_gitlab_url()
   let file_path = expand('%:p')
   let line=line('.')
    call jobstart(['/Users/pgaultier/code/c/nvim/gitlab-url-copy', file_path, line], {})
 endfunction
 
-nmap <leader>x :call <SID>copy_gitlab_url()<cr>
+function! s:vcopy_gitlab_url(line_start, line_end)
+  let file_path = expand('%:p')
+   call jobstart(['/Users/pgaultier/code/c/nvim/gitlab-url-copy', file_path, a:line_start, a:line_end], {})
+endfunction
+
+nmap <leader>x :call <SID>ncopy_gitlab_url()<cr>
+command! -nargs=0 -range VGitlabUrlCopy :call <SID>vcopy_gitlab_url(<line1>, <line2>)
+vnoremap <leader>x :VGitlabUrlCopy<cr>
 
 
 " Plugins
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'https://github.com/mbbill/undotree'
@@ -322,9 +330,8 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'https://github.com/tpope/vim-abolish'
 Plug 'morhetz/gruvbox'
-Plug 'Olical/conjure'
 " Plug 'neovim/nvim-lsp'
-Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh' }
+" Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh' }
 
 " Override :Rg
 command! -bang -nargs=* Rg
