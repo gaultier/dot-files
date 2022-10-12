@@ -133,14 +133,11 @@ set updatetime=300
 set shortmess+=c
 
 set signcolumn=yes
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-" if has("nvim-0.5.0") || has("patch-8.1.1564")
-"   " Recently vim can merge signcolumn and number column into one
-"   set signcolumn=number
-" else
-"   set signcolumn=yes
-" endif
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -151,10 +148,6 @@ inoremap <silent><expr> <TAB>
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
 
 " Use <c-space> to trigger completion.
 if has('nvim')
@@ -334,9 +327,9 @@ Plug 'morhetz/gruvbox'
 " Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh' }
 
 " Override :Rg
-command! -bang -nargs=* Rg
+command! -bang -nargs=* -complete=file Rg
   \ call fzf#vim#grep(
-  \   'rg --hidden --column --line-number --no-heading --color=always --smart-case --hidden '. <q-args>, 1,
+  \   'rg --column --line-number --no-heading --color=always --smart-case --hidden '. <q-args>, 1,
   \   fzf#vim#with_preview(), <bang>0)
 
 " Initialize plugin system
