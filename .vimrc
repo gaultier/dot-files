@@ -84,9 +84,6 @@ set nowritebackup
 nmap <c-k> <C-w>k
 nmap <c-j> <C-w>j
 
-autocmd FileType c,cpp ClangFormatAutoEnable
-autocmd FileType proto ClangFormatAutoDisable
-
 nnoremap <leader>cp :let @+ = expand("%:p")<CR>
 nnoremap <leader>cr :let @+ = expand("%")<CR>
 nnoremap <leader>cf :let @+ = expand("%:t")<CR>
@@ -119,7 +116,15 @@ command! -nargs=0 Format :call CocActionAsync('format')
 " Autoformat
 augroup mygroup
   autocmd!
-  autocmd BufWritePost *.json,*.ts call CocAction('format')
+  autocmd BufWritePost *.json,*.c,*.cpp,*.h,*.rs call CocAction('format')
+augroup end
+"
+" Autoformat js/ts
+autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
+autocmd FileType javascript setlocal formatprg=prettier\ --parser\ typescript
+augroup mygroup
+  autocmd!
+  autocmd BufWritePost *.js,*.jsx,*.ts,*.tsx call jobstart(['deno', 'fmt',  expand('%:p')], {})
 augroup end
 
 " Give more space for displaying messages.
@@ -134,7 +139,7 @@ set shortmess+=c
 
 set signcolumn=yes
 
-function! s:check_back_space() abort
+function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
@@ -143,10 +148,10 @@ endfunction
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
 
 " Use <c-space> to trigger completion.
@@ -294,6 +299,32 @@ nmap <leader>x :call <SID>ncopy_gitlab_url()<cr>
 command! -nargs=0 -range VGitlabUrlCopy :call <SID>vcopy_gitlab_url(<line1>, <line2>)
 vnoremap <leader>x :VGitlabUrlCopy<cr>
 
+let g:jq_fmt_ns = nvim_create_namespace('jq_fmt')
+function! s:v_jq_fmt(line_start, line_end)
+  let marks = nvim_buf_get_extmarks(0, g:jq_fmt_ns, 0, -1, {})
+  for [mark_id, row, col] in marks 
+    call nvim_buf_del_extmark(0, g:jq_fmt_ns, mark_id)
+  endfor
+
+  let input = getline(a:line_start, a:line_end)
+
+  let output = system('jq -M', input)
+
+  if v:shell_error == 0
+      for i in range(a:line_start, a:line_end, 1)
+        delete
+      endfor
+      let lines = split(output, '\n')
+      " Need `-1` in case we are at the end of the file
+      call append(a:line_start-1, lines)
+  else 
+      call nvim_buf_set_extmark(0, g:jq_fmt_ns, a:line_start-1, 0, {'virt_text': [['jq failed: ' . output, 'ErrorMsg']], 'virt_text_pos': 'eol'})
+  endif
+endfunction
+
+command! -nargs=0 -range VJqFmt :call <SID>v_jq_fmt(<line1>, <line2>)
+vnoremap <leader>j :VJqFmt<cr>
+
 
 " Plugins
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
@@ -310,7 +341,7 @@ Plug 'https://github.com/tpope/vim-eunuch'
 Plug 'https://github.com/tommcdo/vim-exchange'
 Plug 'https://github.com/airblade/vim-gitgutter'
 Plug 'https://github.com/kana/vim-operator-user'
-Plug 'https://github.com/rhysd/vim-clang-format'
+" Plug 'https://github.com/rhysd/vim-clang-format'
 Plug 'git://github.com/tpope/vim-repeat.git'
 Plug 'https://github.com/tpope/vim-unimpaired'
 Plug 'wellle/targets.vim'

@@ -31,8 +31,6 @@ export PATH="$HOME/code/notmycode/odin/:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/opt/ice/libexec/bin:$PATH"
 export PATH="/usr/local/opt/ice/libexec/bin:$PATH"
-export PATH="/usr/local/rmg/buildenv/:$PATH"
-export PATH="/usr/local/rmg/bin/:$PATH"
 export PATH="/usr/local/opt/icu4c/bin:$PATH"
 export PATH="/usr/local/opt/icu4c/sbin:$PATH"
 export PATH="/usr/local/opt/llvm/bin:$PATH"
@@ -40,13 +38,8 @@ export PATH=$PATH:$GOPATH/bin:$HOME/go/bin
 export PATH="/usr/local/opt/python@3.7/bin:$PATH"
 export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 export RMG_BUILDENV_PROJECT_DIRS="$HOME/projects"
-# export LD_LIBRARY_PATH="/usr/local/lib:/usr/local/opt/openssl@1.1/lib:/usr/local/opt/mysql@5.6/lib/:/usr/local/opt/curl/lib:/usr/local/rmg/lib"
-# export LDFLAGS="-L/usr/local/lib/ -L/usr/local/opt/openssl@1.1/lib -L/usr/local/opt/icu4c/lib -L/usr/local/opt/mysql@5.6/lib/ -L/usr/local/opt/llvm/lib -L/usr/local/rmg/lib/"
-# export CPPFLAGS="-I/usr/local/include -I/usr/local/rmg/include -I/usr/local/opt/openssl@1.1/include -I/usr/local/opt/icu4c/include -I /usr/local/opt/mysql@5.6/include/ -I/usr/local/opt/llvm/include -I/usr/local/opt/curl/include" 
 export PKG_CONFIG_PATH="/opt/pkg/lib/pkgconfig/:/usr/local/opt/icu4c/lib/pkgconfig:/usr/local/opt/curl/lib/pkgconfig:$PKG_CONFIG_PATH"
 export C_INCLUDE_PATH=""
-# export CXXFLAGS="$CPPFLAGS"
-# export CFLAGS="$CPPFLAGS"
 export DOCKER_BUILDKIT=1
 export COMPOSE_DOCKER_CLI_BUILD=1
 export SCCACHE_REDIS="redis://host.docker.internal"
@@ -155,39 +148,7 @@ export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 if which startx >/dev/null 2>&1 && [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
   exec startx
 fi
-SAM_CLI_TELEMETRY=0
 export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
 export GOPATH=~/go
 export PATH="/usr/local/opt/postgresql@13/bin:/Users/pgaultier/Library/Python/3.7/bin/:$PATH"
-
-eval "$(saml2aws --completion-script-zsh)"
-okta_assume_template() {
-  export AWS_DEFAULT_REGION="eu-central-1"
-  oktapwd=$(security find-generic-password -a philippe.gaultier@ppro.com -s okta-aws-cli -w)
-  okta-awscli --okta-profile ${1} -P $oktapwd --cache 
-  if [ -s ~/.okta-credentials.cache ]
-  then
-      source ~/.okta-credentials.cache
-      rm -rf ~/.okta-credentials.cache
-  fi
-}
-ppro_security() {
-    okta_assume_template ppro_security
-}
-ppro_logging() {
-     okta_assume_template ppro_logging
-}
-ppro_production() {
-    okta_assume_template ppro_production
-}
-ppro_infrastructure() {
-    okta_assume_template ppro_infrastructure
-}
-ppro_dev() {
-     okta_assume_template ppro_development
-}
-ppro_staging() {
-     okta_assume_template ppro_staging
-}
 export PATH="/usr/local/opt/mysql-client/bin:$PATH"
-export PATH="/Users/pgaultier/Downloads/jdk-17.0.2.jdk/Contents/Home/bin/:$PATH"

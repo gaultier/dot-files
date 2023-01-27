@@ -1,12 +1,6 @@
 {
   "inlayHint.enableParameter": false,
   "languageserver": {
-    "kotlin": {
-      "command": "~/notmycode/kotlin-language-server/server/build/install/server/bin/kotlin-language-server",
-      "filetypes": [
-        "kotlin"
-      ]
-    },
     "terraform": {
       "command": "terraform-ls",
       "args": [
@@ -21,24 +15,15 @@
     "golang": {
       "command": "gopls",
       "rootPatterns": [
-        "go.mod",
-        ".vim/",
-        ".git/",
-        ".hg/"
+        "go.mod"
       ],
       "filetypes": [
         "go"
-      ],
-      "initializationOptions": {
-        "usePlaceholders": true,
-        "buildFlags": [
-          "-tags=unit,integration"
-        ]
-      }
+      ]
     },
     "clangd": {
       "disableSnippetCompletion": true,
-      "command": "clangd",
+      "command": "/usr/local/opt/llvm/bin/clangd",
       "rootPatterns": [
         "compile_flags.txt",
         "compile_commands.json"
