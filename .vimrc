@@ -79,21 +79,22 @@ set hidden
 set nobackup
 set nowritebackup
 
+" Tmux-like pane navigation
 nmap <c-k> <C-w>k
 nmap <c-j> <C-w>j
+nmap <c-h> <C-w>h
+nmap <c-l> <C-w>l
 
 nnoremap <leader>cp :let @+ = expand("%:p")<CR>
 nnoremap <leader>cr :let @+ = expand("%")<CR>
 nnoremap <leader>cf :let @+ = expand("%:t")<CR>
 nnoremap <leader>e :vs ~/.vimrc<CR>
-
-nnoremap <leader>yy "+y<CR>
+nmap <leader>s :source ~/.vimrc<CR>
 
 set rtp+=/usr/local/opt/fzf
 let g:fzf_preview_window = ['right:50%', 'ctrl-/']
 nnoremap <c-p> :FZF<cr>
 
-nnoremap <S-c-R> :source ~/.vimrc<cr>
 nnoremap <c-g> :lua vim.fn['fzf#vim#grep']('rg --column --line-number --no-heading --color=always -w -- ' .. vim.fn['expand']('<cword>'), 1, vim.fn['fzf#vim#with_preview'](),0) <cr>
 
 nmap <leader>l :nohl<CR>:lclose<CR>:cclose<CR>
@@ -103,8 +104,6 @@ let g:gitgutter_enabled = 1
 
 " Treat .nasm files as .asm files for syntax highlighting and such
 autocmd BufRead,BufNewFile *.nasm setfiletype asm
-
-" Coc config
 
 " Autoformat with LSP
 autocmd BufWritePost *.json,*.c,*.cpp,*.h,*.rs Format
@@ -261,14 +260,7 @@ command! -nargs=? Fold :call     CocActionAsync('fold', <f-args>)
 " nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 " nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
-" Coc config end
-
-" let g:tmux_navigator_no_mappings = 1
-" nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
-" nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
-" nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
-" nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
-" nnoremap <silent> <M-j> :TmuxNavigatePrevious<cr>
+"---------- Coc end ----------
 
 let g:go_doc_keywordprg_enabled = 0
 
@@ -288,6 +280,7 @@ nmap <leader>x :call <SID>ncopy_gitlab_url()<cr>
 command! -nargs=0 -range VGitlabUrlCopy :call <SID>vcopy_gitlab_url(<line1>, <line2>)
 vnoremap <leader>x :VGitlabUrlCopy<cr>
 
+" Format visual selection with jq
 let g:jq_fmt_ns = nvim_create_namespace('jq_fmt')
 function! s:v_jq_fmt(line_start, line_end)
   let marks = nvim_buf_get_extmarks(0, g:jq_fmt_ns, 0, -1, {})
@@ -310,7 +303,6 @@ function! s:v_jq_fmt(line_start, line_end)
       call nvim_buf_set_extmark(0, g:jq_fmt_ns, a:line_start-1, 0, {'virt_text': [['jq failed: ' . output, 'ErrorMsg']], 'virt_text_pos': 'eol'})
   endif
 endfunction
-
 command! -nargs=0 -range VJqFmt :call <SID>v_jq_fmt(<line1>, <line2>)
 vnoremap <leader>j :VJqFmt<cr>
 
@@ -330,7 +322,6 @@ Plug 'https://github.com/tpope/vim-eunuch'
 Plug 'https://github.com/tommcdo/vim-exchange'
 Plug 'https://github.com/airblade/vim-gitgutter'
 Plug 'https://github.com/kana/vim-operator-user'
-" Plug 'https://github.com/rhysd/vim-clang-format'
 Plug 'git://github.com/tpope/vim-repeat.git'
 Plug 'https://github.com/tpope/vim-unimpaired'
 Plug 'wellle/targets.vim'
@@ -343,8 +334,6 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'https://github.com/tpope/vim-abolish'
 Plug 'morhetz/gruvbox'
-" Plug 'neovim/nvim-lsp'
-" Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh' }
 
 " Override :Rg
 command! -bang -nargs=* -complete=file Rg
