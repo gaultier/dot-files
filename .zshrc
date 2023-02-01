@@ -27,18 +27,12 @@ export HISTSIZE=1000000000
 export SAVEHIST=1000000000
 
 export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/code/notmycode/odin/:$PATH"
-export PATH="/usr/local/sbin:$PATH"
-export PATH="/usr/local/opt/ice/libexec/bin:$PATH"
-export PATH="/usr/local/opt/ice/libexec/bin:$PATH"
-export PATH="/usr/local/opt/icu4c/bin:$PATH"
-export PATH="/usr/local/opt/icu4c/sbin:$PATH"
 export PATH="/usr/local/opt/llvm/bin:$PATH"
+export GOPATH=~/go
 export PATH=$PATH:$GOPATH/bin:$HOME/go/bin
 export PATH="/usr/local/opt/python@3.7/bin:$PATH"
-export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
-export RMG_BUILDENV_PROJECT_DIRS="$HOME/projects"
-export PKG_CONFIG_PATH="/opt/pkg/lib/pkgconfig/:/usr/local/opt/icu4c/lib/pkgconfig:/usr/local/opt/curl/lib/pkgconfig:$PKG_CONFIG_PATH"
+export PATH="/usr/local/opt/openssl/bin:$PATH"
+export PKG_CONFIG_PATH="/usr/local/opt/icu4c/lib/pkgconfig:/usr/local/opt/curl/lib/pkgconfig:$PKG_CONFIG_PATH"
 export C_INCLUDE_PATH=""
 export DOCKER_BUILDKIT=1
 export COMPOSE_DOCKER_CLI_BUILD=1
@@ -61,12 +55,8 @@ autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '\C-x\C-e' edit-command-line
 
+# Fuzzy search of git branch
 git-branch-fzf () {
-    # local branch="$(git branch --list --format='%(refname:lstrip=2)' | fzf)" 
-    # local ret=$?
-    # # zle reset-prompt
-    # echo -n $branch
-    # return $ret
     CMD="git checkout "$(git branch --list --format='%(refname:lstrip=2)' | fzf )""
     echo $CMD
     zle reset-prompt
@@ -90,15 +80,11 @@ if [ ! -d $HOME/.config/nvim ]; then
     ln -s $HOME/.vimrc $HOME/.config/nvim/init.vim
 fi
 
+# Nuke (local!) kubernetes
 if type kubectl > /dev/null ; then 
     source <(kubectl completion zsh);
     alias k=kubectl
     alias knuke="test $(kubectl config current-context) = 'docker-desktop' && kubectl delete po,svc,ingress,configmap,deploy,replicaset,secret,jobs,cronjobs,ns,statefulsets,role,rolebinding,clusterrole --force --all --grace-period 0 --all-namespaces --ignore-not-found --cascade"
-fi
-
-if [ ! -f "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim ]; then
-    curl -sSL -o ${XDG_DATA_HOME:-$HOME}/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
 # Dot files
@@ -111,7 +97,7 @@ fi
 # fi
 
 # Aliases
-alias utc=~/bin/utc.lua
+alias utc=lua -e 'print(os.date("!%Y-%m-%d %H:%M:%SZ", os.time()))'
 alias ydl="youtube-dl -f mp4 --restrict-filenames"
 alias d=docker
 alias dnuke="docker ps | awk 'NR > 1 {print \$1}' | xargs docker stop -t 0"
@@ -137,18 +123,10 @@ if which fdfind >/dev/null 2>&1; then
   alias fd=fdfind
 fi
 
+# Dot files management
 alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias vim=nvim
 
 [ -f /usr/local/opt/fzf/shell/completion.zsh ] && source /usr/local/opt/fzf/shell/completion.zsh
 [ -f /usr/local/opt/fzf/shell/key-bindings.zsh ] && source /usr/local/opt/fzf/shell/key-bindings.zsh
 
-export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
-
-if which startx >/dev/null 2>&1 && [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-  exec startx
-fi
-export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
-export GOPATH=~/go
-export PATH="/usr/local/opt/postgresql@13/bin:/Users/pgaultier/Library/Python/3.7/bin/:$PATH"
-export PATH="/usr/local/opt/mysql-client/bin:$PATH"
