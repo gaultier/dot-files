@@ -6,7 +6,6 @@ let g:loaded_python3_provider = 0
 let g:loaded_ruby_provider = 0
 let g:loaded_node_provider = 0
 let g:loaded_perl_provider = 0
-" highlight Pmenu ctermfg=grey ctermbg=black
 autocmd Signal SIGUSR1 quit
 " set background=dark
 set background=light
@@ -61,13 +60,12 @@ filetype plugin indent on
 
 " Shared statusline
 set laststatus=3
-" Reset
-set statusline=
-set statusline=%#LineNr#%F:%l:%c:%o%=\ │\ %p%%\ │\ %{strftime('%c')} 
-func Refresh_Statusline(timer)
+" Custom status line
+func Refresh_Statusline(_timer)
   set statusline=
-  set statusline=%#LineNr#%F:%l:%c:%o%=\ │\ %p%%\ │\ %{strftime('%c')} 
+  set statusline=%#LineNr#%F:%l:%c:%o\ │\ %=%{coc#status()}%{get(b:,'coc_current_function','')}%=\ │\ %p%%\ │\ %{strftime('%c')} 
 endfunc
+call Refresh_Statusline({})
 call timer_start(1000, 'Refresh_Statusline', {'repeat': -1})
 
 
@@ -97,36 +95,27 @@ nnoremap <c-p> :FZF<cr>
 
 nnoremap <S-c-R> :source ~/.vimrc<cr>
 nnoremap <c-g> :lua vim.fn['fzf#vim#grep']('rg --column --line-number --no-heading --color=always -w -- ' .. vim.fn['expand']('<cword>'), 1, vim.fn['fzf#vim#with_preview'](),0) <cr>
-nnoremap <c-_> :GFiles<cr>
-nnoremap <leader>d :GFiles?<cr>
 
 nmap <leader>l :nohl<CR>:lclose<CR>:cclose<CR>
 let g:indentLine_char = '┊'
 let g:gitgutter_enabled = 1
 
 
+" Treat .nasm files as .asm files for syntax highlighting and such
 autocmd BufRead,BufNewFile *.nasm setfiletype asm
-autocmd BufRead,BufNewFile *.ice setfiletype cpp
-
 
 " Coc config
-" Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocActionAsync('format')
 
-" Autoformat
-augroup mygroup
-  autocmd!
-  autocmd BufWritePost *.json,*.c,*.cpp,*.h,*.rs call CocAction('format')
-augroup end
+" Autoformat with LSP
+autocmd BufWritePost *.json,*.c,*.cpp,*.h,*.rs Format
 "
-" Autoformat js/ts
-autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
-autocmd FileType javascript setlocal formatprg=prettier\ --parser\ typescript
+" Autoformat js/ts with `deno fmt` (needs to be installed)
 augroup mygroup
   autocmd!
   autocmd BufWritePost *.js,*.jsx,*.ts,*.tsx call jobstart(['deno', 'fmt',  expand('%:p')], {})
 augroup end
 
+"---------- Coc begin ----------
 " Give more space for displaying messages.
 set cmdheight=2
 
@@ -242,10 +231,10 @@ nmap <silent> <C-s> <Plug>(coc-range-select)
 xmap <silent> <C-s> <Plug>(coc-range-select)
 
 " Add `:Format` command to format current buffer.
-" command! -nargs=0 Format :call CocAction('format')
+command! -nargs=0 Format :call CocActionAsync('format')
 
 " Add `:Fold` command to fold current buffer.
-" command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+command! -nargs=? Fold :call     CocActionAsync('fold', <f-args>)
 
 " Add `:OR` command for organize imports of the current buffer.
 " command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
@@ -253,7 +242,7 @@ xmap <silent> <C-s> <Plug>(coc-range-select)
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings using CoCList:
 " Show all diagnostics.
