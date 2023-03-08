@@ -10,10 +10,10 @@ return {
   exit_behavior = "Close",
   color_scheme = "Gruvbox Light",
   -- color_scheme = "ChallengerDeep",
-  font = wezterm.font_with_fallback({
-      "SauceCodePro Nerd Font",
-      "JetBrains Mono",
-    }),
+    -- font = wezterm.font_with_fallback({
+  --     "SauceCodePro Nerd Font",
+  --     "JetBrains Mono",
+  --   }),
   font_size = 12.0,
   scrollback_lines = 10000,
   keys = {

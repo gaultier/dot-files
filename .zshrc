@@ -1,4 +1,5 @@
 # Env
+export GOPRIVATE=bitbucket.org/advance52/*,dev.azure.com/advance52/*
 export PROMPT='%(?..%F{red}✘ %? )%f%F{blue}%B%~%b %(!.#.›) %f'
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
@@ -27,6 +28,7 @@ export HISTSIZE=1000000000
 export SAVEHIST=1000000000
 
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="/usr/sbin/:$PATH"
 export PATH="/usr/local/opt/llvm/bin:$PATH"
 export GOPATH=~/go
 export PATH=$PATH:$GOPATH/bin:$HOME/go/bin

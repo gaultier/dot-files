@@ -1,6 +1,6 @@
 [user]
  	name = Philippe Gaultier
- 	email = philippe.gaultier@ppro.com
+ 	email = philippe.gaultier@gi-de.com
 [alias]
 	dsf = "!f() { [ -z \"$GIT_PREFIX\" ] || cd \"$GIT_PREFIX\" && git diff --color \"$@\" | diff-so-fancy  | less --tabs=4 -RFXS; }; f"
 [pull]
@@ -8,7 +8,7 @@
 [push]
 	autoSetupRemote = true
 [core]
-	excludesfile = /Users/pgaultier/.gitignore
+	excludesfile = /home/pg/.gitignore
 	pager = delta
 [color]
 	pager = no
@@ -18,10 +18,11 @@
 		commit-style = yellow
 		file-style = yellow
 	  syntax-theme = gruvbox-light
-
-[url "ssh://git@gitlab.ppro.com/"]
-			insteadOf = https://gitlab.ppro.com/
-[url "git@gitlab.ppro.com:"]
-	insteadOf = https://gitlab.ppro.com/
 [init]
 	defaultBranch = master
+[url "git@ssh.dev.azure.com:v3/"]
+        insteadOf = https://dev.azure.com/
+[url "git@bitbucket.org:advance52"]
+				insteadOf = https://philippe_gaultier@bitbucket.org/advance52
+[url "git@bitbucket.org:advance52"]
+				insteadOf = https://bitbucket.org/advance52
