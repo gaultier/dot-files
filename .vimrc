@@ -265,22 +265,22 @@ command! -nargs=? Fold :call     CocActionAsync('fold', <f-args>)
 let g:go_doc_keywordprg_enabled = 0
 
 
-function! s:ncopy_gitlab_url()
-  let file_path = expand('%:p')
+function! s:ncopy_git_webui_url()
+  let file_path = expand('%')
   let line=line('.')
-   call jobstart(['/Users/pgaultier/code/c/nvim/gitlab-url-copy', file_path, line], {})
+   call jobstart(['bitbucket-link', getcwd(), file_path, line], {})
 endfunction
 
-function! s:vcopy_gitlab_url(line_start, line_end)
-  let file_path = expand('%:p')
-   call jobstart(['/Users/pgaultier/code/c/nvim/gitlab-url-copy', file_path, a:line_start, a:line_end], {})
+function! s:vcopy_git_webui_url(line_start, line_end)
+  let file_path = expand('%p')
+   call jobstart(['bitbucket-link', getcwd(), file_path, a:line_start, a:line_end], {})
 endfunction
 
-nmap <leader>x :call <SID>ncopy_gitlab_url()<cr>
-command! -nargs=0 -range VGitlabUrlCopy :call <SID>vcopy_gitlab_url(<line1>, <line2>)
-vnoremap <leader>x :VGitlabUrlCopy<cr>
+nmap <leader>x :call <SID>ncopy_git_webui_url()<cr>
+command! -nargs=0 -range VGitWebUiUrlCopy :call <SID>vcopy_git_webui_url(<line1>, <line2>)
+vnoremap <leader>x :VGitWebUiUrlCopy<cr>
 
-" Format visual selection with jq
+" " Format visual selection with jq
 let g:jq_fmt_ns = nvim_create_namespace('jq_fmt')
 function! s:v_jq_fmt(line_start, line_end)
   let marks = nvim_buf_get_extmarks(0, g:jq_fmt_ns, 0, -1, {})
