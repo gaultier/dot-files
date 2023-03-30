@@ -85,6 +85,16 @@ nmap <c-j> <C-w>j
 nmap <c-h> <C-w>h
 nmap <c-l> <C-w>l
 
+for i in range(97,122)
+  let c = nr2char(i)
+  exec "map \e".c." <M-".c.">"
+  exec "map! \e".c." <M-".c.">"
+endfor
+nnoremap <M-h> :eval system('tmux select-pane -H')<CR>
+nnoremap <M-j> :eval system('tmux select-pane -J')<CR>
+nnoremap <M-k> :eval system('tmux select-pane -K')<CR>
+nnoremap <M-l> :eval system('tmux select-pane -L')<CR>
+
 nnoremap <leader>cp :let @+ = expand("%:p")<CR>
 nnoremap <leader>cr :let @+ = expand("%")<CR>
 nnoremap <leader>cf :let @+ = expand("%:t")<CR>
