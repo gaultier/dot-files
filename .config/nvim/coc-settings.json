@@ -19,7 +19,21 @@
       ],
       "filetypes": [
         "go"
-      ]
+      ],
+      "settings": {
+        "codelenses": {
+          "tidy": true,
+          "gc_details": true // Show a code lens toggling the display of gc's choices.
+        },
+        "buildFlags": [
+          "-tags=rabbitmq,integration"
+        ]
+      },
+      "initializationOptions": {
+        "buildFlags": [
+          "-tags=rabbitmq,integration"
+        ]
+      },
     },
     "clangd": {
       "disableSnippetCompletion": true,
