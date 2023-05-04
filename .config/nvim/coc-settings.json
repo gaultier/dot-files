@@ -26,18 +26,27 @@
           "gc_details": true // Show a code lens toggling the display of gc's choices.
         },
         "buildFlags": [
-          "-tags=rabbitmq,integration"
+          "-tags=rabbitmq,integration,transfer_tests,db_tests,property_tests,e2e_tests"
         ]
       },
       "initializationOptions": {
         "buildFlags": [
-          "-tags=rabbitmq,integration"
+          "-tags=rabbitmq,integration,transfer_tests,db_tests,property_tests,e2e_tests"
         ]
       },
     },
+    "odin": {
+      "command": "ols",
+      "filetypes": [
+        "odin"
+      ],
+      "rootPatterns": [
+        "ols.json"
+      ]
+    },
     "clangd": {
       "disableSnippetCompletion": true,
-      "command": "/usr/local/opt/llvm/bin/clangd",
+      "command": "/usr/bin/clangd",
       "rootPatterns": [
         "compile_flags.txt",
         "compile_commands.json"
