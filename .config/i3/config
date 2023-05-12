@@ -94,14 +94,14 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+w split h
+# bindsym $mod+w split h
 
 # split in vertical orientation
-bindsym $mod+s split v
+# bindsym $mod+s split v
 bindsym $mod+t split toggle
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+bindsym $mod+fkillall -USR1 i3status  fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 # bindsym $mod+s nop
@@ -212,5 +212,8 @@ bindsym $mod+Shift+f [floating] focus
 
 gaps inner 15px
 
-bindsym $mod+x move scratchpad
-bindsym $mod+minus scratchpad show
+bindsym $mod+* move scratchpad
+bindsym $mod+/ scratchpad show
+bindsym $mod+minus gaps inner all minus 2px
+bindsym $mod+plus gaps inner all plus 2px
+
