@@ -211,3 +211,6 @@ bindsym $mod+z workspace back_and_forth
 bindsym $mod+Shift+f [floating] focus
 
 gaps inner 15px
+
+bindsym $mod+x move scratchpad
+bindsym $mod+minus scratchpad show
