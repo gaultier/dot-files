@@ -196,6 +196,7 @@ bindsym $mod+r mode "resize"
 bar {
         i3bar_command i3bar --transparency
         status_command i3status
+        tray_padding 10
 }
 
 bindsym $mod+F1 [class="Firefox"] focus
