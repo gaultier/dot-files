@@ -28,13 +28,13 @@ exec --no-startup-id dex --autostart --environment i3
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork --image=/home/pg/Downloads/GDWP-756-HD-No-Logo.png --ignore-empty-password
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 exec_always --no-startup-id feh --bg-scale /home/pg/Downloads/GDWP-723-HD-N-Logo.jpeg
-exec_always --no-startup-id picom --active-opacity=1 --inactive-opacity=0.8 --opacity-rule='100:class_g = "mpv"'
+exec_always --no-startup-id picom --active-opacity=1 --inactive-opacity=0.8
 
 exec alacritty
 exec firefox
@@ -101,7 +101,7 @@ bindsym $mod+Shift+Right move right
 bindsym $mod+t split toggle
 
 # enter fullscreen mode for the focused container
-bindsym $mod+fkillall -USR1 i3status  fullscreen toggle
+bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 # bindsym $mod+s nop
