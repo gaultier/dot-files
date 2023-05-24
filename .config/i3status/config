@@ -6,6 +6,7 @@
 # ß
 # If the above line is not correctly displayed, fix your editor first!
 
+
 general {
         colors = true
         interval = 5
@@ -53,7 +54,12 @@ tztime local {
         format = "%Y-%m-%d %H:%M:%S"
 }
 
- cpu_temperature 0 {
-           format = "T: %degrees °C"
-           path = "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input"
+cpu_temperature 0 {
+        format = "T: %degrees °C"
+        path = "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input"
+}
+
+cpu_temperature 1 {
+        format = "T: %degrees °C"
+        path = "/sys/devices/platform/coretemp.0/hwmon/hwmon6/temp1_input"
 }

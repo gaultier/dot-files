@@ -29,13 +29,14 @@ exec --no-startup-id dex --autostart --environment i3
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork --image=/home/pg/Downloads/GDWP-756-HD-No-Logo.png --ignore-empty-password
+exec --no-startup-id xss-lock --transfer-sleep-lock --  i3lock-fancy-rapid 5 3
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 exec_always --no-startup-id feh --bg-scale /home/pg/Downloads/GDWP-752-HD-No-Logo.jpeg
 exec_always --no-startup-id picom --active-opacity=1 --inactive-opacity=0.5
+exec_always --no-startup-id /home/pg/.config/polybar/launch.sh
 
 exec alacritty
 exec firefox
@@ -194,19 +195,20 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-        i3bar_command i3bar --transparency
-        status_command i3status
-        tray_padding 10
-}
+# bar {
+#         tray_padding 15
+#         i3bar_command i3bar --transparency
+#         status_command i3status
+# }
 
 bindsym $mod+F1 [class="Firefox"] focus
 bindsym $mod+F2 [class="Microsoft-edge"] focus
 bindsym $mod+F3 [title="Slack"] focus
 
-floating_maximum_size 600 x 600
+# floating_maximum_size 600 x 600
 bindsym $mod+Shift+s sticky toggle
 # for_window [class="mpv"] sticky enable
+
 
 workspace_auto_back_and_forth yes
 bindsym $mod+z workspace back_and_forth
@@ -214,8 +216,8 @@ bindsym $mod+Shift+f [floating] focus
 
 gaps inner 15px
 
-bindsym $mod+* move scratchpad
-bindsym $mod+/ scratchpad show
+bindsym $mod + Shift + p move scratchpad
+bindsym $mod+p scratchpad show
 bindsym $mod+minus gaps inner all minus 2px
 bindsym $mod+plus gaps inner all plus 2px
 

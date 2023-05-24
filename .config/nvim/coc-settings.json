@@ -26,12 +26,12 @@
           "gc_details": true // Show a code lens toggling the display of gc's choices.
         },
         "buildFlags": [
-          "-tags=rabbitmq,integration,transfer_tests,db_tests,property_tests,e2e_tests"
+          "-tags=rabbitmq,integration,transfer_tests,db_tests,property_tests,e2e_tests,api_test"
         ]
       },
       "initializationOptions": {
         "buildFlags": [
-          "-tags=rabbitmq,integration,transfer_tests,db_tests,property_tests,e2e_tests"
+          "-tags=rabbitmq,integration,transfer_tests,db_tests,property_tests,e2e_tests,api_test"
         ]
       },
     },
