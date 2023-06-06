@@ -24,8 +24,8 @@ set number relativenumber
 set clipboard=unnamed
 set encoding=utf-8
 set expandtab
-let tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=0
 set splitbelow
 set splitright
 syntax on
@@ -111,7 +111,7 @@ autocmd BufWritePost *.json,*.c,*.cpp,*.h,*.rs Format
 " Autoformat js/ts with `deno fmt` (needs to be installed)
 augroup mygroup
   autocmd!
-  autocmd BufWritePost *.js,*.jsx,*.ts,*.tsx call jobstart(['deno', 'fmt',  expand('%:p')], {})
+  autocmd BufWritePost *.js,*.jsx,*.ts,*.tsx call jobstart(['deno', 'fmt', '--line-width=120',  expand('%:p')], {})
 augroup end
 
 "---------- Coc begin ----------

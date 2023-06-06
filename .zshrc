@@ -115,6 +115,8 @@ export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64/
 export LC_ALL=en_US.UTF-8
+export DENO_INSTALL="/home/pg/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
 
 # Install stuff if not present already
 if [ ! -d $HOME/.config/nvim ]; then
