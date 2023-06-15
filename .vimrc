@@ -266,14 +266,14 @@ let g:go_doc_keywordprg_enabled = 0
 
 
 function! s:ncopy_git_webui_url()
-  let file_path = expand('%')
+  let file_path = expand('%:p')
   let line=line('.')
-   call jobstart(['bitbucket-link', getcwd(), file_path, line], {})
+   call jobstart(['ado-link', file_path, line, line+1], {})
 endfunction
 
 function! s:vcopy_git_webui_url(line_start, line_end)
-  let file_path = expand('%p')
-   call jobstart(['bitbucket-link', getcwd(), file_path, a:line_start, a:line_end], {})
+  let file_path = expand('%:p')
+   call jobstart(['ado-link', file_path, a:line_start, a:line_end+1], {})
 endfunction
 
 nmap <leader>x :call <SID>ncopy_git_webui_url()<cr>

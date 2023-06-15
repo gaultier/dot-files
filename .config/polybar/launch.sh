@@ -6,7 +6,7 @@ polybar-msg cmd quit
 # Otherwise you can use the nuclear option:
 # killall -q polybar
 
-for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
+for m in $(xrandr --query | grep -E '(HDMI1 connected)|(eDP1 connected)' | cut -d" " -f1); do
   MONITOR=$m polybar --reload &
 done
 
