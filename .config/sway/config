@@ -14,7 +14,10 @@ set $term alacritty
 set $menu rofi -modi drun,run -show run | xargs swaymsg exec
 
 output HDMI-A-1 mode 3440x1440 pos 0 0 bg ~/Downloads/wp.png stretch
-output eDP-1 mode 1920x1080 pos 0 1920 bg ~/Downloads/wp.png stretch
+output eDP-1 mode 1920x1080 pos 0 1440 bg ~/Downloads/wp.png stretch
+
+exec swaync
+bindsym $mod+Shift+n exec swaync-client -t -sw
 
 exec swayidle -w \
          timeout 300 'swaylock -f -c 000000' \
@@ -34,12 +37,6 @@ font pango:Monaco Regular 10
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex --autostart --environment i3
 
-# The combination of xss-lock, nm-applet and pactl is a popular choice, so
-# they are included here as an example. Modify as you see fit.
-
-# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
-# screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock --  i3lock-fancy-rapid 5 3
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -171,13 +168,10 @@ bindsym $mod+Shift+0 move container to workspace number $ws10; workspace number 
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
 
 # Exit sway (logs you out of your Wayland session)
 bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
 
-# bindsym $mod+Shift+t exec i3lock-fancy-rapid 5 3
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -211,7 +205,7 @@ bar {
 
     # when the status_command prints a new line to stdout, swaybar updates.
     # the default just shows the current date and time.
-    status_command while date ; do sleep 1; done
+    status_command while ~/bar.sh; do sleep 1; done
 
     colors {
         statusline #ffffff
@@ -242,8 +236,8 @@ bindsym $mod+Shift+f [floating] focus
 
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
-# bindsym $mod+minus gaps inner all minus 2px
-# bindsym $mod+plus gaps inner all plus 2px
+bindsym $mod+u gaps inner all minus 2px
+bindsym $mod+i gaps inner all plus 2px
 
 
 # bindsym $mod + period move workspace to output next
