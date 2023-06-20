@@ -12,3 +12,11 @@ etc/local.conf
 .ignore
 .nvimlog
 __pycache__
+.cargo
+.venv
+.bundle
+.azure
+.debug
+.config/chromium
+.config/go
+.config/microsoft*
