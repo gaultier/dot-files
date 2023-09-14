@@ -13,8 +13,8 @@ set $mod Mod1
 set $term alacritty
 set $menu rofi -modi drun,run -show run | xargs swaymsg exec
 
-output HDMI-A-1 mode 3440x1440 pos 0 0 bg ~/Downloads/wp.png stretch
-output eDP-1 mode 1920x1080 pos 0 1440 bg ~/Downloads/wp.png stretch
+output HDMI-A-1 mode 3440x1440 pos 0 0 bg ~/Downloads/wp.png fit
+output eDP-1 mode 1920x1080 pos 0 1440 bg ~/Downloads/wp.png fit
 
 exec swaync
 
@@ -25,7 +25,7 @@ exec swayidle -w \
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Monaco Regular 10
+# font pango:Monaco Regular 10
 # font -urw-nimbus mono l-regular-r-normal--0-0-0-0-p-0-iso8859-2
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
@@ -42,8 +42,8 @@ exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
-exec flatpak run com.slack.Slack; move workspace to output eDP-1;
-exec flatpak run com.microsoft.Edge; move workspace to output eDP-1;
+exec slack; move workspace to output eDP-1;
+exec microsoft-edge-stable; move workspace to output eDP-1;
 
 assign [class="Microsoft-edge"] workspace 1
 assign [title="Slack"] workspace 1
