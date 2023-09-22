@@ -104,19 +104,13 @@ export GOPRIVATE=bitbucket.org/advance52/*,dev.azure.com/advance52/*
 export EDITOR=nvim
 export VISUAL=nvim
 export BAT_THEME=gruvbox-light
-export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="/usr/sbin/:$PATH"
-export PATH="/usr/local/opt/llvm/bin:$PATH"
 export GOPATH=~/go
 export PATH=$PATH:$GOPATH/bin:$HOME/go/bin
-export PATH="/usr/local/opt/python@3.7/bin:$PATH"
-export PATH="/usr/local/opt/openssl/bin:$PATH"
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
-export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64/
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk/
 export LC_ALL=en_US.UTF-8
-export DENO_INSTALL="/home/pg/.deno"
-export PATH="$DENO_INSTALL/bin:$PATH"
 
 # Install stuff if not present already
 if [ ! -d $HOME/.config/nvim ]; then
@@ -127,7 +121,7 @@ fi
 alias utc=lua -e 'print(os.date("!%Y-%m-%d %H:%M:%SZ", os.time()))'
 alias ydl="youtube-dl -f mp4 --restrict-filenames"
 alias d=docker
-alias dnuke="docker ps | awk 'NR > 1 {print \$1}' | xargs docker stop -t 0"
+alias dnuke="docker ps | awk 'NR > 1 {print | \"docker stop -t 0 \" \$1}'"
 alias e=$EDITOR
 alias l='ls -latr'
 alias gst='git status'
