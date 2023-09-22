@@ -148,6 +148,7 @@ fi
 alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias vim=nvim
 
+[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 # macOS
 [ -f /usr/local/opt/fzf/shell/completion.zsh ] && source /usr/local/opt/fzf/shell/completion.zsh
 # debian
