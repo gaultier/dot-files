@@ -118,7 +118,6 @@ if [ ! -d $HOME/.config/nvim ]; then
     ln -s $HOME/.vimrc $HOME/.config/nvim/init.vim
 fi
 # Aliases
-alias utc=lua -e 'print(os.date("!%Y-%m-%d %H:%M:%SZ", os.time()))'
 alias ydl="youtube-dl -f mp4 --restrict-filenames"
 alias d=docker
 alias dnuke="docker ps | awk 'NR > 1 {print | \"docker stop -t 0 \" \$1}'"
@@ -140,7 +139,6 @@ alias gwip='git add .; git commit -am "[wip]"'
 alias gcl='git clone --depth 1 --recurse'
 alias gpsup='git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)'
 alias ...='cd ../..'
-alias "cs=xclip -selection clipboard"
 
 if which fdfind >/dev/null 2>&1; then
   alias fd=fdfind
