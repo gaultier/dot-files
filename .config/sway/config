@@ -10,7 +10,7 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod1
-set $term alacritty
+set $term foot
 set $menu rofi -modi drun,run -show run | xargs swaymsg exec
 
 output HDMI-A-1 mode 3440x1440 pos 0 0 bg ~/Downloads/wp.png fit
@@ -56,7 +56,7 @@ floating_modifier $mod
 # tiling_drag modifier titlebar
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec $term
 
 # kill focused window
 bindsym $mod+Shift+q kill
