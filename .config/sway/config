@@ -13,8 +13,8 @@ set $mod Mod1
 set $term foot
 set $menu rofi -modi drun,run -show run | xargs swaymsg exec
 
-output HDMI-A-1 mode 3440x1440 pos 0 0 bg ~/Downloads/wp.png fit
-output eDP-1 mode 1920x1080 pos 0 1440 bg ~/Downloads/wp.png fit
+output HDMI-A-1 mode 3440x1440 pos 0 0 bg ~/Downloads/wp.png stretch
+output eDP-1 mode 1920x1080 pos 0 1440 bg ~/Downloads/wp.png stretch
 
 exec swaync
 
