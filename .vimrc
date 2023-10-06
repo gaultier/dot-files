@@ -322,7 +322,7 @@ Plug 'https://github.com/tpope/vim-eunuch'
 Plug 'https://github.com/tommcdo/vim-exchange'
 Plug 'https://github.com/airblade/vim-gitgutter'
 Plug 'https://github.com/kana/vim-operator-user'
-Plug 'git://github.com/tpope/vim-repeat.git'
+" Plug 'git://github.com/tpope/vim-repeat.git'
 Plug 'https://github.com/tpope/vim-unimpaired'
 Plug 'wellle/targets.vim'
 Plug 'https://github.com/tpope/vim-surround'
@@ -334,7 +334,6 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'https://github.com/tpope/vim-abolish'
 Plug 'morhetz/gruvbox'
-Plug 'https://github.com/christoomey/vim-tmux-navigator'
 
 " Override :Rg
 command! -bang -nargs=* -complete=file Rg
