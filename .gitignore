@@ -20,3 +20,4 @@ __pycache__
 .config/chromium
 .config/go
 .config/microsoft*
+.project.gf

@@ -23,7 +23,7 @@
       "settings": {
         "codelenses": {
           "tidy": true,
-          "gc_details": true // Show a code lens toggling the display of gc's choices.
+          "gc_details": true
         },
         "buildFlags": [
           "-tags=rabbitmq,integration,transfer_tests,db_tests,property_tests,e2e_tests,api_test,dev,integration_tests"
@@ -33,7 +33,7 @@
         "buildFlags": [
           "-tags=rabbitmq,integration,transfer_tests,db_tests,property_tests,e2e_tests,api_test,dev,integration_tests"
         ]
-      },
+      }
     },
     "odin": {
       "command": "ols",
@@ -58,6 +58,15 @@
         "c++",
         "objc",
         "objcpp"
+      ]
+    },
+    "rust": {
+      "command": "rust-analyzer",
+      "filetypes": [
+        "rust"
+      ],
+      "rootPatterns": [
+        "Cargo.toml"
       ]
     }
   }

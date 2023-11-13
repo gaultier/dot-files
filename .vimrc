@@ -106,7 +106,7 @@ let g:gitgutter_enabled = 1
 autocmd BufRead,BufNewFile *.nasm setfiletype asm
 
 " Autoformat with LSP
-autocmd BufWritePost *.json,*.c,*.cpp,*.h,*.rs Format
+" autocmd BufWritePost *.json,*.c,*.cpp,*.h,*.rs Format
 "
 " Autoformat js/ts with `deno fmt` (needs to be installed)
 augroup mygroup
