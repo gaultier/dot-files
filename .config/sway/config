@@ -4,8 +4,8 @@ set $mod Mod1
 set $term foot
 set $menu rofi -modi drun,run -show run | xargs swaymsg exec
 
-output HDMI-A-1 mode 3440x1440 pos 0 0 bg ~/Downloads/wp.png stretch
-output eDP-1 mode 1920x1080 pos 0 1440 bg ~/Downloads/wp.png stretch
+output DP-2 mode 3440x1440 pos 0 0 bg ~/Downloads/wp.png stretch
+output eDP-1 mode 1920x1080 pos 3440 0 bg ~/Downloads/wp.png stretch
 
 exec swaync
 
@@ -218,7 +218,8 @@ bindsym $mod+u gaps inner all minus 2px
 bindsym $mod+i gaps inner all plus 2px
 
 
-bindsym $mod+n move workspace to output HDMI-A-1
+bindsym $mod+n move workspace to output DP-2
 bindsym $mod+Shift+n move workspace to output eDP-1
+bindsym $mod+x exec grimshot save screen ~/Downloads/screenshot_$(date +%s).png
 
 for_window [app_id="flameshot"] border pixel 0, floating enable, fullscreen disable, move absolute position 0 0
