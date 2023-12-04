@@ -7,7 +7,7 @@ set $menu rofi -modi drun,run -show run | xargs swaymsg exec
 output DP-2 mode 3440x1440 pos 0 0 bg ~/Downloads/wp.png stretch
 output eDP-1 mode 1920x1080 pos 3440 0 bg ~/Downloads/wp.png stretch
 
-exec swaync
+# exec swaync
 
 exec swayidle -w \
          timeout 900 'swaylock -f -c 000000' \
@@ -21,7 +21,7 @@ exec swayidle -w \
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 10
+font pango:Noto Mono 10
 
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
@@ -34,10 +34,10 @@ exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
-exec slack; move workspace to output eDP-1;
-exec microsoft-edge-stable; move workspace to output eDP-1;
+exec flatpak run com.slack.Slack; move workspace to output eDP-1;
+# exec microsoft-edge-stable; move workspace to output eDP-1;
 
-assign [class="Microsoft-edge"] workspace 1
+# assign [class="Microsoft-edge"] workspace 1
 assign [title="Slack"] workspace 1
 
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -180,19 +180,20 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-bar {
-    position top
+bar swaybar_command waybar
+# bar {
+#     position top
 
-    # when the status_command prints a new line to stdout, swaybar updates.
-    # the default just shows the current date and time.
-    status_command while ~/bar.sh; do sleep 1; done
+#     # when the status_command prints a new line to stdout, swaybar updates.
+#     # the default just shows the current date and time.
+#     status_command while ~/bar.sh; do sleep 1; done
 
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
-}
+#     colors {
+#         statusline #ffffff
+#         background #323232
+#         inactive_workspace #32323200 #32323200 #5c5c5c
+#     }
+# }
 
 input "type:keyboard" {
         xkb_layout us,de
@@ -200,7 +201,7 @@ input "type:keyboard" {
 }
 
 bindsym $mod+F1 [class="Firefox"] focus
-bindsym $mod+F2 [class="Microsoft-edge"] focus
+# bindsym $mod+F2 [class="Microsoft-edge"] focus
 bindsym $mod+F3 [title="Slack"] focus
 
 floating_maximum_size 900 x 900
@@ -222,4 +223,4 @@ bindsym $mod+n move workspace to output DP-2
 bindsym $mod+Shift+n move workspace to output eDP-1
 bindsym $mod+x exec grimshot save screen ~/Downloads/screenshot_$(date +%s).png
 
-for_window [app_id="flameshot"] border pixel 0, floating enable, fullscreen disable, move absolute position 0 0
+# for_window [app_id="flameshot"] border pixel 0, floating enable, fullscreen disable, move absolute position 0 0
