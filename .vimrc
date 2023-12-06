@@ -1,128 +1,4 @@
-" syntax enable
-" set termguicolors
-" set smartcase
-" set ignorecase
-" let g:loaded_python3_provider = 0
-" let g:loaded_ruby_provider = 0
-" let g:loaded_node_provider = 0
-" let g:loaded_perl_provider = 0
-"autocmd Signal SIGUSR1 quit
-" set background=dark
-" set background=light
-
-" let mapleader = ' '
-" let maplocalleader = ' '
-" set noswapfile
-" Enable persistent undo so that undo history persists across vim sessions
-" set undofile
-" set undodir=~/.vim/undo
-
-" set mouse=a
-" set nomodeline
-" set modelines=0
-" set number relativenumber
-" set clipboard=unnamed
-" set encoding=utf-8
-" set expandtab
-" set tabstop=2
-" set shiftwidth=0
-" set splitbelow
-" set splitright
-" syntax on
-" pop-up menu options
-" highlight Pmenu guibg=NONE
-" set wildoptions=pum
-" set pumblend=10
-" set foldcolumn=0
-" set nocursorline
-" set ttyfast
-" set autowrite
-" set autoread
-" increase the history limit of
-" set history=10000
-" No annoying sound on errors
-" set noerrorbells
-" set novisualbell
-" set grepprg=rg
-" set updatetime=50
-" set selection=inclusive
-" Display 5 lines above/below the cursor when scrolling with a mouse.
-" set scrolloff=5
-" Highlight matching pairs of brackets. Use the '%' character to jump between pairs
-" set matchpairs+=<:>
-" highlight Comment cterm=italic
-" highlight clear SignColumn
-" Use system clipboard
-" if has('unnamedplus')
-"   set clipboard=unnamed,unnamedplus
-" endi
-" filetype plugin indent on
-
-" Shared statusline
-" set laststatus=3
-" Custom status line
-" unneeded | func Refresh_Statusline(_timer)
-" unneeded |   set statusline=
-" unneeded |   set statusline=%#LineNr#%F:%l:%c:%o\ │\ %=%{coc#status()}%{get(b:,'coc_current_function','')}%=\ │\ %p%%\ │\ %{strftime('%c')} 
-" unneeded | endfunc
-" unneeded | call Refresh_Statusline({})
-" unneeded | call timer_start(1000, 'Refresh_Statusline', {'repeat': -1})
-
-
-" Make split bar prettier
-" set fillchars=stlnc:⚊,vert:\│ 
-" highlight VertSplit cterm=NONE gui=NONE
-" highlight WinSeparator cterm=NONE gui=NONE
-" set hidden
-
-" Some servers have issues with backup files, see #649.
-" set nobackup
-" set nowritebackup
-
-" Tmux-like pane navigation
-" nmap <c-k> <C-w>k
-" nmap <c-j> <C-w>j
-" nmap <c-h> <C-w>h
-" nmap <c-l> <C-w>l
-
-" nnoremap <leader>cp :let @+ = expand("%:p")<CR>
-" nnoremap <leader>cr :let @+ = expand("%")<CR>
-" nnoremap <leader>cf :let @+ = expand("%:t")<CR>
-" nnoremap <leader>e :vs ~/.vimrc<CR>
-" nmap <leader>s :source ~/.vimrc<CR>
-
-" set rtp+=/usr/local/opt/fzf
-" let g:fzf_preview_window = ['right:50%', 'ctrl-/']
-" nnoremap <c-p> :FZF<cr>
-
-" nnoremap <c-g> :lua vim.fn['fzf#vim#grep']('rg --column --line-number --no-heading --color=always -w -- ' .. vim.fn['expand']('<cword>'), 1, vim.fn['fzf#vim#with_preview'](),0) <cr>
-
-" nmap <leader>l :nohl<CR>:lclose<CR>:cclose<CR>
-" let g:indentLine_char = '┊'
-" let g:gitgutter_enabled = 1
-
-
-" Treat .nasm files as .asm files for syntax highlighting and such
-autocmd BufRead,BufNewFile *.nasm setfiletype asm
-
-" Autoformat with LSP
-" autocmd BufWritePost *.json,*.c,*.cpp,*.h,*.rs Format
-"
-" Autoformat js/ts with `deno fmt` (needs to be installed)
-" unneeded | augroup mygroup
-" unneeded |   autocmd!
-" unneeded |   autocmd BufWritePost *.js,*.jsx,*.ts,*.tsx call jobstart(['deno', 'fmt', '--line-width=120',  expand('%:p')], {})
-" unneeded | augroup end
-
 "---------- Coc begin ----------
-" Give more space for displaying messages.
-" set cmdheight=2
-
-" Don't pass messages to |ins-completion-menu|.
-" set shortmess+=c
-
-" set signcolumn=auto
-
 function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~" '\s'
@@ -138,30 +14,14 @@ inoremap <silent><expr> <TAB>
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
 
-" Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
-
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-" Use `[g` and `]g` to navigate diagnostics
-" nmap <silent> [g <Plug>(coc-diagnostic-prev)
-" nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" GoTo code navigation.
-" nmap <silent> gd <Plug>(coc-definition)
-" nmap <silent> gy <Plug>(coc-type-definition)
-" nmap <silent> gi <Plug>(coc-implementation)
-" nmap <silent> gr <Plug>(noc-references)
 
 " Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+" TODO: nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -173,107 +33,20 @@ function! s:show_documentation()
   endif
 endfunction
 
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Symbol renaming.
-" nmap <leader>rn <Plug>(coc-rename)
-
-" Formatting selected code.
-" xmap <leader>f  <Plug>(coc-format-selected)
-" nmap <leader>f  <Plug>(coc-format-selected)
-
-" augroup mygroup
-"   autocmd!
-"   " Setup formatexpr specified filetype(s).
-"   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-"   " Update signature help on jump placeholder.
-"   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-" augroup end
-
-" Applying codeAction to the selected region.
-" Example: `<leader>aap` for current paragraph
-" xmap <leader>a  <Plug>(coc-codeaction-selected)
-" nmap <leader>a  <Plug>(coc-codeaction-selected)
-
-" Remap keys for applying codeAction to the current line.
-" nmap <leader>ac  <Plug>(coc-codeaction)
-" Apply AutoFix to problem on the current line.
-" nmap <leader>qf  <Plug>(coc-fix-current)
-
-" Map function and class text objects
-" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-" xmap if <Plug>(coc-funcobj-i)
-" omap if <Plug>(coc-funcobj-i)
-" xmap af <Plug>(coc-funcobj-a)
-" omap af <Plug>(coc-funcobj-a)
-" xmap ic <Plug>(coc-classobj-i)
-" omap ic <Plug>(coc-classobj-i)
-" xmap ac <Plug>(coc-classobj-a)
-" omap ac <Plug>(coc-classobj-a)
-
-" Remap <C-f> and <C-b> for scroll float windows/popups.
-" unneeded | nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-" unneeded | nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-" unneeded | inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-" unneeded | inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-" unneeded | vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-" unneeded | vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-
-" Use CTRL-S for selections ranges.
-" Requires 'textDocument/selectionRange' support of language server.
-" unneeded | nmap <silent> <C-s> <Plug>(coc-range-select)
-" unneeded | xmap <silent> <C-s> <Plug>(coc-range-select)
-
-" Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocActionAsync('format')
-
-" Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold :call     CocActionAsync('fold', <f-args>)
-
-" Add `:OR` command for organize imports of the current buffer.
-" command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-" Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
-" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
-" Mappings using CoCList:
-" Show all diagnostics.
-" nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions.
-" nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-" Show commands.
-" nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document.
-" nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols.
-" nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-" nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-" nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list.
-" nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 "---------- Coc end ----------
-
-" let g:go_doc_keywordprg_enabled = 0
-
-
-function! s:ncopy_git_webui_url()
-  let file_path = expand('%:p')
-  let line=line('.')
-   call jobstart(['ado-link', file_path, line, line+1], {})
-endfunction
+" function! s:ncopy_git_webui_url()
+"   let file_path = expand('%:p')
+"   let line=line('.')
+"    call jobstart(['ado-link', file_path, line, line+1], {})
+" endfunction
 
 function! s:vcopy_git_webui_url(line_start, line_end)
   let file_path = expand('%:p')
    call jobstart(['ado-link', file_path, a:line_start, a:line_end+1], {})
 endfunction
 
-nmap <leader>x :call <SID>ncopy_git_webui_url()<cr>
-command! -nargs=0 -range VGitWebUiUrlCopy :call <SID>vcopy_git_webui_url(<line1>, <line2>)
+" TODO: nmap <leader>x :call <SID>ncopy_git_webui_url()<cr>
+" TODO: command! -nargs=0 -range VGitWebUiUrlCopy :call <SID>vcopy_git_webui_url(<line1>, <line2>)
 vnoremap <leader>x :VGitWebUiUrlCopy<cr>
 
 " " Format visual selection with jq
@@ -299,7 +72,7 @@ function! s:v_jq_fmt(line_start, line_end)
       call nvim_buf_set_extmark(0, g:jq_fmt_ns, a:line_start-1, 0, {'virt_text': [['jq failed: ' . output, 'ErrorMsg']], 'virt_text_pos': 'eol'})
   endif
 endfunction
-command! -nargs=0 -range VJqFmt :call <SID>v_jq_fmt(<line1>, <line2>)
+" TODO: command! -nargs=0 -range VJqFmt :call <SID>v_jq_fmt(<line1>, <line2>)
 vnoremap <leader>j :VJqFmt<cr>
 
 

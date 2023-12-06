@@ -1,4 +1,3 @@
-
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_node_provider = 0
@@ -32,6 +31,49 @@ vim.keymap.set('n', 'gi', '<Plug>(coc-implementation)')
 vim.keymap.set('n', 'gr', '<Plug>(noc-references)')
 vim.keymap.set('n', '<leader>rn', '<Plug>(coc-rename)')
 vim.keymap.set('n', '<leader>qf', '<Plug>(coc-fix-current)')
+vim.keymap.set('i', '<c-space', 'coc#refresh()')
+
+vim.api.nvim_create_user_command('Format', ':call CocActionAsync("format")',
+  {bang=true, desc='LSP-format command'})
+
+vim.api.nvim_create_autocmd('CursorHold', {
+  pattern = '*',
+  command = 'silent call CocActionAsync("highlight")',
+  desc = 'Highlight the symbol and its references when holding the cursor.',
+})
+
+vim.api.nvim_create_autocmd('BufWritePost', {
+  pattern = '*.json,*.c,*.h,*.rs',
+  command = 'Format',
+  desc = 'LSP-format source files',
+})
+
+vim.api.nvim_create_autocmd('BufRead,BufNewFile', {
+  pattern = '*.nasm',
+  callback = function()
+    vim.cmd('set filetype asm')
+  end,
+  desc = 'Treat .nasm files as .asm files',
+})
+
+vim.keymap.set('n', '<leader>x', function()
+  local file_path = vim.fn.expand('%:p')
+  local line = vim.fn.line('.')
+  vim.fn.jobstart({'ado-link', file_path, line, line + 1}, {
+      stderr_buffered = true,
+      on_stderr = function(_chan_id, data, name)
+        if next(data) == nil then
+          return
+        end
+
+        local cmd = vim.fn.printf('"ado-link %s %d %d"', file_path, line, line+1)
+        local tmp = table.concat(data, ', ')
+        vim.fn.setqflist({{lnum=line, end_lnum=line+1, type='E', text= cmd .. ': ' .. tmp}}, 'r')
+        vim.cmd [[ :cc ]]
+      end
+    })
+end, 
+{desc='Copy to clipboard a URL to a git webui for the current line'})
 
 ------------------- Plug
 local Plug = vim.fn['plug#']
