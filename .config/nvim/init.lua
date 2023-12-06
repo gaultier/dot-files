@@ -46,7 +46,7 @@ vim.o.swapfile = false
 vim.o.tabstop = 2
 vim.o.termguicolors = true
 vim.o.ttyfast = true
-vim.o.undodir = '~/.vim/undo'
+vim.o.undodir = '/home/pg/.vim/undo'
 vim.o.undofile = true
 vim.o.updatetime = 50
 vim.o.visualbell = false
@@ -167,7 +167,7 @@ vim.api.nvim_command('syntax enable')
 
 function grep_current_word()
   local word = vim.fn.expand('<cword>')
-  vim.api.nvim_command('Rg -w ' .. word)
+  vim.api.nvim_command('Rg ' .. word)
 end
 vim.keymap.set('n', '<c-g>', grep_current_word)
 
