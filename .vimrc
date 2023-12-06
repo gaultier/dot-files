@@ -34,11 +34,6 @@ function! s:show_documentation()
 endfunction
 
 "---------- Coc end ----------
-" function! s:ncopy_git_webui_url()
-"   let file_path = expand('%:p')
-"   let line=line('.')
-"    call jobstart(['ado-link', file_path, line, line+1], {})
-" endfunction
 
 function! s:vcopy_git_webui_url(line_start, line_end)
   let file_path = expand('%:p')
@@ -47,7 +42,7 @@ endfunction
 
 " TODO: nmap <leader>x :call <SID>ncopy_git_webui_url()<cr>
 " TODO: command! -nargs=0 -range VGitWebUiUrlCopy :call <SID>vcopy_git_webui_url(<line1>, <line2>)
-vnoremap <leader>x :VGitWebUiUrlCopy<cr>
+" vnoremap <leader>x :VGitWebUiUrlCopy<cr>
 
 " " Format visual selection with jq
 let g:jq_fmt_ns = nvim_create_namespace('jq_fmt')

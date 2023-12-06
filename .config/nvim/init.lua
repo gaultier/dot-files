@@ -56,24 +56,33 @@ vim.api.nvim_create_autocmd('BufRead,BufNewFile', {
   desc = 'Treat .nasm files as .asm files',
 })
 
-vim.keymap.set('n', '<leader>x', function()
-  local file_path = vim.fn.expand('%:p')
-  local line = vim.fn.line('.')
-  vim.fn.jobstart({'ado-link', file_path, line, line + 1}, {
-      stderr_buffered = true,
-      on_stderr = function(_chan_id, data, name)
-        if next(data) == nil then
-          return
-        end
+function print_err_on_stderr(data, cmd, line_start, line_end)
+  if next(data) == nil then
+    return
+  end
 
-        local cmd = vim.fn.printf('"ado-link %s %d %d"', file_path, line, line+1)
-        local tmp = table.concat(data, ', ')
-        vim.fn.setqflist({{lnum=line, end_lnum=line+1, type='E', text= cmd .. ': ' .. tmp}}, 'r')
-        vim.cmd [[ :cc ]]
+  local tmp = table.concat(data, ' ')
+  vim.fn.setqflist({{lnum=line_start, end_lnum=line_end, type='E', text= cmd .. ': ' .. tmp}}, 'r')
+  vim.cmd [[ :cc ]]
+end
+
+vim.keymap.set('v', '<leader>x', ':GitWebUiUrlCopy<CR>')
+vim.keymap.set('n', '<leader>x', ':GitWebUiUrlCopy<CR>')
+vim.api.nvim_create_user_command('GitWebUiUrlCopy', function(arg)
+  local file_path = vim.fn.expand('%:p')
+  local line_start = arg.line1
+  local line_end = arg.line2
+  if (line_end == line_start) then line_end = line_end + 1 end
+
+  vim.fn.jobstart({'ado-link', file_path, line_start, line_end}, {
+      stderr_buffered = true,
+      on_stderr = function(_chanid, data) 
+        local cmd = vim.fn.printf('"ado-link %s %d %d"', file_path, line_start, line_end)
+        print_err_on_stderr(data, cmd, line_start, line_end)
       end
     })
 end, 
-{desc='Copy to clipboard a URL to a git webui for the current line'})
+{force=true, range=true, nargs=0, bang=true, desc='Copy to clipboard a URL to a git webui for the current line'})
 
 ------------------- Plug
 local Plug = vim.fn['plug#']
