@@ -32,6 +32,7 @@ vim.o.modeline = false
 vim.o.modelines = 0
 vim.o.mouse = 'a'
 vim.o.number = relativenumber
+vim.o.omnifunc = true
 vim.o.scrolloff = 5
 vim.o.selection = 'inclusive'
 vim.o.shiftwidth = 0
@@ -218,6 +219,7 @@ cmp.setup {
     { name = 'nvim_lsp' },
   }),
 }
+
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
