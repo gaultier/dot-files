@@ -1,18 +1,63 @@
-vim.g.loaded_python3_provider = 0
-vim.g.loaded_ruby_provider = 0
-vim.g.loaded_node_provider = 0
-vim.g.loaded_perl_provider = 0
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
 vim.g.fzf_preview_window = {'right:50%', 'ctrl-/'}
-vim.g.indentLine_char = '┊'
 vim.g.gitgutter_enabled = 1
 vim.g.go_doc_keywordprg_enabled = 0
+vim.g.indentLine_char = '┊'
+vim.g.loaded_node_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
+vim.o.autoread = true
+vim.o.autowrite = true
+vim.o.background = 'light'
+vim.o.backup = false
+vim.o.clipboard = 'unnamed'
+vim.o.clipboard = 'unnamed,unnamedplus'
+vim.o.cmdheight = 2
+vim.o.cursorline = false
+vim.o.encoding = 'utf-8'
+vim.o.errorbells = false
+vim.o.expandtab = true
+vim.o.fillchars = 'stlnc:⚊,vert:│'
+vim.o.foldcolumn = '0'
+vim.o.grepprg = 'rg'
+vim.o.hidden = true
+vim.o.history = 10000 
+vim.o.ignorecase = true
+vim.o.laststatus = 3
+vim.o.matchpairs = '<:>'
+vim.o.modeline = false
+vim.o.modelines = 0
+vim.o.mouse = 'a'
+vim.o.number = relativenumber
+vim.o.scrolloff = 5
+vim.o.selection = 'inclusive'
+vim.o.shiftwidth = 0
+vim.o.shortmess = 'c'
+vim.o.signcolumn = 'auto'
+vim.o.smartcase = true
+vim.o.splitbelow = true
+vim.o.splitright = true
+vim.o.statusline = '%#LineNr#%F:%l:%c:%o │ %=%= │ %p%%'
+vim.o.swapfile = false
+vim.o.tabstop = 2
+vim.o.termguicolors = true
+vim.o.ttyfast = true
+vim.o.undodir = '~/.vim/undo'
+vim.o.undofile = true
+vim.o.updatetime = 50
+vim.o.visualbell = false
+vim.o.wildoptions = 'pum'
+vim.o.writebackup = false
 
+vim.api.nvim_command('highlight Comment cterm=italic')
+vim.api.nvim_command('highlight clear SignColumn')
+vim.api.nvim_command('filetype plugin indent on')
+vim.api.nvim_command('highlight VertSplit cterm=NONE gui=NONE')
+vim.api.nvim_command('highlight WinSeparator cterm=NONE gui=NONE')
 
-vim.keymap.set('n', '<leader>e', ':vs ~/.vimrc<CR>')
-vim.keymap.set('n', '<leader>s', ':source ~/.vimrc<CR>')
 vim.keymap.set('n', '<leader>el', ':vs ~/.config/nvim/init.lua<CR>')
 vim.keymap.set('n', '<leader>sl', ':luafile ~/.config/nvim/init.lua<CR>')
 vim.keymap.set('n', '<c-p>', ':FZF<CR>')
@@ -78,12 +123,12 @@ vim.api.nvim_create_user_command('JqFmt', function(arg)
     vim.fn.setqflist({{lnum=line_start, end_lnum=line_end, type='E', text = 'Failed to format JSON'}}, 'r')
     vim.cmd [[ :cc ]]
   end
-   
 end, 
 {force=true, range=true, nargs=0, bang=true, desc='Format JSON snippet'})
 vim.keymap.set({'v', 'n'}, '<leader>j', ':JqFmt<CR>')
 
 ------------------- Plug
+--
 local Plug = vim.fn['plug#']
 
 vim.call('plug#begin', '~/.vim/plugged')
@@ -115,62 +160,9 @@ Plug 'morhetz/gruvbox'
 Plug 'RaafatTurki/hex.nvim'
 
 vim.call('plug#end')
+vim.api.nvim_command('colorscheme gruvbox')
+vim.api.nvim_command('syntax enable')
 
-vim.cmd([[ 
-  source ~/.vimrc 
-  syntax enable
-  set termguicolors
-  set smartcase
-  set ignorecase
-  colorscheme gruvbox
-  set background=light
-  set noswapfile
-  set undofile
-  set undodir=~/.vim/undo
-  set mouse=a
-  set nomodeline
-  set modelines=0
-  set number relativenumber
-  set clipboard=unnamed
-  set encoding=utf-8
-  set expandtab
-  set tabstop=2
-  set shiftwidth=0
-  set splitbelow
-  set splitright
-  syntax on
-  set wildoptions=pum
-  set foldcolumn=0
-  set nocursorline
-  set ttyfast
-  set autowrite
-  set autoread
-  set history=10000 
-  set noerrorbells
-  set novisualbell
-  set grepprg=rg
-  set updatetime=50
-  set selection=inclusive
-  set scrolloff=5
-  set matchpairs+=<:>
-  highlight Comment cterm=italic
-  highlight clear SignColumn
-  set clipboard=unnamed,unnamedplus
-  filetype plugin indent on
-  set laststatus=3
-  set fillchars=stlnc:⚊,vert:\│ 
-  highlight VertSplit cterm=NONE gui=NONE
-  highlight WinSeparator cterm=NONE gui=NONE
-  set hidden
-  set nobackup
-  set nowritebackup
-  set rtp+=/usr/local/opt/fzf
-  set cmdheight=2
-  set shortmess+=c
-  set signcolumn=auto
-  set statusline=
-  set statusline=%#LineNr#%F:%l:%c:%o\ │\ %=%=\ │\ %p%%
-]])
 
 function grep_current_word()
   local word = vim.fn.expand('<cword>')
