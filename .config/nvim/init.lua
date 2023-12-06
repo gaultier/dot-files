@@ -23,24 +23,11 @@ vim.keymap.set('n', '<c-h>', '<C-w>h')
 vim.keymap.set('n', '<c-l>', '<C-w>l')
 vim.keymap.set('n', '<c-g>', ':Rg --column --line-number --no-heading --color=always -w -- ' .. vim.fn['expand']('<cword>') .. '<cr>')
 vim.keymap.set('n', '<leader>l', ':nohl<CR>:lclose<CR>:cclose<CR>')
-vim.keymap.set('n', '[g', '<Plug>(coc-diagnostic-prev)')
-vim.keymap.set('n', ']g', '<Plug>(coc-diagnostic-next)')
-vim.keymap.set('n', 'gd', '<Plug>(coc-definition)')
-vim.keymap.set('n', 'gy', '<Plug>(coc-type-definition)')
-vim.keymap.set('n', 'gi', '<Plug>(coc-implementation)')
-vim.keymap.set('n', 'gr', '<Plug>(noc-references)')
-vim.keymap.set('n', '<leader>rn', '<Plug>(coc-rename)')
-vim.keymap.set('n', '<leader>qf', '<Plug>(coc-fix-current)')
-vim.keymap.set('i', '<c-space', 'coc#refresh()')
+vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
+vim.keymap.set('n', '[g', vim.diagnostic.goto_prev)
+vim.keymap.set('n', ']g', vim.diagnostic.goto_next)
+vim.keymap.set('i', '<c-l>', '<c-x><c-o>')
 
-vim.api.nvim_create_user_command('Format', ':call CocActionAsync("format")',
-  {bang=true, desc='LSP-format command'})
-
-vim.api.nvim_create_autocmd('CursorHold', {
-  pattern = '*',
-  command = 'silent call CocActionAsync("highlight")',
-  desc = 'Highlight the symbol and its references when holding the cursor.',
-})
 
 vim.api.nvim_create_autocmd('BufWritePost', {
   pattern = '*.json,*.c,*.h,*.rs',
@@ -48,7 +35,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
   desc = 'LSP-format source files',
 })
 
-vim.api.nvim_create_autocmd('BufRead,BufNewFile', {
+vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
   pattern = '*.nasm',
   callback = function()
     vim.cmd('set filetype asm')
@@ -66,8 +53,7 @@ function print_err_on_stderr(data, cmd, line_start, line_end)
   vim.cmd [[ :cc ]]
 end
 
-vim.keymap.set('v', '<leader>x', ':GitWebUiUrlCopy<CR>')
-vim.keymap.set('n', '<leader>x', ':GitWebUiUrlCopy<CR>')
+vim.keymap.set({'v', 'n'}, '<leader>x', ':GitWebUiUrlCopy<CR>')
 vim.api.nvim_create_user_command('GitWebUiUrlCopy', function(arg)
   local file_path = vim.fn.expand('%:p')
   local line_start = arg.line1
@@ -101,8 +87,7 @@ vim.api.nvim_create_user_command('JqFmt', function(arg)
    
 end, 
 {force=true, range=true, nargs=0, bang=true, desc='Format JSON snippet'})
-vim.keymap.set('v', '<leader>j', ':JqFmt<CR>')
-vim.keymap.set('n', '<leader>j', ':JqFmt<CR>')
+vim.keymap.set({'v', 'n'}, '<leader>j', ':JqFmt<CR>')
 
 ------------------- Plug
 local Plug = vim.fn['plug#']
@@ -119,7 +104,8 @@ Plug 'https://github.com/kana/vim-operator-user'
 Plug 'https://github.com/tpope/vim-unimpaired'
 Plug 'wellle/targets.vim'
 Plug 'https://github.com/tpope/vim-surround'
-Plug('neoclide/coc.nvim', {branch = 'release'})
+-- Plug('neoclide/coc.nvim', {branch = 'release'})
+Plug('https://github.com/neovim/nvim-lspconfig', {['dir'] = '~/.vim/plugged/lspconfig.nvim'})
 Plug 'sheerun/vim-polyglot'
 Plug 'fatih/vim-go'
 Plug 'https://github.com/tpope/vim-fugitive'
@@ -159,7 +145,6 @@ vim.cmd([[
   set splitright
   syntax on
   set wildoptions=pum
-  highlight Pmenu guibg=NONE
   set foldcolumn=0
   set nocursorline
   set ttyfast
@@ -189,7 +174,35 @@ vim.cmd([[
   set shortmess+=c
   set signcolumn=auto
   set statusline=
-  set statusline=%#LineNr#%F:%l:%c:%o\ │\ %=%{coc#status()}%{get(b:,'coc_current_function','')}%=\ │\ %p%%
+  set statusline=%#LineNr#%F:%l:%c:%o\ │\ %=%=\ │\ %p%%
 ]])
 
 require 'hex'.setup()
+
+local lspconfig = require('lspconfig')
+lspconfig.clangd.setup{}
+lspconfig.gopls.setup{}
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+  callback = function(ev)
+    -- Enable completion triggered by <c-x><c-o>
+    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+    -- Buffer local mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local opts = { buffer = ev.buf }
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
+    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
+    vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+    vim.keymap.set('n', '<space>f', function()
+      vim.lsp.buf.format { async = true }
+    end, opts)
+  end,
+})
