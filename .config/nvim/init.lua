@@ -9,6 +9,8 @@ vim.g.indentLine_char = '┊'
 vim.g.gitgutter_enabled = 1
 vim.g.go_doc_keywordprg_enabled = 0
 
+
+
 vim.keymap.set('n', '<leader>e', ':vs ~/.vimrc<CR>')
 vim.keymap.set('n', '<leader>s', ':source ~/.vimrc<CR>')
 vim.keymap.set('n', '<leader>el', ':vs ~/.config/nvim/init.lua<CR>')
@@ -21,19 +23,11 @@ vim.keymap.set('n', '<c-k>', '<C-w>k')
 vim.keymap.set('n', '<c-j>', '<C-w>j')
 vim.keymap.set('n', '<c-h>', '<C-w>h')
 vim.keymap.set('n', '<c-l>', '<C-w>l')
-vim.keymap.set('n', '<c-g>', ':Rg --column --line-number --no-heading --color=always -w -- ' .. vim.fn['expand']('<cword>') .. '<cr>')
 vim.keymap.set('n', '<leader>l', ':nohl<CR>:lclose<CR>:cclose<CR>')
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '[g', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']g', vim.diagnostic.goto_next)
-vim.keymap.set('i', '<c-l>', '<c-x><c-o>')
 
-
-vim.api.nvim_create_autocmd('BufWritePost', {
-  pattern = '*.json,*.c,*.h,*.rs',
-  command = 'Format',
-  desc = 'LSP-format source files',
-})
 
 vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
   pattern = '*.nasm',
@@ -104,7 +98,8 @@ Plug 'https://github.com/kana/vim-operator-user'
 Plug 'https://github.com/tpope/vim-unimpaired'
 Plug 'wellle/targets.vim'
 Plug 'https://github.com/tpope/vim-surround'
--- Plug('neoclide/coc.nvim', {branch = 'release'})
+Plug('https://github.com/hrsh7th/nvim-cmp')
+Plug('https://github.com/hrsh7th/cmp-nvim-lsp')
 Plug('https://github.com/neovim/nvim-lspconfig', {['dir'] = '~/.vim/plugged/lspconfig.nvim'})
 Plug 'sheerun/vim-polyglot'
 Plug 'fatih/vim-go'
@@ -177,11 +172,60 @@ vim.cmd([[
   set statusline=%#LineNr#%F:%l:%c:%o\ │\ %=%=\ │\ %p%%
 ]])
 
+function grep_current_word()
+  local word = vim.fn.expand('<cword>')
+  vim.api.nvim_command('Rg -w ' .. word)
+end
+vim.keymap.set('n', '<c-g>', grep_current_word)
+
 require 'hex'.setup()
 
+-- Add additional capabilities supported by nvim-cmp
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
 local lspconfig = require('lspconfig')
+
+local servers = { 'clangd', 'rust_analyzer', 'gopls' }
+for _, lsp in ipairs(servers) do
+  lspconfig[lsp].setup {
+    -- on_attach = my_custom_on_attach,
+    capabilities = capabilities,
+  }
+end
+
 lspconfig.clangd.setup{}
 lspconfig.gopls.setup{}
+
+-- nvim-cmp setup
+local cmp = require 'cmp'
+cmp.setup {
+  mapping = cmp.mapping.preset.insert({
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<CR>'] = cmp.mapping.confirm {
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true,
+    },
+    ['<Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
+    ['<S-Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
+  }),
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+  }),
+}
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
