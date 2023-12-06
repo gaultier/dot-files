@@ -35,42 +35,6 @@ endfunction
 
 "---------- Coc end ----------
 
-function! s:vcopy_git_webui_url(line_start, line_end)
-  let file_path = expand('%:p')
-   call jobstart(['ado-link', file_path, a:line_start, a:line_end+1], {})
-endfunction
-
-" TODO: nmap <leader>x :call <SID>ncopy_git_webui_url()<cr>
-" TODO: command! -nargs=0 -range VGitWebUiUrlCopy :call <SID>vcopy_git_webui_url(<line1>, <line2>)
-" vnoremap <leader>x :VGitWebUiUrlCopy<cr>
-
-" " Format visual selection with jq
-let g:jq_fmt_ns = nvim_create_namespace('jq_fmt')
-function! s:v_jq_fmt(line_start, line_end)
-  let marks = nvim_buf_get_extmarks(0, g:jq_fmt_ns, 0, -1, {})
-  for [mark_id, row, col] in marks 
-    call nvim_buf_del_extmark(0, g:jq_fmt_ns, mark_id)
-  endfor
-
-  let input = getline(a:line_start, a:line_end)
-
-  let output = system('jq -M', input)
-
-  if v:shell_error == 0
-      for i in range(a:line_start, a:line_end, 1)
-        delete
-      endfor
-      let lines = split(output, '\n')
-      " Need `-1` in case we are at the end of the file
-      call append(a:line_start-1, lines)
-  else 
-      call nvim_buf_set_extmark(0, g:jq_fmt_ns, a:line_start-1, 0, {'virt_text': [['jq failed: ' . output, 'ErrorMsg']], 'virt_text_pos': 'eol'})
-  endif
-endfunction
-" TODO: command! -nargs=0 -range VJqFmt :call <SID>v_jq_fmt(<line1>, <line2>)
-vnoremap <leader>j :VJqFmt<cr>
-
-
 " Plugins
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))

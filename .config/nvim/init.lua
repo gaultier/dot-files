@@ -61,8 +61,8 @@ function print_err_on_stderr(data, cmd, line_start, line_end)
     return
   end
 
-  local tmp = table.concat(data, ' ')
-  vim.fn.setqflist({{lnum=line_start, end_lnum=line_end, type='E', text= cmd .. ': ' .. tmp}}, 'r')
+  local err = table.concat(data, ' ')
+  vim.fn.setqflist({{lnum=line_start, end_lnum=line_end, type='E', text= cmd .. ': ' .. err}}, 'r')
   vim.cmd [[ :cc ]]
 end
 
@@ -83,6 +83,26 @@ vim.api.nvim_create_user_command('GitWebUiUrlCopy', function(arg)
     })
 end, 
 {force=true, range=true, nargs=0, bang=true, desc='Copy to clipboard a URL to a git webui for the current line'})
+
+vim.api.nvim_create_user_command('JqFmt', function(arg)
+  -- Move from 1-index to 0-index.
+  local line_start = arg.line1 - 1
+  local line_end = arg.line2
+  local input = table.concat(vim.api.nvim_buf_get_lines(0, line_start, line_end, true), '\n')
+
+  local output = vim.fn.system('jq -M', input)
+  if vim.v.shell_error == 0 then
+    local new_lines = vim.fn.split(output, '\n')
+    vim.api.nvim_buf_set_lines(0, line_start, line_end, true, new_lines)
+  else
+    vim.fn.setqflist({{lnum=line_start, end_lnum=line_end, type='E', text = 'Failed to format JSON'}}, 'r')
+    vim.cmd [[ :cc ]]
+  end
+   
+end, 
+{force=true, range=true, nargs=0, bang=true, desc='Format JSON snippet'})
+vim.keymap.set('v', '<leader>j', ':JqFmt<CR>')
+vim.keymap.set('n', '<leader>j', ':JqFmt<CR>')
 
 ------------------- Plug
 local Plug = vim.fn['plug#']
