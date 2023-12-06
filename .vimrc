@@ -1,105 +1,105 @@
-syntax enable
-set termguicolors
-set smartcase
-set ignorecase
-let g:loaded_python3_provider = 0
-let g:loaded_ruby_provider = 0
-let g:loaded_node_provider = 0
-let g:loaded_perl_provider = 0
-autocmd Signal SIGUSR1 quit
+" syntax enable
+" set termguicolors
+" set smartcase
+" set ignorecase
+" let g:loaded_python3_provider = 0
+" let g:loaded_ruby_provider = 0
+" let g:loaded_node_provider = 0
+" let g:loaded_perl_provider = 0
+"autocmd Signal SIGUSR1 quit
 " set background=dark
-set background=light
+" set background=light
 
-let mapleader = ' '
-let maplocalleader = ' '
-set noswapfile
+" let mapleader = ' '
+" let maplocalleader = ' '
+" set noswapfile
 " Enable persistent undo so that undo history persists across vim sessions
-set undofile
-set undodir=~/.vim/undo
+" set undofile
+" set undodir=~/.vim/undo
 
-set mouse=a
-set nomodeline
-set modelines=0
-set number relativenumber
-set clipboard=unnamed
-set encoding=utf-8
-set expandtab
-set tabstop=2
-set shiftwidth=0
-set splitbelow
-set splitright
-syntax on
+" set mouse=a
+" set nomodeline
+" set modelines=0
+" set number relativenumber
+" set clipboard=unnamed
+" set encoding=utf-8
+" set expandtab
+" set tabstop=2
+" set shiftwidth=0
+" set splitbelow
+" set splitright
+" syntax on
 " pop-up menu options
-highlight Pmenu guibg=NONE
-set wildoptions=pum
+" highlight Pmenu guibg=NONE
+" set wildoptions=pum
 " set pumblend=10
-set foldcolumn=0
-set nocursorline
-set ttyfast
-set autowrite
-set autoread
+" set foldcolumn=0
+" set nocursorline
+" set ttyfast
+" set autowrite
+" set autoread
 " increase the history limit of
-set history=10000
+" set history=10000
 " No annoying sound on errors
-set noerrorbells
-set novisualbell
-set grepprg=rg
-set updatetime=50
-set selection=inclusive
+" set noerrorbells
+" set novisualbell
+" set grepprg=rg
+" set updatetime=50
+" set selection=inclusive
 " Display 5 lines above/below the cursor when scrolling with a mouse.
-set scrolloff=5
+" set scrolloff=5
 " Highlight matching pairs of brackets. Use the '%' character to jump between pairs
-set matchpairs+=<:>
-highlight Comment cterm=italic
-highlight clear SignColumn
+" set matchpairs+=<:>
+" highlight Comment cterm=italic
+" highlight clear SignColumn
 " Use system clipboard
-if has('unnamedplus')
-  set clipboard=unnamed,unnamedplus
-endi
-filetype plugin indent on
+" if has('unnamedplus')
+"   set clipboard=unnamed,unnamedplus
+" endi
+" filetype plugin indent on
 
 " Shared statusline
-set laststatus=3
+" set laststatus=3
 " Custom status line
-func Refresh_Statusline(_timer)
-  set statusline=
-  set statusline=%#LineNr#%F:%l:%c:%o\ │\ %=%{coc#status()}%{get(b:,'coc_current_function','')}%=\ │\ %p%%\ │\ %{strftime('%c')} 
-endfunc
-call Refresh_Statusline({})
-call timer_start(1000, 'Refresh_Statusline', {'repeat': -1})
+" unneeded | func Refresh_Statusline(_timer)
+" unneeded |   set statusline=
+" unneeded |   set statusline=%#LineNr#%F:%l:%c:%o\ │\ %=%{coc#status()}%{get(b:,'coc_current_function','')}%=\ │\ %p%%\ │\ %{strftime('%c')} 
+" unneeded | endfunc
+" unneeded | call Refresh_Statusline({})
+" unneeded | call timer_start(1000, 'Refresh_Statusline', {'repeat': -1})
 
 
 " Make split bar prettier
-set fillchars=stlnc:⚊,vert:\│ 
-highlight VertSplit cterm=NONE gui=NONE
-highlight WinSeparator cterm=NONE gui=NONE
-set hidden
+" set fillchars=stlnc:⚊,vert:\│ 
+" highlight VertSplit cterm=NONE gui=NONE
+" highlight WinSeparator cterm=NONE gui=NONE
+" set hidden
 
 " Some servers have issues with backup files, see #649.
-set nobackup
-set nowritebackup
+" set nobackup
+" set nowritebackup
 
 " Tmux-like pane navigation
-nmap <c-k> <C-w>k
-nmap <c-j> <C-w>j
-nmap <c-h> <C-w>h
-nmap <c-l> <C-w>l
+" nmap <c-k> <C-w>k
+" nmap <c-j> <C-w>j
+" nmap <c-h> <C-w>h
+" nmap <c-l> <C-w>l
 
-nnoremap <leader>cp :let @+ = expand("%:p")<CR>
-nnoremap <leader>cr :let @+ = expand("%")<CR>
-nnoremap <leader>cf :let @+ = expand("%:t")<CR>
-nnoremap <leader>e :vs ~/.vimrc<CR>
-nmap <leader>s :source ~/.vimrc<CR>
+" nnoremap <leader>cp :let @+ = expand("%:p")<CR>
+" nnoremap <leader>cr :let @+ = expand("%")<CR>
+" nnoremap <leader>cf :let @+ = expand("%:t")<CR>
+" nnoremap <leader>e :vs ~/.vimrc<CR>
+" nmap <leader>s :source ~/.vimrc<CR>
 
-set rtp+=/usr/local/opt/fzf
-let g:fzf_preview_window = ['right:50%', 'ctrl-/']
-nnoremap <c-p> :FZF<cr>
+" set rtp+=/usr/local/opt/fzf
+" let g:fzf_preview_window = ['right:50%', 'ctrl-/']
+" nnoremap <c-p> :FZF<cr>
 
-nnoremap <c-g> :lua vim.fn['fzf#vim#grep']('rg --column --line-number --no-heading --color=always -w -- ' .. vim.fn['expand']('<cword>'), 1, vim.fn['fzf#vim#with_preview'](),0) <cr>
+" nnoremap <c-g> :lua vim.fn['fzf#vim#grep']('rg --column --line-number --no-heading --color=always -w -- ' .. vim.fn['expand']('<cword>'), 1, vim.fn['fzf#vim#with_preview'](),0) <cr>
 
-nmap <leader>l :nohl<CR>:lclose<CR>:cclose<CR>
-let g:indentLine_char = '┊'
-let g:gitgutter_enabled = 1
+" nmap <leader>l :nohl<CR>:lclose<CR>:cclose<CR>
+" let g:indentLine_char = '┊'
+" let g:gitgutter_enabled = 1
 
 
 " Treat .nasm files as .asm files for syntax highlighting and such
@@ -109,27 +109,23 @@ autocmd BufRead,BufNewFile *.nasm setfiletype asm
 " autocmd BufWritePost *.json,*.c,*.cpp,*.h,*.rs Format
 "
 " Autoformat js/ts with `deno fmt` (needs to be installed)
-augroup mygroup
-  autocmd!
-  autocmd BufWritePost *.js,*.jsx,*.ts,*.tsx call jobstart(['deno', 'fmt', '--line-width=120',  expand('%:p')], {})
-augroup end
+" unneeded | augroup mygroup
+" unneeded |   autocmd!
+" unneeded |   autocmd BufWritePost *.js,*.jsx,*.ts,*.tsx call jobstart(['deno', 'fmt', '--line-width=120',  expand('%:p')], {})
+" unneeded | augroup end
 
 "---------- Coc begin ----------
 " Give more space for displaying messages.
-set cmdheight=2
-
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=300
+" set cmdheight=2
 
 " Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
+" set shortmess+=c
 
-set signcolumn=auto
+" set signcolumn=auto
 
 function! CheckBackspace() abort
   let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+  return !col || getline('.')[col - 1]  =~" '\s'
 endfunction
 
 " Use tab for trigger completion with characters ahead and navigate.
@@ -155,14 +151,14 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+" nmap <silent> [g <Plug>(coc-diagnostic-prev)
+" nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(noc-references)
+" nmap <silent> gd <Plug>(coc-definition)
+" nmap <silent> gy <Plug>(coc-type-definition)
+" nmap <silent> gi <Plug>(coc-implementation)
+" nmap <silent> gr <Plug>(noc-references)
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -181,7 +177,7 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
+" nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
 " xmap <leader>f  <Plug>(coc-format-selected)
@@ -203,7 +199,7 @@ nmap <leader>rn <Plug>(coc-rename)
 " Remap keys for applying codeAction to the current line.
 " nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
+" nmap <leader>qf  <Plug>(coc-fix-current)
 
 " Map function and class text objects
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
@@ -217,17 +213,17 @@ nmap <leader>qf  <Plug>(coc-fix-current)
 " omap ac <Plug>(coc-classobj-a)
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.
-nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+" unneeded | nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+" unneeded | nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+" unneeded | inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+" unneeded | inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+" unneeded | vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+" unneeded | vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 
 " Use CTRL-S for selections ranges.
 " Requires 'textDocument/selectionRange' support of language server.
-nmap <silent> <C-s> <Plug>(coc-range-select)
-xmap <silent> <C-s> <Plug>(coc-range-select)
+" unneeded | nmap <silent> <C-s> <Plug>(coc-range-select)
+" unneeded | xmap <silent> <C-s> <Plug>(coc-range-select)
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocActionAsync('format')
@@ -262,7 +258,7 @@ command! -nargs=? Fold :call     CocActionAsync('fold', <f-args>)
 " nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 "---------- Coc end ----------
 
-let g:go_doc_keywordprg_enabled = 0
+" let g:go_doc_keywordprg_enabled = 0
 
 
 function! s:ncopy_git_webui_url()
@@ -313,35 +309,10 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
   silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
-call plug#begin('~/.vim/plugged')
 
-Plug 'https://github.com/mbbill/undotree'
-Plug 'https://github.com/tpope/vim-abolish'
-Plug 'https://github.com/tpope/vim-commentary'
-Plug 'https://github.com/tpope/vim-eunuch'
-Plug 'https://github.com/tommcdo/vim-exchange'
-Plug 'https://github.com/airblade/vim-gitgutter'
-Plug 'https://github.com/kana/vim-operator-user'
-" Plug 'git://github.com/tpope/vim-repeat.git'
-Plug 'https://github.com/tpope/vim-unimpaired'
-Plug 'wellle/targets.vim'
-Plug 'https://github.com/tpope/vim-surround'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'sheerun/vim-polyglot'
-Plug 'fatih/vim-go'
-Plug 'https://github.com/tpope/vim-fugitive'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'https://github.com/tpope/vim-abolish'
-Plug 'morhetz/gruvbox'
 
 " Override :Rg
 command! -bang -nargs=* -complete=file Rg
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always --smart-case --hidden '. <q-args>, 1,
   \   fzf#vim#with_preview(), <bang>0)
-
-" Initialize plugin system
-call plug#end()
-
-colorscheme gruvbox
