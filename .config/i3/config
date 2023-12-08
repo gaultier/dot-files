@@ -11,40 +11,6 @@
 
 set $mod Mod1
 
-# >>> Plasma Integration <<<
-  # Try to kill the wallpaper set by Plasma (it takes up the entire workspace and hides everything)
-  
-  exec --no-startup-id wmctrl -c Plasma
-  for_window [title="Desktop — Plasma"] kill; floating enable; border none
-  
-  # Compositor (Animations, Shadows, Transparency)
-  exec --no-startup-id picom -cCFb
-
-# >>> Window rules <<<
-  # >>> Avoid tiling Plasma popups, dropdown windows, etc. <<<
-  # For the first time, manually resize them, i3 will remember the setting for floating windows
-    for_window [class="yakuake"] floating enable;
-    for_window [class="lattedock"] floating enable;
-    for_window [class="plasmashell"] floating enable;
-    for_window [class="Kmix"] floating enable; border none
-    for_window [class="kruler"] floating enable; border none
-    for_window [class="Plasma"] floating enable; border none
-    for_window [class="Klipper"] floating enable; border none
-    for_window [class="krunner"] floating enable; border none
-    for_window [class="Plasmoidviewer"] floating enable; border none
-    for_window [title="plasma-desktop"] floating enable; border none
-    for_window [class="plasmashell" window_type="notification"] floating enable, border none, move position 1450px 20px
-    no_focus [class="plasmashell" window_type="notification"] 
-
-  # >>> Avoid tiling for non-Plasma stuff <<<
-    for_window [window_role="pop-up"] floating enable
-    for_window [window_role="bubble"] floating enable
-    for_window [window_role="task_dialog"] floating enable
-    for_window [window_role="Preferences"] floating enable
-    for_window [window_role="About"] floating enable
-    for_window [window_type="dialog"] floating enable
-    for_window [window_type="menu"] floating enable
-    for_window [instance="__scratchpad"] floating enable
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -64,14 +30,14 @@ font pango:Monaco Regular 10
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-# exec --no-startup-id xss-lock --transfer-sleep-lock --  i3lock-fancy-rapid 5 3
+exec --no-startup-id xss-lock --transfer-sleep-lock --  i3lock
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
-# exec --no-startup-id nm-applet
+exec --no-startup-id nm-applet
 # exec_always --no-startup-id feh --bg-scale /home/pg/Downloads/GDWP-752-HD-No-Logo.jpeg
 # exec_always --no-startup-id picom --active-opacity=1 --inactive-opacity=0.5
-# exec_always --no-startup-id /home/pg/.config/polybar/launch.sh
+exec_always --no-startup-id /home/pg/.config/polybar/launch.sh
 
 exec alacritty
 exec flatpak run org.mozilla.firefox
@@ -204,7 +170,7 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 # bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
-# bindsym $mod+Shift+t exec i3lock-fancy-rapid 5 3
+bindsym $mod+Shift+t exec xss‐lock ‐‐transfer‐sleep‐lock ‐‐ i3lock ‐‐nofork
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -254,7 +220,7 @@ workspace_auto_back_and_forth yes
 bindsym $mod+z workspace back_and_forth
 bindsym $mod+Shift+f [floating] focus
 
-gaps inner 15px
+gaps inner 0px
 
 bindsym $mod + Shift + p move scratchpad
 bindsym $mod+p scratchpad show
