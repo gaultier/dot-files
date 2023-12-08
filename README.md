@@ -17,5 +17,7 @@ config checkout -f
 config config --local status.showUntrackedFiles no
 ```
 
+- `sudo chsh -s /usr/bin/zsh pg`
+
 
 How to: https://www.atlassian.com/git/tutorials/dotfiles
