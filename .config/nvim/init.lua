@@ -130,10 +130,11 @@ end,
 vim.keymap.set({'v', 'n'}, '<leader>j', ':JqFmt<CR>')
 
 ------------------- Plug
---
+
+local PlugDir = vim.fn.stdpath('data') .. '/plugged'
 local Plug = vim.fn['plug#']
 
-vim.call('plug#begin', '~/.vim/plugged')
+vim.call('plug#begin', PlugDir)
 
 Plug 'https://github.com/mbbill/undotree'
 Plug 'https://github.com/tpope/vim-abolish'
@@ -147,7 +148,7 @@ Plug 'wellle/targets.vim'
 Plug 'https://github.com/tpope/vim-surround'
 Plug('https://github.com/hrsh7th/nvim-cmp')
 Plug('https://github.com/hrsh7th/cmp-nvim-lsp')
-Plug('https://github.com/neovim/nvim-lspconfig', {['dir'] = '~/.vim/plugged/lspconfig.nvim'})
+Plug('https://github.com/neovim/nvim-lspconfig', {['dir'] = PlugDir .. '/lspconfig.nvim'})
 Plug 'sheerun/vim-polyglot'
 Plug 'fatih/vim-go'
 Plug 'https://github.com/tpope/vim-fugitive'
@@ -224,7 +225,6 @@ cmp.setup {
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
   callback = function(ev)
-    vim.print(ev)
     -- Enable completion triggered by <c-x><c-o>
     vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
