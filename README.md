@@ -23,8 +23,8 @@ cd ohmyzsh
 zsh tools/install.sh
 config checkout ~/.zshrc
 sudo chsh -s /usr/bin/zsh pg
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-nvim -es -u init.vim -i NONE -c "PlugInstall" -c "qa"
+curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+nvim -es -i NONE -c "PlugInstall" -c "qa"
 ```
 
 How to: https://www.atlassian.com/git/tutorials/dotfiles
