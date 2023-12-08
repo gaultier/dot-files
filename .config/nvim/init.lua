@@ -27,11 +27,12 @@ vim.o.hidden = true
 vim.o.history = 10000 
 vim.o.ignorecase = true
 vim.o.laststatus = 3
-vim.o.matchpairs = '<:>'
+vim.o.matchpairs = vim.o.matchpairs .. ',<:>'
 vim.o.modeline = false
 vim.o.modelines = 0
 vim.o.mouse = 'a'
-vim.o.number = relativenumber
+vim.o.relativenumber = true
+vim.o.number = true
 vim.o.omnifunc = true
 vim.o.scrolloff = 5
 vim.o.selection = 'inclusive'
@@ -181,7 +182,6 @@ local lspconfig = require('lspconfig')
 local servers = { 'clangd', 'rust_analyzer', 'gopls' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
-    -- on_attach = my_custom_on_attach,
     capabilities = capabilities,
   }
 end
@@ -224,6 +224,7 @@ cmp.setup {
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
   callback = function(ev)
+    vim.print(ev)
     -- Enable completion triggered by <c-x><c-o>
     vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
@@ -234,7 +235,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+    -- vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
     vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
     vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
     vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
@@ -242,5 +243,30 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<space>f', function()
       vim.lsp.buf.format { async = true }
     end, opts)
+
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+    if client.server_capabilities.documentHighlightProvider then
+      vim.cmd [[
+        hi! LspReferenceRead cterm=bold ctermbg=235 guibg=LightYellow
+        hi! LspReferenceText cterm=bold ctermbg=235 guibg=LightYellow
+        hi! LspReferenceWrite cterm=bold ctermbg=235 guibg=LightYellow
+      ]]
+      vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
+      vim.api.nvim_clear_autocmds { buffer = ev.buf, group = "lsp_document_highlight" }
+      vim.api.nvim_create_autocmd("CursorHold", {
+        callback = vim.lsp.buf.document_highlight,
+        buffer = ev.buf,
+        group = "lsp_document_highlight",
+        desc = "Document Highlight",
+      })
+      vim.api.nvim_create_autocmd("CursorMoved", {
+        callback = vim.lsp.buf.clear_references,
+        buffer = ev.buf,
+        group = "lsp_document_highlight",
+        desc = "Clear All the References",
+      })
+    else
+      print('does not have highlight')
+    end
   end,
 })
