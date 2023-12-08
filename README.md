@@ -17,6 +17,7 @@ config checkout -f
 config config --local status.showUntrackedFiles no
 
 mkdir ~/not-my-code
+mkdir ~/my-code
 cd ~/not-my-code
 git clone https://github.com/ohmyzsh/ohmyzsh.git
 cd ohmyzsh
