@@ -1,12 +1,12 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # Terminate already running bar instances
 # If all your bars have ipc enabled, you can use 
-polybar-msg cmd quit
+#polybar-msg cmd quit || true
 # Otherwise you can use the nuclear option:
-# killall -q polybar
+killall -q polybar
 
-for m in $(xrandr --query | grep -E '(HDMI1 connected)|(eDP1 connected)' | cut -d" " -f1); do
+for m in $(xrandr --query | grep -w connected | cut -d" " -f1); do
   MONITOR=$m polybar --reload &
 done
 
