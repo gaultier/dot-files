@@ -1,4 +1,5 @@
 exec xrandr --output DP-2 --above eDP-1
+setxkbmap -option caps:escape
 
 # Disable DPMS turning off the screen
 xset -dpms
