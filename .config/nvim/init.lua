@@ -13,7 +13,6 @@ vim.o.autoread = true
 vim.o.autowrite = true
 vim.o.background = 'light'
 vim.o.backup = false
-vim.o.clipboard = 'unnamed'
 vim.o.clipboard = 'unnamed,unnamedplus'
 vim.o.cmdheight = 2
 vim.o.cursorline = false
@@ -96,16 +95,6 @@ vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
   desc = 'Treat .nasm files as .asm files',
 })
 
-function print_err_on_stderr(data, cmd, line_start, line_end)
-  if next(data) == nil then
-    return
-  end
-
-  local err = table.concat(data, ' ')
-  vim.fn.setqflist({{lnum=line_start, end_lnum=line_end, type='E', text= cmd .. ': ' .. err}}, 'r')
-  vim.cmd [[ :cc ]]
-end
-
 vim.keymap.set({'v', 'n'}, '<leader>x', ':GitWebUiUrlCopy<CR>')
 vim.api.nvim_create_user_command('GitWebUiUrlCopy', function(arg)
   local file_path = vim.fn.expand('%:p')
@@ -113,11 +102,32 @@ vim.api.nvim_create_user_command('GitWebUiUrlCopy', function(arg)
   local line_end = arg.line2
   if (line_end == line_start) then line_end = line_end + 1 end
 
+  local total_stderr = ''
+  local total_stdout = ''
   vim.fn.jobstart({'ado-link', file_path, line_start, line_end}, {
+      stdout_buffered = true,
       stderr_buffered = true,
       on_stderr = function(_chanid, data) 
-        local cmd = vim.fn.printf('"ado-link %s %d %d"', file_path, line_start, line_end)
-        print_err_on_stderr(data, cmd, line_start, line_end)
+        for _, msg in ipairs(data) do
+          total_stderr = total_stderr .. msg
+        end
+      end,
+      on_stdout = function(_chanid, data)
+        for _, msg in ipairs(data) do
+          total_stdout = total_stdout .. msg
+        end
+      end,
+      on_exit = function() 
+        if #total_stderr > 0 then
+          local cmd = vim.fn.printf('"ado-link %s %d %d"', file_path, line_start, line_end)
+          vim.fn.setqflist({{lnum=line_start, end_lnum=line_end, type='E', text= cmd .. ': ' .. total_stderr}}, 'r')
+          vim.cmd [[ :cc ]]
+        end
+        if #total_stdout > 0 then
+          print(total_stdout)
+          vim.fn.setreg('*', total_stdout)
+          vim.fn.setreg('+', total_stdout)
+        end
       end
     })
 end, 
