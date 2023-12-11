@@ -76,6 +76,21 @@ vim.keymap.set('n', '[g', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']g', vim.diagnostic.goto_next)
 
 
+vim.api.nvim_create_user_command('Rg', function(arg)
+  local cmd = 'rg --column --line-number --no-heading --color=always --smart-case --hidden '
+  for _, a in ipairs(arg.fargs) do
+    cmd = cmd .. ' ' .. a
+  end
+  vim.call('fzf#vim#grep', cmd)
+end,
+{
+  force=true,
+  range=false,
+  nargs='*',
+  bang=true, 
+  desc='Search with rg',
+})
+
 vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
   pattern = '*.nasm',
   callback = function()
