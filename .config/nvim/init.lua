@@ -77,10 +77,7 @@ vim.keymap.set('n', ']g', vim.diagnostic.goto_next)
 
 
 vim.api.nvim_create_user_command('Rg', function(arg)
-  local cmd = 'rg --column --line-number --no-heading --color=always --smart-case --hidden '
-  for _, a in ipairs(arg.fargs) do
-    cmd = cmd .. ' ' .. a
-  end
+  local cmd = 'rg --column --line-number --no-heading --color=always --smart-case --hidden ' .. vim.fn.join(arg.fargs, ' ')
   vim.call('fzf#vim#grep', cmd)
 end,
 {
