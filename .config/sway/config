@@ -1,4 +1,4 @@
-include /etc/sway/config.d/*
+include /etc/sway/config-vars.d/*
 
 set $mod Mod1
 set $term foot
@@ -93,8 +93,8 @@ bindsym $mod+t split toggle
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-# bindsym $mod+s nop
-# bindsym $mod+w nop
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
@@ -135,16 +135,16 @@ bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace number $ws1; workspace number $ws1
-bindsym $mod+Shift+2 move container to workspace number $ws2; workspace number $ws2
-bindsym $mod+Shift+3 move container to workspace number $ws3; workspace number $ws3
-bindsym $mod+Shift+4 move container to workspace number $ws4; workspace number $ws4
-bindsym $mod+Shift+5 move container to workspace number $ws5; workspace number $ws5
-bindsym $mod+Shift+6 move container to workspace number $ws6; workspace number $ws6
-bindsym $mod+Shift+7 move container to workspace number $ws7; workspace number $ws7
-bindsym $mod+Shift+8 move container to workspace number $ws8; workspace number $ws8
-bindsym $mod+Shift+9 move container to workspace number $ws9; workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10; workspace number $ws10
+bindsym $mod+Shift+1 move container to workspace number $ws1;
+bindsym $mod+Shift+2 move container to workspace number $ws2;
+bindsym $mod+Shift+3 move container to workspace number $ws3;
+bindsym $mod+Shift+4 move container to workspace number $ws4;
+bindsym $mod+Shift+5 move container to workspace number $ws5;
+bindsym $mod+Shift+6 move container to workspace number $ws6;
+bindsym $mod+Shift+7 move container to workspace number $ws7;
+bindsym $mod+Shift+8 move container to workspace number $ws8;
+bindsym $mod+Shift+9 move container to workspace number $ws9;
+bindsym $mod+Shift+0 move container to workspace number $ws10;
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -209,3 +209,5 @@ bindsym $mod+i gaps inner all plus 2px
 bindsym $mod+n move workspace to output DP-2
 bindsym $mod+Shift+n move workspace to output eDP-1
 bindsym $mod+x exec grimshot save screen ~/Downloads/screenshot_$(date +%s).png
+
+include /etc/sway/config.d/*
