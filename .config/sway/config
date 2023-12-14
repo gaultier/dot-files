@@ -2,7 +2,7 @@ include /etc/sway/config-vars.d/*
 
 set $mod Mod1
 set $term foot
-set $menu rofi -modi drun,run -show run | xargs swaymsg exec
+set $menu tofi-run | xargs swaymsg exec --
 
 output DP-2 mode 3440x1440 pos 0 0 bg ~/Downloads/wp.png stretch
 output eDP-1 mode 1920x1080 pos 3440 0 bg ~/Downloads/wp.png stretch
@@ -56,7 +56,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+Shift+t exec ~/lock.sh
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id "rofi -modi drun,run -show run"
+bindsym $mod+d exec --no-startup-id $menu
 
 # change focus
 bindsym $mod+h focus left
