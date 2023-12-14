@@ -181,19 +181,6 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 bar swaybar_command waybar
-# bar {
-#     position top
-
-#     # when the status_command prints a new line to stdout, swaybar updates.
-#     # the default just shows the current date and time.
-#     status_command while ~/bar.sh; do sleep 1; done
-
-#     colors {
-#         statusline #ffffff
-#         background #323232
-#         inactive_workspace #32323200 #32323200 #5c5c5c
-#     }
-# }
 
 input "type:keyboard" {
         xkb_layout us,de
@@ -201,7 +188,7 @@ input "type:keyboard" {
 }
 
 bindsym $mod+F1 [class="Firefox"] focus
-# bindsym $mod+F2 [class="Microsoft-edge"] focus
+bindsym $mod+F2 [class="Microsoft-edge"] focus
 bindsym $mod+F3 [title="Slack"] focus
 
 floating_maximum_size 900 x 900
@@ -222,5 +209,3 @@ bindsym $mod+i gaps inner all plus 2px
 bindsym $mod+n move workspace to output DP-2
 bindsym $mod+Shift+n move workspace to output eDP-1
 bindsym $mod+x exec grimshot save screen ~/Downloads/screenshot_$(date +%s).png
-
-# for_window [app_id="flameshot"] border pixel 0, floating enable, fullscreen disable, move absolute position 0 0

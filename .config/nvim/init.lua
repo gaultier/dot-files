@@ -124,7 +124,6 @@ vim.api.nvim_create_user_command('GitWebUiUrlCopy', function(arg)
           vim.cmd [[ :cc ]]
         end
         if #total_stdout > 0 then
-          print(total_stdout)
           vim.fn.setreg('*', total_stdout)
           vim.fn.setreg('+', total_stdout)
         end
