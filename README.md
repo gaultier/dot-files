@@ -26,7 +26,7 @@ alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 config checkout ~/.zshrc
 sudo chsh -s /usr/bin/zsh pg
 curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-nvim -es -i NONE -c "PlugInstall" -c "qa"
+nvim -c ":PlugInstall" -c ":qa"
 ```
 
 How to: https://www.atlassian.com/git/tutorials/dotfiles
