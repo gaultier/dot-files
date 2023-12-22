@@ -1,9 +1,10 @@
 include /etc/sway/config-vars.d/*
 
 set $mod Mod1
-set $term foot
+set $term alacritty
 set $menu tofi-run | xargs swaymsg exec --
 
+output DP-1 mode 3440x1440 pos 0 0 bg ~/Downloads/wp.png stretch
 output DP-2 mode 3440x1440 pos 0 0 bg ~/Downloads/wp.png stretch
 output eDP-1 mode 1920x1080 pos 3440 0 bg ~/Downloads/wp.png stretch
 
@@ -27,8 +28,10 @@ font pango:Noto Mono 10
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex --autostart --environment sway
 
+exec systemctl --user set-environment BROWSER=firefox
 exec systemctl --user set-environment XDG_CURRENT_DESKTOP=sway
 exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY
+exec systemctl --user set-environment XDG_DATA_DIRS="/usr/local/share/:/usr/share/:/var/lib/flatpak/exports/share:/home/pg/.local/share/flatpak/exports/share"
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -206,6 +209,7 @@ bindsym $mod+u gaps inner all minus 2px
 bindsym $mod+i gaps inner all plus 2px
 
 
+bindsym $mod+m move workspace to output DP-1
 bindsym $mod+n move workspace to output DP-2
 bindsym $mod+Shift+n move workspace to output eDP-1
 bindsym $mod+x exec grimshot save screen ~/Downloads/screenshot_$(date +%s).png

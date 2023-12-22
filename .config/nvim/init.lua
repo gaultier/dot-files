@@ -236,12 +236,12 @@ cmp.setup {
 }
 
 -- Format on save.
-vim.api.nvim_create_autocmd('BufWritePre', {
-   pattern = {'*.json', '*.c', '*.h', '*.rs'},
-   callback = function() 
-     vim.lsp.buf.format {async=false}
-   end,
-})
+-- vim.api.nvim_create_autocmd('BufWritePre', {
+--    pattern = {'*.json', '*.c', '*.h', '*.rs'},
+--    callback = function() 
+--      vim.lsp.buf.format {async=false}
+--    end,
+-- })
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
