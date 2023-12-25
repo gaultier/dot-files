@@ -100,11 +100,11 @@ export ARCHFLAGS="-arch x86_64"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export GOPRIVATE=bitbucket.org/advance52/*,dev.azure.com/advance52/*
+export GOPRIVATE=dev.azure.com/advance52/*
 export EDITOR=nvim
 export VISUAL=nvim
 export BAT_THEME=gruvbox-light
-export PATH="/usr/sbin/:$PATH"
+export PATH="/usr/sbin/:/home/pg/Downloads/odin-nightly/ubuntu_artifacts/:$PATH"
 export GOPATH=~/go
 export PATH=$PATH:$GOPATH/bin:$HOME/go/bin
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'

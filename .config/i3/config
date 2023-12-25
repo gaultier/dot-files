@@ -39,6 +39,8 @@ exec --no-startup-id nm-applet
 # exec_always --no-startup-id picom --active-opacity=1 --inactive-opacity=0.5
 exec_always --no-startup-id /home/pg/.config/polybar/launch.sh
 
+exec_always setxkbmap -option caps:escape
+
 exec alacritty
 exec flatpak run org.mozilla.firefox
 exec flatpak run com.slack.Slack

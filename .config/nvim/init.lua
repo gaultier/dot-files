@@ -203,6 +203,7 @@ local lspconfig = require('lspconfig')
 
 lspconfig.clangd.setup{}
 lspconfig.gopls.setup{}
+lspconfig.ols.setup({})
 
 -- nvim-cmp setup
 local cmp = require 'cmp'
@@ -236,12 +237,12 @@ cmp.setup {
 }
 
 -- Format on save.
--- vim.api.nvim_create_autocmd('BufWritePre', {
---    pattern = {'*.json', '*.c', '*.h', '*.rs'},
---    callback = function() 
---      vim.lsp.buf.format {async=false}
---    end,
--- })
+vim.api.nvim_create_autocmd('BufWritePre', {
+   pattern = {'*.json', '*.c', '*.h', '*.rs', '*.odin'},
+   callback = function() 
+     vim.lsp.buf.format {async=false}
+   end,
+})
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
