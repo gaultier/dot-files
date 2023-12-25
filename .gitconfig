@@ -25,3 +25,7 @@
 	defaultBranch = master
 [url "git@ssh.dev.azure.com:v3/"]
         insteadOf = https://dev.azure.com/
+[url "git@ssh.dev.azure.com:v3/advance52/"]
+	insteadOf = https://dev.azure.com/advance52/
+[url "git@ssh.dev.azure.com:v3/advance52"]
+	insteadOf = git://dev.azure.com/advance52
