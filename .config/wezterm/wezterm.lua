@@ -17,6 +17,7 @@ return {
   font_size = 12.0,
   scrollback_lines = 10000,
   keys = {
+    {key="t", mods="ALT", action=wezterm.action{SpawnTab="CurrentPaneDomain"}},
     {key=".", mods="ALT", action=wezterm.action{ActivateTabRelative=1}},
     {key=",", mods="ALT", action=wezterm.action{ActivateTabRelative=-1}},
     {key="z", mods="ALT", action="TogglePaneZoomState"},
