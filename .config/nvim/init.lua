@@ -182,6 +182,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'https://github.com/tpope/vim-abolish'
 Plug 'morhetz/gruvbox'
 Plug 'RaafatTurki/hex.nvim'
+Plug 'jiangmiao/auto-pairs'
 
 vim.call('plug#end')
 vim.api.nvim_command('colorscheme gruvbox')
@@ -202,7 +203,14 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lspconfig = require('lspconfig')
 
 lspconfig.clangd.setup{}
-lspconfig.gopls.setup{}
+lspconfig.gopls.setup({
+    settings = {
+      gopls = {
+        buildFlags = { "-tags=db_tests,dev,e2e_tests,property_tests,transfer_tests" },
+        directoryFilters = {"-**/out"}
+    }
+  }
+})
 lspconfig.ols.setup({})
 
 -- nvim-cmp setup
