@@ -178,11 +178,16 @@ Plug('junegunn/fzf', {
 	vim.call('fzf#install()')
   end
 })
+-- Plug('glacambre/firenvim', { 
+--   ['do'] = function()
+-- 	vim.call('firenvim#install(0)')
+--   end
+-- })
 Plug 'junegunn/fzf.vim'
 Plug 'https://github.com/tpope/vim-abolish'
 Plug 'morhetz/gruvbox'
 Plug 'RaafatTurki/hex.nvim'
-Plug 'jiangmiao/auto-pairs'
+-- Plug 'jiangmiao/auto-pairs'
 
 vim.call('plug#end')
 vim.api.nvim_command('colorscheme gruvbox')

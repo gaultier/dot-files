@@ -21,3 +21,4 @@ __pycache__
 .config/go
 .config/microsoft*
 .project.gf
+.gdb_history
