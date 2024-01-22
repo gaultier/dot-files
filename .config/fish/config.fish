@@ -1,0 +1,38 @@
+set -U EDITOR nvim
+set GOPRIVATE "dev.azure.com/advance52/*"
+
+set BAT_THEME gruvbox-light
+set GOPATH ~/go
+set FZF_DEFAULT_COMMAND 'fd --type f --hidden --follow --exclude .git'
+set FZF_DEFAULT_OPTS '--height 40% --layout=reverse --border'
+
+set PATH /usr/sbin/ /home/pg/.local/share/firenvim/ /home/pg/Downloads/odin-nightly/ubuntu_artifacts/ $GOPATH/bin $PATH
+
+abbr --add e --position command nvim
+abbr --add g --position command git
+abbr --add gco --position command git checkout
+abbr --add gst --position command git status
+abbr --add gp --position command gp
+abbr --add gcam --position command git commit -am
+abbr --add gl --position command git pull
+abbr --add l --position command ls -latr
+abbr --add gsu --position command git submodule update --init --recursive
+abbr --add gb --position command git branch
+abbr --add gc --position command git clone --recurse
+abbr --add gcl --position command git clone --recurse --depth 1
+abbr --add d --position command docker
+abbr --add k --position command kubectl
+abbr --add config --position command git --git-dir=$HOME/.cfg/ --work-tree=$HOME
+
+function dnuke
+    docker ps | awk 'NR > 1 {print | "docker stop -t 0 " $1}'
+end
+
+function gwip
+    git add . && git commit -am "[wip]"
+end
+
+
+if status is-interactive
+    # Commands to run in interactive sessions can go here
+end
