@@ -22,3 +22,7 @@ __pycache__
 .config/microsoft*
 .project.gf
 .gdb_history
+*.a
+*.so
+*.dylib
+*.o

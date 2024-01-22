@@ -159,4 +159,4 @@ alias vim=nvim
 [ -f /usr/share/doc/fzf/examples/completion.zsh ] && source /usr/share/doc/fzf/examples/completion.zsh
 
 #export XDG_CURRENT_DESKTOP=sway
-setxkbmap -option caps:escape
+#setxkbmap -option caps:escape
