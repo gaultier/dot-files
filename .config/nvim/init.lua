@@ -13,7 +13,7 @@ vim.o.autoread = true
 vim.o.autowrite = true
 vim.o.background = 'light'
 vim.o.backup = false
-vim.o.clipboard = 'unnamed,unnamedplus'
+vim.o.clipboard = 'unnamedplus'
 vim.o.cmdheight = 2
 vim.o.cursorline = false
 vim.o.encoding = 'utf-8'
@@ -217,6 +217,7 @@ lspconfig.gopls.setup({
   }
 })
 lspconfig.ols.setup({})
+lspconfig.rust_analyzer.setup{}
 
 -- nvim-cmp setup
 local cmp = require 'cmp'
@@ -251,7 +252,7 @@ cmp.setup {
 
 -- Format on save.
 vim.api.nvim_create_autocmd('BufWritePre', {
-   pattern = {'*.json', '*.c', '*.h', '*.rs', '*.odin'},
+   pattern = {'*.json', '*.rs', '*.odin'},
    callback = function() 
      vim.lsp.buf.format {async=false}
    end,
@@ -302,3 +303,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
   end,
 })
+
+function FormatFunction()
+  vim.lsp.buf.format({
+    async = true,
+    range = {
+      ["start"] = vim.api.nvim_buf_get_mark(0, "<"),
+      ["end"] = vim.api.nvim_buf_get_mark(0, ">"),
+    }
+  })
+end

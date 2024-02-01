@@ -11,6 +11,7 @@
 [core]
 	excludesfile = /home/pg/.gitignore
 	pager = delta
+	editor = nvim
 [color]
 	pager = no
 [delta]

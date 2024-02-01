@@ -1,4 +1,5 @@
 set -U EDITOR nvim
+set -U GIT_EDITOR nvim
 set GOPRIVATE "dev.azure.com/advance52/*"
 
 set BAT_THEME gruvbox-light
@@ -6,19 +7,20 @@ set GOPATH ~/go
 set FZF_DEFAULT_COMMAND 'fd --type f --hidden --follow --exclude .git'
 set FZF_DEFAULT_OPTS '--height 40% --layout=reverse --border'
 
-set PATH /usr/sbin/ /home/pg/.local/share/firenvim/ /home/pg/Downloads/odin-nightly/ubuntu_artifacts/ $GOPATH/bin $PATH
+set PATH /usr/sbin/ /home/pg/.local/share/firenvim/ /home/pg/Downloads/odin-nightly/ubuntu_artifacts/ $GOPATH/bin ~/.cargo/bin/ $PATH
 
 abbr --add e --position command nvim
 abbr --add g --position command git
 abbr --add gco --position command git checkout
 abbr --add gst --position command git status
-abbr --add gp --position command gp
+abbr --add gp --position command git push
 abbr --add gcam --position command git commit -am
 abbr --add gl --position command git pull
 abbr --add l --position command ls -latr
 abbr --add gsu --position command git submodule update --init --recursive
 abbr --add gb --position command git branch
 abbr --add gc --position command git clone --recurse
+abbr --add gd --position command git diff
 abbr --add gcl --position command git clone --recurse --depth 1
 abbr --add d --position command docker
 abbr --add k --position command kubectl
