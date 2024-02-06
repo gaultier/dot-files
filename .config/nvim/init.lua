@@ -1,3 +1,4 @@
+vim.env.BAT_THEME='ansi'
 vim.g.fzf_preview_window = {'right:50%', 'ctrl-/'}
 vim.g.gitgutter_enabled = 1
 vim.g.go_doc_keywordprg_enabled = 0
@@ -77,7 +78,7 @@ vim.keymap.set('n', ']g', vim.diagnostic.goto_next)
 
 vim.api.nvim_create_user_command('Rg', function(arg)
   local cmd = 'rg --column --line-number --no-heading --color=always --smart-case --hidden ' .. vim.fn.join(arg.fargs, ' ')
-  vim.call('fzf#vim#grep', cmd)
+  vim.call('fzf#vim#grep', cmd, vim.call('fzf#vim#with_preview', {options= { '--layout=reverse', '--info=inline'}}))
 end,
 {
   force=true,
@@ -186,7 +187,7 @@ Plug('junegunn/fzf', {
 Plug 'junegunn/fzf.vim'
 Plug 'https://github.com/tpope/vim-abolish'
 Plug 'morhetz/gruvbox'
-Plug 'RaafatTurki/hex.nvim'
+-- Plug 'RaafatTurki/hex.nvim'
 -- Plug 'jiangmiao/auto-pairs'
 
 vim.call('plug#end')
@@ -200,13 +201,14 @@ function grep_current_word()
 end
 vim.keymap.set('n', '<c-g>', grep_current_word)
 
-require 'hex'.setup()
+-- require 'hex'.setup()
 
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local lspconfig = require('lspconfig')
 
+lspconfig.denols.setup{}
 lspconfig.clangd.setup{}
 lspconfig.gopls.setup({
     settings = {
@@ -252,7 +254,7 @@ cmp.setup {
 
 -- Format on save.
 vim.api.nvim_create_autocmd('BufWritePre', {
-   pattern = {'*.json', '*.rs', '*.odin'},
+   pattern = {'*.json', '*.rs', '*.odin', '*.ts'},
    callback = function() 
      vim.lsp.buf.format {async=false}
    end,

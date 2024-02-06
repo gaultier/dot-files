@@ -2,7 +2,7 @@ set -U EDITOR nvim
 set -U GIT_EDITOR nvim
 set GOPRIVATE "dev.azure.com/advance52/*"
 
-set BAT_THEME gruvbox-light
+set BAT_THEME "ansi"
 set GOPATH ~/go
 set FZF_DEFAULT_COMMAND 'fd --type f --hidden --follow --exclude .git'
 set FZF_DEFAULT_OPTS '--height 40% --layout=reverse --border'
