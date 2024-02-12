@@ -1,0 +1,11 @@
+[Unit]
+Description=Stop work
+
+[Timer]
+Unit=stop-work.service
+OnCalendar=Mon,Tue,Wed,Thu,Fri *-*-* 18:00:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+
