@@ -1,6 +1,7 @@
 set -U EDITOR nvim
 set -U GIT_EDITOR nvim
 set GOPRIVATE "dev.azure.com/advance52/*"
+set DFT_BACKGROUND "light "
 
 set BAT_THEME "ansi"
 set GOPATH ~/go
