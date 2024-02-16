@@ -16,6 +16,7 @@ abbr --add gco --position command git checkout
 abbr --add gst --position command git status
 abbr --add gp --position command git push
 abbr --add gcam --position command git commit -am
+abbr --add gca --position command git commit -a
 abbr --add gl --position command git pull
 abbr --add l --position command ls -latr
 abbr --add gsu --position command git submodule update --init --recursive
