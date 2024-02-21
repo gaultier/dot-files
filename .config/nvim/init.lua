@@ -1,4 +1,5 @@
 vim.env.BAT_THEME='ansi'
+vim.env.FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 vim.g.fzf_preview_window = {'right:50%', 'ctrl-/'}
 vim.g.gitgutter_enabled = 1
 vim.g.go_doc_keywordprg_enabled = 0
