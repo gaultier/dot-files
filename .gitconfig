@@ -33,6 +33,8 @@
 [scalar]
 	repo = /home/pg/not-my-code/llvm-project
 	repo = /home/pg/not-my-code/buck2/src
+	repo = /home/pg/not-my-code/neovim/src
 [maintenance]
 	repo = /home/pg/not-my-code/llvm-project
 	repo = /home/pg/not-my-code/buck2/src
+	repo = /home/pg/not-my-code/neovim/src
