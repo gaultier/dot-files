@@ -30,3 +30,9 @@
 	insteadOf = https://dev.azure.com/advance52/
 [url "git@ssh.dev.azure.com:v3/advance52"]
 	insteadOf = git://dev.azure.com/advance52
+[scalar]
+	repo = /home/pg/not-my-code/llvm-project
+	repo = /home/pg/not-my-code/buck2/src
+[maintenance]
+	repo = /home/pg/not-my-code/llvm-project
+	repo = /home/pg/not-my-code/buck2/src
