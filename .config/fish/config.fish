@@ -28,8 +28,7 @@ abbr --add d --position command docker
 abbr --add k --position command kubectl
 abbr --add config --position command git --git-dir=$HOME/.cfg/ --work-tree=$HOME
 
-gsettings set org.gnome.desktop.input-source
-s xkb-options "['caps:escape']"
+gsettings set org.gnome.desktop.input-sources xkb-options "['caps:escape']"
 
 function dnuke
     docker ps | awk 'NR > 1 {print | "docker stop -t 0 " $1}'
