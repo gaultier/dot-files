@@ -101,8 +101,7 @@ vim.keymap.set({'v', 'n'}, '<leader>x', ':GitWebUiUrlCopy<CR>')
 vim.api.nvim_create_user_command('GitWebUiUrlCopy', function(arg)
   local file_path = vim.fn.expand('%:p')
   local line_start = arg.line1
-  -- End is exclusive hence the `+ 1`.
-  local line_end = arg.line2 + 1
+  local line_end = arg.line2
 
   local cmd_handle = io.popen('git ls-files ' .. file_path)
   local file_path_relative_to_git_root = cmd_handle:read('*a')
@@ -117,15 +116,27 @@ vim.api.nvim_create_user_command('GitWebUiUrlCopy', function(arg)
   cmd_handle.close()
 
   local url = ''
-  for host, org, dir, project in string.gmatch(git_origin, 'git@ssh%.([^:]+):v3/([^/]+)/([^/]+)/([^\n]+)') do
-    url = 'https://' .. host .. '/' .. org .. '/' .. dir .. '/_git/' .. project .. '?lineStartColumn=1&lineStyle=plain&_a=contents&version=GC' .. git_commit .. '&path=' .. file_path_relative_to_git_root .. '&line=' .. line_start .. '&lineEnd=' .. line_end
-    break
+  if string.match(git_origin, 'github') then
+    for host, user, project in string.gmatch(git_origin, 'git@([^:]+):([^/]+)/([^/]+)%.git') do
+      url = 'https://' .. host .. '/' .. user .. '/' .. project .. '/blob/' .. git_commit .. '/' .. file_path_relative_to_git_root .. '#L' .. line_start .. '-L' .. line_end
+      break
+    end
+  elseif string.match(git_origin, 'azure.com') then
+    -- End is exclusive in that case hence the `+ 1`.
+    line_end = line_end + 1
+
+    for host, org, dir, project in string.gmatch(git_origin, 'git@ssh%.([^:]+):v3/([^/]+)/([^/]+)/([^\n]+)') do
+      url = 'https://' .. host .. '/' .. org .. '/' .. dir .. '/_git/' .. project .. '?lineStartColumn=1&lineStyle=plain&_a=contents&version=GC' .. git_commit .. '&path=' .. file_path_relative_to_git_root .. '&line=' .. line_start .. '&lineEnd=' .. line_end
+      break
+    end
+  else
+    print('Hosting provider not supported')
   end
 
   vim.fn.setreg('+', url)
   os.execute('xdg-open "' .. url .. '"')
-end, 
-{force=true, range=true, nargs=0, bang=true, desc='Copy to clipboard a URL to a git webui for the current line'})
+end,
+{force=true, range=true, nargs=0, desc='Copy to clipboard a URL to a git webui for the current line'})
 
 vim.api.nvim_create_user_command('JqFmt', function(arg)
   -- Move from 1-index to 0-index.
