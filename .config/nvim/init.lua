@@ -119,9 +119,9 @@ vim.api.nvim_create_user_command('GitWebUiUrlCopy', function(arg)
   local url = ''
   for host, org, dir, project in string.gmatch(git_origin, 'git@ssh%.([^:]+):v3/([^/]+)/([^/]+)/([^\n]+)') do
     url = 'https://' .. host .. '/' .. org .. '/' .. dir .. '/_git/' .. project .. '?lineStartColumn=1&lineStyle=plain&_a=contents&version=GC' .. git_commit .. '&path=' .. file_path_relative_to_git_root .. '&line=' .. line_start .. '&lineEnd=' .. line_end
+    break
   end
 
-  vim.fn.setreg('*', url)
   vim.fn.setreg('+', url)
   os.execute('xdg-open "' .. url .. '"')
 end, 
