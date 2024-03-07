@@ -101,36 +101,29 @@ vim.keymap.set({'v', 'n'}, '<leader>x', ':GitWebUiUrlCopy<CR>')
 vim.api.nvim_create_user_command('GitWebUiUrlCopy', function(arg)
   local file_path = vim.fn.expand('%:p')
   local line_start = arg.line1
-  local line_end = arg.line2
-  if (line_end == line_start) then line_end = line_end + 1 end
+  -- End is exclusive hence the `+ 1`.
+  local line_end = arg.line2 + 1
 
-  local total_stderr = ''
-  local total_stdout = ''
-  vim.fn.jobstart({'ado-link', file_path, line_start, line_end}, {
-      stdout_buffered = true,
-      stderr_buffered = true,
-      on_stderr = function(_chanid, data) 
-        for _, msg in ipairs(data) do
-          total_stderr = total_stderr .. msg
-        end
-      end,
-      on_stdout = function(_chanid, data)
-        for _, msg in ipairs(data) do
-          total_stdout = total_stdout .. msg
-        end
-      end,
-      on_exit = function() 
-        if #total_stderr > 0 then
-          local cmd = vim.fn.printf('"ado-link %s %d %d"', file_path, line_start, line_end)
-          vim.fn.setqflist({{lnum=line_start, end_lnum=line_end, type='E', text= cmd .. ': ' .. total_stderr}}, 'r')
-          vim.cmd [[ :cc ]]
-        end
-        if #total_stdout > 0 then
-          vim.fn.setreg('*', total_stdout)
-          vim.fn.setreg('+', total_stdout)
-        end
-      end
-    })
+  local cmd_handle = io.popen('git ls-files ' .. file_path)
+  local file_path_relative_to_git_root = cmd_handle:read('*a')
+  cmd_handle.close()
+
+  local cmd_handle = io.popen('git remote get-url origin')
+  local git_origin = cmd_handle:read('*a')
+  cmd_handle.close()
+
+  local cmd_handle = io.popen('git rev-parse HEAD')
+  local git_commit = cmd_handle:read('*a')
+  cmd_handle.close()
+
+  local url = ''
+  for host, org, dir, project in string.gmatch(git_origin, 'git@ssh%.([^:]+):v3/([^/]+)/([^/]+)/([^\n]+)') do
+    url = 'https://' .. host .. '/' .. org .. '/' .. dir .. '/_git/' .. project .. '?lineStartColumn=1&lineStyle=plain&_a=contents&version=GC' .. git_commit .. '&path=' .. file_path_relative_to_git_root .. '&line=' .. line_start .. '&lineEnd=' .. line_end
+  end
+
+  vim.fn.setreg('*', url)
+  vim.fn.setreg('+', url)
+  os.execute('xdg-open "' .. url .. '"')
 end, 
 {force=true, range=true, nargs=0, bang=true, desc='Copy to clipboard a URL to a git webui for the current line'})
 
