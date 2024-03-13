@@ -106,14 +106,17 @@ vim.api.nvim_create_user_command('GitWebUiUrlCopy', function(arg)
   local cmd_handle = io.popen('git ls-files ' .. file_path)
   local file_path_relative_to_git_root = cmd_handle:read('*a')
   cmd_handle.close()
+  file_path_relative_to_git_root = string.gsub(file_path_relative_to_git_root, "%s+$", "")
 
   local cmd_handle = io.popen('git remote get-url origin')
   local git_origin = cmd_handle:read('*a')
   cmd_handle.close()
+  git_origin = string.gsub(git_origin, "%s+$", "")
 
   local cmd_handle = io.popen('git rev-parse HEAD')
   local git_commit = cmd_handle:read('*a')
   cmd_handle.close()
+  git_commit = string.gsub(git_commit, "%s+$", "")
 
   local url = ''
   if string.match(git_origin, 'github') then
