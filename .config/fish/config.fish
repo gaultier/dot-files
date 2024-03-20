@@ -1,5 +1,7 @@
 set -U EDITOR nvim
 set -U GIT_EDITOR nvim
+set -U CMAKE_CXX_COMPILER_LAUNCHER ccache
+set -U CMAKE_C_COMPILER_LAUNCHER ccache
 set GOPRIVATE "dev.azure.com/advance52/*"
 set DFT_BACKGROUND "light "
 
