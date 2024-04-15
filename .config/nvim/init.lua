@@ -262,7 +262,7 @@ cmp.setup {
 
 -- Format on save.
 vim.api.nvim_create_autocmd('BufWritePre', {
-   pattern = {'*.json', '*.rs', '*.odin', '*.ts', '*.cpp', '*.h'},
+   pattern = {'*.json', '*.rs', '*.odin', '*.ts', '*.cpp', '*.c', '*.h'},
    callback = function() 
      vim.lsp.buf.format {async=false}
    end,
