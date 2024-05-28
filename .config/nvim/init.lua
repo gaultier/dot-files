@@ -219,6 +219,7 @@ local lspconfig = require('lspconfig')
 
 lspconfig.denols.setup{}
 lspconfig.clangd.setup{}
+lspconfig.zls.setup{}
 lspconfig.gopls.setup({
     settings = {
       gopls = {
