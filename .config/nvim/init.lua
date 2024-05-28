@@ -204,6 +204,7 @@ local lspconfig = require('lspconfig')
 
 lspconfig.denols.setup{}
 lspconfig.clangd.setup{}
+lspconfig.zls.setup{}
 lspconfig.gopls.setup({
     settings = {
       gopls = {
@@ -248,7 +249,7 @@ cmp.setup {
 
 -- Format on save.
 vim.api.nvim_create_autocmd('BufWritePre', {
-   pattern = {'*.json', '*.rs', '*.odin', '*.ts', '*.cpp', '*.h'},
+   pattern = {'*.json', '*.rs', '*.odin', '*.ts', '*.cpp', '*.h', '*.c'},
    callback = function() 
      vim.lsp.buf.format {async=false}
    end,
