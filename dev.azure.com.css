@@ -1,0 +1,8 @@
+.repos-pr-description {
+    max-width: initial;
+}
+
+.custom-scrollbar {
+    scrollbar-width: initial !important;
+    scrollbar-color: initial !important;
+}
