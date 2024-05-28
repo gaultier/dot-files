@@ -34,7 +34,7 @@ vim.o.modelines = 0
 vim.o.mouse = 'a'
 vim.o.relativenumber = true
 vim.o.number = true
-vim.o.omnifunc = true
+-- vim.o.omnifunc = true
 vim.o.scrolloff = 5
 vim.o.selection = 'inclusive'
 vim.o.shiftwidth = 0
@@ -176,6 +176,7 @@ Plug 'https://github.com/kana/vim-operator-user'
 Plug 'https://github.com/tpope/vim-unimpaired'
 Plug 'wellle/targets.vim'
 Plug 'https://github.com/tpope/vim-surround'
+Plug 'https://github.com/nvim-treesitter/nvim-treesitter'
 Plug('https://github.com/hrsh7th/nvim-cmp')
 Plug('https://github.com/hrsh7th/cmp-nvim-lsp')
 Plug('https://github.com/neovim/nvim-lspconfig', {['dir'] = PlugDir .. '/lspconfig.nvim'})
@@ -227,7 +228,15 @@ lspconfig.gopls.setup({
   }
 })
 lspconfig.ols.setup({})
-lspconfig.rust_analyzer.setup{}
+lspconfig.rust_analyzer.setup{
+  settings = {
+    ['rust-analyzer'] = {
+      cargo = {
+        features = "all"
+      }
+    }
+  }
+}
 
 -- nvim-cmp setup
 local cmp = require 'cmp'
