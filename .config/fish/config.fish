@@ -10,7 +10,7 @@ set GOPATH ~/go
 set FZF_DEFAULT_COMMAND 'fd --type f --hidden --follow --exclude .git'
 set FZF_DEFAULT_OPTS '--height 40% --layout=reverse --border'
 
-set PATH /usr/sbin/ /home/pg/.local/share/firenvim/ /home/pg/Downloads/odin-nightly/ubuntu_artifacts/ $GOPATH/bin ~/.cargo/bin/ $PATH
+set PATH /usr/sbin/ /home/pg/Downloads/odin-nightly/ubuntu_artifacts/ $GOPATH/bin ~/.cargo/bin/ $PATH
 
 abbr --add e --position command nvim
 abbr --add g --position command git
