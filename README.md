@@ -6,7 +6,7 @@ ssh-keygen -t ed25519 -C 'philigaultier@gmail.com'
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_ed25519
 ```
-- Add to Github.
+[Add to Github](https://github.com/settings/ssh/new)
 
 ```
 cd ~
