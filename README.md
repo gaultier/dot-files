@@ -16,7 +16,7 @@ abbr --add config --position command git --git-dir=$HOME/.cfg/ --work-tree=$HOME
 config checkout -f
 config config --local status.showUntrackedFiles no
 source ~/.config/fish/config.fish
-pkill --signal SIGUSR1 kitty
+kill -USR1 $(pgrep kitty)
 
 mkdir ~/not-my-code ~/my-code
 sudo chsh -s $(which fish) $(whoami)
