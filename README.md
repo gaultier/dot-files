@@ -3,9 +3,9 @@ Setup:
 
 ```
 ssh-keygen -t ed25519 -C 'philigaultier@gmail.com'
-eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/id_ed25519
+sh -c 'eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_ed25519'
 ```
+
 [Add to Github](https://github.com/settings/ssh/new)
 
 ```
@@ -13,8 +13,8 @@ cd ~
 echo ".cfg" >> ~/.gitignore
 git clone --bare git@github.com:gaultier/dot-files.git ~/.cfg
 abbr --add config --position command git --git-dir=$HOME/.cfg/ --work-tree=$HOME
-config checkout -f
-config config --local status.showUntrackedFiles no
+git --git-dir=$HOME/.cfg/ --work-tree=$HOME checkout -f
+git --git-dir=$HOME/.cfg/ --work-tree=$HOME config --local status.showUntrackedFiles no
 source ~/.config/fish/config.fish
 kill -USR1 $(pgrep kitty)
 
