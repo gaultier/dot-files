@@ -4,13 +4,14 @@ set -U CMAKE_CXX_COMPILER_LAUNCHER ccache
 set -U CMAKE_C_COMPILER_LAUNCHER ccache
 set GOPRIVATE "dev.azure.com/advance52/*"
 set DFT_BACKGROUND "light "
+set -U ODIN_ROOT "/home/pg/not-my-code/Odin"
 
 set BAT_THEME "ansi"
 set GOPATH ~/go
 set FZF_DEFAULT_COMMAND 'fd --type f --hidden --follow --exclude .git'
 set FZF_DEFAULT_OPTS '--height 40% --layout=reverse --border'
 
-set PATH /usr/sbin/ /home/pg/Downloads/odin-nightly/ubuntu_artifacts/ $GOPATH/bin ~/.cargo/bin/ $PATH
+set PATH /usr/sbin/ $ODIN_ROOT $GOPATH/bin ~/.cargo/bin/ $PATH
 
 abbr --add e --position command nvim
 abbr --add g --position command git
