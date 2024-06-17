@@ -11,7 +11,7 @@ set GOPATH ~/go
 set FZF_DEFAULT_COMMAND 'fd --type f --hidden --follow --exclude .git'
 set FZF_DEFAULT_OPTS '--height 40% --layout=reverse --border'
 
-set PATH /usr/sbin/ $ODIN_ROOT $GOPATH/bin ~/.cargo/bin/ $PATH
+set PATH /usr/sbin/ $ODIN_ROOT /home/pg/not-my-code/ols/ $GOPATH/bin ~/.cargo/bin/ $PATH
 
 abbr --add e --position command nvim
 abbr --add g --position command git
