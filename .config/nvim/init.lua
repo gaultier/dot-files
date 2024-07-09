@@ -23,7 +23,7 @@ vim.o.errorbells = false
 vim.o.expandtab = true
 vim.o.fillchars = 'stlnc:⚊,vert:│'
 vim.o.foldcolumn = '0'
-vim.o.grepprg = 'rg'
+vim.o.grepprg = 'rg --vimgrep'
 vim.o.hidden = true
 vim.o.history = 10000 
 vim.o.ignorecase = true
@@ -61,6 +61,8 @@ vim.api.nvim_command('filetype plugin indent on')
 vim.api.nvim_command('highlight VertSplit cterm=NONE gui=NONE')
 vim.api.nvim_command('highlight WinSeparator cterm=NONE gui=NONE')
 
+vim.keymap.set('n', '<leader>c', ':cnext<CR>')
+vim.keymap.set('n', '<leader>m', ':MdTitleLink<CR>')
 vim.keymap.set('n', '<leader>el', ':vs ~/.config/nvim/init.lua<CR>')
 vim.keymap.set('n', '<leader>sl', ':luafile ~/.config/nvim/init.lua<CR>')
 vim.keymap.set('n', '<c-p>', ':FZF<CR>')
@@ -333,3 +335,50 @@ function FormatFunction()
     }
   })
 end
+
+function startswith(text, prefix)
+    return text:find(prefix, 1, true) == 1
+end
+
+vim.api.nvim_create_user_command('MdTitleLink', function(arg)
+  -- Move from 1-index to 0-index.
+  local line_start = arg.line1 - 1
+  local line_end = arg.line2
+  local input = table.concat(vim.api.nvim_buf_get_lines(0, line_start, line_end, true), '\n')
+
+
+  local level = 0
+  if startswith(input, '######') then
+    level = 6
+  elseif startswith(input, '#####') then
+    level = 5
+  elseif startswith(input, '####') then
+    level = 4
+  elseif startswith(input, '###') then
+    level = 3
+  elseif startswith(input, '##') then
+    level = 2
+  elseif startswith(input, '#') then
+    level = 1
+  else 
+      print('unknown <h> level')
+  end
+
+  input = string.sub(input, level + 2)
+  local output = string.lower(input)
+  output = string.gsub(output, '%W', '-')
+  output = string.gsub(output, '^-+', '')
+  output = string.gsub(output, '-+$', '')
+  output = string.gsub(output, '-+', '-')
+
+  output = '<h' .. level .. ' id="' .. output .. '">' .. input .. '</h' .. level ..  '>'
+  vim.api.nvim_buf_set_lines(0, line_start, line_end, true, {output})
+
+end,
+{
+  force=true,
+  range=true,
+  nargs=0,
+  bang=true,
+  desc='Markdown title to link'
+})
