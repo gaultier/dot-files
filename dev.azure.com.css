@@ -6,3 +6,7 @@
     scrollbar-width: initial !important;
     scrollbar-color: initial !important;
 }
+
+.repos-editor-discussion {
+    max-width: initial !important;
+}
