@@ -7,11 +7,12 @@ set DFT_BACKGROUND "light "
 set -U ODIN_ROOT "/home/pg/not-my-code/Odin"
 
 set BAT_THEME "ansi"
-set GOPATH ~/go
 set FZF_DEFAULT_COMMAND 'fd --type f --hidden --follow --exclude .git'
 set FZF_DEFAULT_OPTS '--height 40% --layout=reverse --border'
 
-set PATH /usr/sbin/ $ODIN_ROOT /home/pg/not-my-code/ols/ $GOPATH/bin ~/.cargo/bin/ /usr/local/go/bin/ $PATH
+set GOROOT $HOME/go
+set GOPATH $HOME/go-workspace
+set PATH /usr/sbin/ $ODIN_ROOT /home/pg/not-my-code/ols/ ~/.cargo/bin/ ~/go/bin/ /usr/local/go/bin/ $PATH
 
 abbr --add e --position command nvim
 abbr --add g --position command git
@@ -30,6 +31,17 @@ abbr --add gcl --position command git clone --recurse --depth 1
 abbr --add d --position command docker
 abbr --add k --position command kubectl
 abbr --add config --position command git --git-dir=$HOME/.cfg/ --work-tree=$HOME
+if command --query wl-copy
+    abbr --add xcopy --position command wl-copy
+else if command --query xclip
+    abbr --add xcopy --position command xclip -i -select clipboard
+end
+if command --query wl-paste
+    abbr --add xpaste --position command wl-paste
+else if command --query xclip
+    abbr --add xpaste --position command xclip -o -select clipboard
+end
+
 
 gsettings set org.gnome.desktop.input-sources xkb-options "['caps:escape']"
 
