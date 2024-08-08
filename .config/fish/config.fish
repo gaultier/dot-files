@@ -12,7 +12,7 @@ set FZF_DEFAULT_OPTS '--height 40% --layout=reverse --border'
 
 set GOROOT $HOME/go
 set GOPATH $HOME/go-workspace
-set PATH /usr/sbin/ $ODIN_ROOT /home/pg/not-my-code/ols/ ~/.cargo/bin/ ~/go/bin/ /usr/local/go/bin/ $PATH
+set PATH /usr/sbin/ $ODIN_ROOT /home/pg/not-my-code/ols/ ~/.cargo/bin/ ~/go/bin/ /usr/local/go/bin/ /home/pg/.local/bin $PATH
 
 abbr --add e --position command nvim
 abbr --add g --position command git
