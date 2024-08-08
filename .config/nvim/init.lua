@@ -1,6 +1,4 @@
 vim.env.BAT_THEME='ansi'
-vim.env.FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
-vim.g.fzf_preview_window = {'right:50%', 'ctrl-/'}
 vim.g.gitgutter_enabled = 1
 vim.g.go_doc_keywordprg_enabled = 0
 vim.g.indentLine_char = '┊'
@@ -65,7 +63,7 @@ vim.keymap.set('n', '<leader>c', ':cnext<CR>')
 vim.keymap.set('n', '<leader>m', ':MdTitleLink<CR>')
 vim.keymap.set('n', '<leader>el', ':vs ~/.config/nvim/init.lua<CR>')
 vim.keymap.set('n', '<leader>sl', ':luafile ~/.config/nvim/init.lua<CR>')
-vim.keymap.set('n', '<c-p>', ':FZF<CR>')
+vim.keymap.set('n', '<c-p>', ':FzfLua files<CR>')
 vim.keymap.set('n', '<leader>cp', ':let @+ = expand("%:p")<CR>')
 vim.keymap.set('n', '<leader>cr', ':let @+ = expand("%")<CR>')
 vim.keymap.set('n', '<leader>cf', ':let @+ = expand("%:t")<CR>')
@@ -73,23 +71,13 @@ vim.keymap.set('n', '<c-k>', '<C-w>k')
 vim.keymap.set('n', '<c-j>', '<C-w>j')
 vim.keymap.set('n', '<c-h>', '<C-w>h')
 vim.keymap.set('n', '<c-l>', '<C-w>l')
+vim.keymap.set('n', '<c-g>', ':FzfLua grep_cword<CR>')
 vim.keymap.set('n', '<leader>l', ':nohl<CR>:lclose<CR>:cclose<CR>')
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '[g', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']g', vim.diagnostic.goto_next)
 
 
-vim.api.nvim_create_user_command('Rg', function(arg)
-  local cmd = 'rg --column --line-number --no-heading --color=always --smart-case --hidden ' .. vim.fn.join(arg.fargs, ' ')
-  vim.call('fzf#vim#grep', cmd, vim.call('fzf#vim#with_preview', {options= { '--layout=reverse', '--info=inline'}}))
-end,
-{
-  force=true,
-  range=false,
-  nargs='*',
-  bang=true, 
-  desc='Search with rg',
-})
 
 vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
   pattern = '*.nasm',
@@ -185,17 +173,7 @@ Plug('https://github.com/neovim/nvim-lspconfig', {['dir'] = PlugDir .. '/lspconf
 Plug 'sheerun/vim-polyglot'
 Plug 'fatih/vim-go'
 Plug 'https://github.com/tpope/vim-fugitive'
-Plug('junegunn/fzf', { 
-  ['do'] = function()
-	vim.call('fzf#install()')
-  end
-})
--- Plug('glacambre/firenvim', { 
---   ['do'] = function()
--- 	vim.call('firenvim#install(0)')
---   end
--- })
-Plug 'junegunn/fzf.vim'
+Plug('https://github.com/ibhagwan/fzf-lua')
 Plug 'https://github.com/tpope/vim-abolish'
 Plug 'morhetz/gruvbox'
 -- Plug 'RaafatTurki/hex.nvim'
@@ -205,14 +183,6 @@ vim.call('plug#end')
 vim.api.nvim_command('colorscheme gruvbox')
 vim.api.nvim_command('syntax enable')
 
-
-function grep_current_word()
-  local word = vim.fn.expand('<cword>')
-  vim.api.nvim_command('Rg ' .. word)
-end
-vim.keymap.set('n', '<c-g>', grep_current_word)
-
--- require 'hex'.setup()
 
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
