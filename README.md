@@ -11,6 +11,7 @@ chsh -s "$(which fish)" pg
 [Add to Github](https://github.com/settings/ssh/new)
 
 ```
+fish
 cd ~
 echo ".cfg" >> ~/.gitignore
 git clone --bare git@github.com:gaultier/dot-files.git ~/.cfg
@@ -18,7 +19,8 @@ abbr --add config --position command git --git-dir=$HOME/.cfg/ --work-tree=$HOME
 git --git-dir=$HOME/.cfg/ --work-tree=$HOME checkout -f
 git --git-dir=$HOME/.cfg/ --work-tree=$HOME config --local status.showUntrackedFiles no
 source ~/.config/fish/config.fish
-kill -USR1 $(pgrep kitty)
+
+# ctrl + shift + f5 to reload kitty
 
 mkdir ~/not-my-code ~/my-code
 sudo chsh -s $(which fish) $(whoami)
