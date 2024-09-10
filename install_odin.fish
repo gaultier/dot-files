@@ -6,7 +6,7 @@ if ! command -q dnf
   exit 1
 end
 
-sudo dnf install git clang llvm-devel
+sudo dnf install -y git clang llvm-devel
 mkdir ~/not-my-code
 cd ~/not-my-code
 git clone --recurse https://github.com/odin-lang/Odin.git
