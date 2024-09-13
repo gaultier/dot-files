@@ -183,19 +183,20 @@ vim.call('plug#end')
 vim.api.nvim_command('colorscheme gruvbox')
 vim.api.nvim_command('syntax enable')
 
+require('fzf-lua')--.setup({'fzf-vim'})
 
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local lspconfig = require('lspconfig')
 
-lspconfig.denols.setup{}
+-- lspconfig.denols.setup{}
 lspconfig.clangd.setup{}
-lspconfig.zls.setup{}
+-- lspconfig.zls.setup{}
 lspconfig.gopls.setup({
     settings = {
       gopls = {
-        buildFlags = { "-tags=db_tests,dev,e2e_tests,property_tests,transfer_tests" },
+        buildFlags = { "-tags=db_tests,dev,e2e_tests,property_tests,transfer_tests,integration_tests" },
         directoryFilters = {"-**/out"}
     }
   }
