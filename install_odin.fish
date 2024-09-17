@@ -1,12 +1,15 @@
 #!/usr/bin/env fish
 set -x fish_trace
 
-if ! command -q dnf 
-  echo "Not on Fedora"
+if command -q dnf
+  sudo dnf install -y git clang llvm-devel
+else if command -q apt
+  sudo apt install -y git clang llvm-dev
+else
+  echo "Not on Fedora/Ubuntu"
   exit 1
 end
 
-sudo dnf install -y git clang llvm-devel
 mkdir ~/not-my-code
 cd ~/not-my-code
 git clone --recurse https://github.com/odin-lang/Odin.git
