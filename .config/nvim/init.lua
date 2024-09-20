@@ -63,7 +63,7 @@ vim.keymap.set('n', '<leader>c', ':cnext<CR>')
 vim.keymap.set('n', '<leader>m', ':MdTitleLink<CR>')
 vim.keymap.set('n', '<leader>el', ':vs ~/.config/nvim/init.lua<CR>')
 vim.keymap.set('n', '<leader>sl', ':luafile ~/.config/nvim/init.lua<CR>')
-vim.keymap.set('n', '<c-p>', ':FzfLua files<CR>')
+vim.keymap.set('n', '<c-p>', ':Telescope find_files<CR>')
 vim.keymap.set('n', '<leader>cp', ':let @+ = expand("%:p")<CR>')
 vim.keymap.set('n', '<leader>cr', ':let @+ = expand("%")<CR>')
 vim.keymap.set('n', '<leader>cf', ':let @+ = expand("%:t")<CR>')
@@ -71,7 +71,7 @@ vim.keymap.set('n', '<c-k>', '<C-w>k')
 vim.keymap.set('n', '<c-j>', '<C-w>j')
 vim.keymap.set('n', '<c-h>', '<C-w>h')
 vim.keymap.set('n', '<c-l>', '<C-w>l')
-vim.keymap.set('n', '<c-g>', ':FzfLua grep_cword<CR>')
+vim.keymap.set('n', '<c-g>', ':Telescope grep_string<CR>')
 vim.keymap.set('n', '<leader>l', ':nohl<CR>:lclose<CR>:cclose<CR>')
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '[g', vim.diagnostic.goto_prev)
@@ -173,17 +173,14 @@ Plug('https://github.com/neovim/nvim-lspconfig', {['dir'] = PlugDir .. '/lspconf
 Plug 'sheerun/vim-polyglot'
 Plug 'fatih/vim-go'
 Plug 'https://github.com/tpope/vim-fugitive'
-Plug('https://github.com/ibhagwan/fzf-lua')
+Plug 'nvim-lua/plenary.nvim'
+Plug('nvim-telescope/telescope.nvim',  { tag= '0.1.8' })
 Plug 'https://github.com/tpope/vim-abolish'
 Plug 'morhetz/gruvbox'
--- Plug 'RaafatTurki/hex.nvim'
--- Plug 'jiangmiao/auto-pairs'
 
 vim.call('plug#end')
 vim.api.nvim_command('colorscheme gruvbox')
 vim.api.nvim_command('syntax enable')
-
-require('fzf-lua')--.setup({'fzf-vim'})
 
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -306,3 +303,15 @@ function FormatFunction()
     }
   })
 end
+
+vim.api.nvim_create_user_command('Rg', function(arg)
+  vim.cmd('grep '.. vim.fn.join(arg.fargs, ' '))
+  vim.cmd('Telescope quickfix')
+end,
+{
+  force=true,
+  range=false,
+  nargs='*',
+  bang=true, 
+  desc='Search with rg',
+})
