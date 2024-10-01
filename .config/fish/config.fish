@@ -46,7 +46,8 @@ end
 gsettings set org.gnome.desktop.input-sources xkb-options "['caps:escape']"
 
 function dnuke
-    docker ps | awk 'NR > 1 {print | "docker stop -t 0 " $1}'
+    docker ps --all | awk 'NR > 1 {system("docker rm -f " $1)}'
+    docker volume ls | awk 'NR>1{system("docker volume rm -f " $2)}'
 end
 
 function gwip
