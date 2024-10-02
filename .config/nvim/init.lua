@@ -60,7 +60,6 @@ vim.api.nvim_command('highlight VertSplit cterm=NONE gui=NONE')
 vim.api.nvim_command('highlight WinSeparator cterm=NONE gui=NONE')
 
 vim.keymap.set('n', '<leader>c', ':cnext<CR>')
-vim.keymap.set('n', '<leader>m', ':MdTitleLink<CR>')
 vim.keymap.set('n', '<leader>el', ':vs ~/.config/nvim/init.lua<CR>')
 vim.keymap.set('n', '<leader>sl', ':luafile ~/.config/nvim/init.lua<CR>')
 vim.keymap.set('n', '<c-p>', ':Telescope find_files<CR>')
@@ -86,6 +85,16 @@ vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
   end,
   desc = 'Treat .nasm files as .asm files',
 })
+
+
+vim.keymap.set({ 'n'}, '<leader>m', ':FileLineCopy<CR>')
+vim.api.nvim_create_user_command('FileLineCopy', function(arg)
+  local file_path = vim.fn.expand('%')
+  local line = vim.fn.line('.')
+  local res = file_path .. ':' .. line
+  vim.fn.setreg('+', res)
+end,
+{force=true, range=false, nargs=0, desc='Copy to clipboard: `<file>:<line>`'})
 
 vim.keymap.set({'v', 'n'}, '<leader>x', ':GitWebUiUrlCopy<CR>')
 vim.api.nvim_create_user_command('GitWebUiUrlCopy', function(arg)
