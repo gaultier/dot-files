@@ -21,6 +21,8 @@ vim.o.errorbells = false
 vim.o.expandtab = true
 vim.o.fillchars = 'stlnc:⚊,vert:│'
 vim.o.foldcolumn = '0'
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 vim.o.grepprg = 'rg --vimgrep'
 vim.o.hidden = true
 vim.o.history = 10000 
@@ -81,7 +83,7 @@ vim.keymap.set('n', ']g', vim.diagnostic.goto_next)
 vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
   pattern = '*.nasm',
   callback = function()
-    vim.cmd('set filetype asm')
+    vim.cmd('set ft=asm')
   end,
   desc = 'Treat .nasm files as .asm files',
 })
@@ -198,7 +200,7 @@ local lspconfig = require('lspconfig')
 
 -- lspconfig.denols.setup{}
 lspconfig.clangd.setup{}
--- lspconfig.zls.setup{}
+lspconfig.zls.setup{}
 lspconfig.gopls.setup({
     settings = {
       gopls = {
