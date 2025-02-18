@@ -137,8 +137,20 @@ vim.api.nvim_create_user_command('GitWebUiUrlCopy', function(arg)
     print('Hosting provider not supported')
   end
 
+  -- Copy to clipboard.
   vim.fn.setreg('+', url)
-  os.execute('xdg-open "' .. url .. '"')
+
+  -- Open URL in the default browser.
+  local os_name = vim.loop.os_uname().sysname
+  if os_name == 'Linux' or os_name == 'FreeBSD' or os_name == 'OpenBSD' or os_name == 'NetBSD' then
+    os.execute('xdg-open "' .. url .. '"')
+  elseif os_name == 'Darwin' then
+    os.execute('open "' .. url .. '"')
+  elseif os_name == 'Windows' then
+    os.execute('start "' .. url .. '"')
+  else
+    print('Unknown os: ' .. os_name)
+  end
 end,
 {force=true, range=true, nargs=0, desc='Copy to clipboard a URL to a git webui for the current line'})
 
