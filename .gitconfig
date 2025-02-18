@@ -18,6 +18,7 @@
 	light = true
 	line-numbers = true
   syntax-theme = gruvbox-light
+	side-by-side = false
 [init]
 	defaultBranch = master
 [url "git@ssh.dev.azure.com:v3/"]

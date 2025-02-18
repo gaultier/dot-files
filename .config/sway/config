@@ -2,11 +2,10 @@ include /etc/sway/config-vars.d/*
 
 set $mod Mod1
 set $term alacritty
-set $menu tofi-run | xargs swaymsg exec --
 
-output DP-1 mode 3440x1440 pos 0 0 bg ~/Downloads/wp.png stretch
-output DP-2 mode 3440x1440 pos 0 0 bg ~/Downloads/wp.png stretch
-output eDP-1 mode 1920x1080 pos 3440 0 bg ~/Downloads/wp.png stretch
+# output DP-1 mode 3440x1440 pos 0 0
+output HDMI-A-1 mode 3440x1440 pos 0 0 
+output eDP-1 mode 1920x1080 pos 3440 0
 
 # exec swaync
 
@@ -59,7 +58,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+Shift+t exec ~/lock.sh
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id $menu
+bindsym $mod+d exec --no-startup-id rofi -modi drun,run -show drun | xargs swaymsg exec
 
 # change focus
 bindsym $mod+h focus left

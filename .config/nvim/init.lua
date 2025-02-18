@@ -21,8 +21,8 @@ vim.o.errorbells = false
 vim.o.expandtab = true
 vim.o.fillchars = 'stlnc:⚊,vert:│'
 vim.o.foldcolumn = '0'
-vim.o.foldmethod = "expr"
-vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+-- vim.o.foldmethod = "expr"
+-- vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 vim.o.grepprg = 'rg --vimgrep'
 vim.o.hidden = true
 vim.o.history = 10000 
@@ -100,14 +100,14 @@ end,
 
 vim.keymap.set({'v', 'n'}, '<leader>x', ':GitWebUiUrlCopy<CR>')
 vim.api.nvim_create_user_command('GitWebUiUrlCopy', function(arg)
-  local file_path = vim.fn.expand('%:p')
+  local file_path_abs = vim.fn.expand('%:p')
+  local file_path_rel_cmd = io.popen('git ls-files --full-name "' .. file_path_abs .. '"')
+  local file_path_relative_to_git_root = file_path_rel_cmd:read('*a')
+  print(file_path_relative_to_git_root)
+  file_path_rel_cmd.close()
+
   local line_start = arg.line1
   local line_end = arg.line2
-
-  local cmd_handle = io.popen('git ls-files ' .. file_path)
-  local file_path_relative_to_git_root = cmd_handle:read('*a')
-  cmd_handle.close()
-  file_path_relative_to_git_root = string.gsub(file_path_relative_to_git_root, "%s+$", "")
 
   local cmd_handle = io.popen('git remote get-url origin')
   local git_origin = cmd_handle:read('*a')
@@ -204,7 +204,7 @@ lspconfig.zls.setup{}
 lspconfig.gopls.setup({
     settings = {
       gopls = {
-        buildFlags = { "-tags=db_tests,dev,e2e_tests,property_tests,transfer_tests,integration_tests" },
+        buildFlags = { "-tags=rabbitmq_test,db_tests,dev,e2e_tests,property_tests,transfer_tests,integration_tests" },
         directoryFilters = {"-**/out"}
     }
   }
