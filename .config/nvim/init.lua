@@ -103,7 +103,6 @@ vim.api.nvim_create_user_command('GitWebUiUrlCopy', function(arg)
   local file_path_abs = vim.fn.expand('%:p')
   local file_path_rel_cmd = io.popen('git ls-files --full-name "' .. file_path_abs .. '"')
   local file_path_relative_to_git_root = file_path_rel_cmd:read('*a')
-  print(file_path_relative_to_git_root)
   file_path_rel_cmd.close()
 
   local line_start = arg.line1
@@ -288,6 +287,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
     vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
     vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
+    vim.keymap.set({ 'n', 'v' }, '<space>f', vim.lsp.buf.format, opts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
 
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
