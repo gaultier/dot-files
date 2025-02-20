@@ -220,7 +220,13 @@ lspconfig.gopls.setup({
     }
   }
 })
-lspconfig.ols.setup({})
+
+lspconfig.ols.setup({
+    init_options = {
+      checker_args = "-strict-style",
+  },
+})
+
 lspconfig.rust_analyzer.setup{
   settings = {
     ['rust-analyzer'] = {
