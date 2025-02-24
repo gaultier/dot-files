@@ -103,6 +103,7 @@ vim.api.nvim_create_user_command('GitWebUiUrlCopy', function(arg)
   local file_path_abs = vim.fn.expand('%:p')
   local file_path_rel_cmd = io.popen('git ls-files --full-name "' .. file_path_abs .. '"')
   local file_path_relative_to_git_root = file_path_rel_cmd:read('*a')
+  file_path_relative_to_git_root = string.gsub(file_path_relative_to_git_root, "%s+$", "")
   file_path_rel_cmd.close()
 
   local line_start = arg.line1
