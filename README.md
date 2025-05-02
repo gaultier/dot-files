@@ -4,7 +4,7 @@ Setup:
 ```
 mkdir ~/.ssh
 ssh-keygen -t ed25519 -C 'philigaultier@gmail.com'
-sh -c 'eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_ed25519'
+sh -c 'eval "$(ssh-agent -s)" && ssh-add [--apple-use-keychain] ~/.ssh/id_ed25519'
 chsh -s "$(which fish)" "$(whoami)"
 ```
 
