@@ -5,7 +5,7 @@ Setup:
 mkdir ~/.ssh
 ssh-keygen -t ed25519 -C 'philigaultier@gmail.com'
 sh -c 'eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_ed25519'
-chsh -s "$(which fish)" pg
+chsh -s "$(which fish)" "$(whoami)"
 ```
 
 [Add to Github](https://github.com/settings/ssh/new)
@@ -22,7 +22,7 @@ source ~/.config/fish/config.fish
 
 # ctrl + shift + f5 to reload kitty
 
-mkdir ~/not-my-code ~/my-code
+mkdir ~/not-my-code ~/my-code ~/company-code
 curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 nvim -c ":PlugInstall" -c ":qa"
 ```

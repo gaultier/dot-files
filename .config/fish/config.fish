@@ -12,7 +12,7 @@ set FZF_DEFAULT_OPTS '--height 40% --layout=reverse --border'
 
 set GOROOT $HOME/go
 set GOPATH $HOME/go-workspace
-set PATH /usr/sbin/ $ODIN_ROOT /home/pg/not-my-code/ols/ ~/.cargo/bin/ ~/go/bin/ /usr/local/go/bin/ /home/pg/.local/bin $PATH
+set PATH /opt/homebrew/bin/ /usr/sbin/ $ODIN_ROOT /home/pg/not-my-code/ols/ ~/.cargo/bin/ ~/go/bin/ /usr/local/go/bin/ /home/pg/.local/bin $PATH
 
 abbr --add e --position command nvim
 abbr --add g --position command git
@@ -43,7 +43,9 @@ else if command --query xclip
 end
 
 
-gsettings set org.gnome.desktop.input-sources xkb-options "['caps:escape']"
+if command --query gsettings
+    gsettings set org.gnome.desktop.input-sources xkb-options "['caps:escape']"
+end
 
 function dnuke
     docker ps --all | awk 'NR > 1 {system("docker rm -f " $1)}'
