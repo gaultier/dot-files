@@ -48,7 +48,6 @@ vim.o.swapfile = false
 vim.o.tabstop = 2
 vim.o.termguicolors = true
 vim.o.ttyfast = true
-vim.o.undodir = '/home/pg/.vim/undo'
 vim.o.undofile = true
 vim.o.updatetime = 50
 vim.o.visualbell = false
