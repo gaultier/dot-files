@@ -30,15 +30,29 @@ abbr --add gcl --position command git clone --recurse --depth 1
 abbr --add d --position command docker
 abbr --add k --position command kubectl
 abbr --add config --position command git --git-dir=$HOME/.cfg/ --work-tree=$HOME
-if command --query wl-copy
-    abbr --add xcopy --position command wl-copy
-else if command --query xclip
-    abbr --add xcopy --position command xclip -i -select clipboard
+
+function xcopy
+    if command --query wl-copy
+        wl-copy
+    else if command --query xclip
+        xclip -i -select clipboard
+    else if command --query pbcopy
+        pbcopy
+    else 
+        false
+    end
 end
-if command --query wl-paste
-    abbr --add xpaste --position command wl-paste
-else if command --query xclip
-    abbr --add xpaste --position command xclip -o -select clipboard
+
+function xpaste
+    if command --query wl-paste
+       wl-paste
+    else if command --query xclip
+        xclip -o -select clipboard
+    else if command --query pbpaste
+        pbpaste
+    else
+        false
+    end
 end
 
 
