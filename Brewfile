@@ -9,13 +9,18 @@ brew "difftastic"
 brew "git-delta"
 brew "parallel"
 brew "htop"
+brew "fd"
+
+cask "kitty"
 
 # Ory
 brew "vale"
 brew "markdownlint-cli"
 brew "gh"
 brew "npm"
+brew "kubectl"
+brew "k9s"
+brew "skaffold"
 
-
-
-cask "kitty"
+cask "google-cloud-sdk"
+cask "docker"
