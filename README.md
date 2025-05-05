@@ -28,3 +28,31 @@ nvim -c ":PlugInstall" -c ":qa"
 ```
 
 How to: https://www.atlassian.com/git/tutorials/dotfiles
+
+
+## Macos specific setup
+
+### Sudo with Touchid
+
+Add this to `/etc/pam.d/sudo_local`:
+
+```
+auth       sufficient     pam_tid.so
+```
+
+### Cache ssh key passwords (use keychain)
+
+Add this to `~/.ssh/config`:
+
+```
+Host *
+    UseKeychain yes
+```
+
+### Brew
+
+After installing brew and the dotfiles, do:
+
+```
+brew bundle install --file=~/Brewfile --cleanup
+```
