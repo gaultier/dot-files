@@ -12,6 +12,7 @@ brew "htop"
 brew "fd"
 
 cask "kitty"
+cask "firefox"
 
 # Ory
 brew "vale"

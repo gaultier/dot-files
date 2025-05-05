@@ -2,7 +2,6 @@ set -U EDITOR nvim
 set -U GIT_EDITOR nvim
 set -U CMAKE_CXX_COMPILER_LAUNCHER ccache
 set -U CMAKE_C_COMPILER_LAUNCHER ccache
-set GOPRIVATE "dev.azure.com/advance52/*"
 set DFT_BACKGROUND "light "
 set -U ODIN_ROOT "/home/pg/not-my-code/Odin"
 
@@ -47,8 +46,12 @@ if command --query gsettings
     gsettings set org.gnome.desktop.input-sources xkb-options "['caps:escape']"
 end
 
+function dstop
+    docker ps | awk 'NR > 1 {system("docker rm -f " $1)}'
+end
+
 function dnuke
-    docker ps --all | awk 'NR > 1 {system("docker rm -f " $1)}'
+    dstop
     docker volume ls | awk 'NR>1{system("docker volume rm -f " $2)}'
 end
 
