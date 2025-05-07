@@ -21,8 +21,6 @@ vim.o.errorbells = false
 vim.o.expandtab = true
 vim.o.fillchars = 'stlnc:-,vert:│'
 vim.o.foldcolumn = '0'
--- vim.o.foldmethod = "expr"
--- vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 vim.o.grepprg = 'rg --vimgrep'
 vim.o.hidden = true
 vim.o.history = 10000 
@@ -88,6 +86,8 @@ vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
 })
 
 
+-- Copy the current `file:line` to the clipboard to easily set
+-- a debugger breakpoint in gdb.
 vim.keymap.set({ 'n'}, '<leader>m', ':FileLineCopy<CR>')
 vim.api.nvim_create_user_command('FileLineCopy', function(arg)
   local file_path = vim.fn.expand('%')
@@ -97,6 +97,7 @@ vim.api.nvim_create_user_command('FileLineCopy', function(arg)
 end,
 {force=true, range=false, nargs=0, desc='Copy to clipboard: `<file>:<line>`'})
 
+-- Copy a git forge link to the current line or visual range, to the clipboard.
 vim.keymap.set({'v', 'n'}, '<leader>x', ':GitWebUiUrlCopy<CR>')
 vim.api.nvim_create_user_command('GitWebUiUrlCopy', function(arg)
   local file_path_abs = vim.fn.expand('%:p')
@@ -153,6 +154,7 @@ vim.api.nvim_create_user_command('GitWebUiUrlCopy', function(arg)
 end,
 {force=true, range=true, nargs=0, desc='Copy to clipboard a URL to a git webui for the current line'})
 
+-- Format a visually selected json snippet in-place with `jq`.
 vim.api.nvim_create_user_command('JqFmt', function(arg)
   -- Move from 1-index to 0-index.
   local line_start = arg.line1 - 1
@@ -323,16 +325,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
-function FormatFunction()
-  vim.lsp.buf.format({
-    async = true,
-    range = {
-      ["start"] = vim.api.nvim_buf_get_mark(0, "<"),
-      ["end"] = vim.api.nvim_buf_get_mark(0, ">"),
-    }
-  })
-end
-
+-- Search with `rg` and show preview in floating window.
 vim.api.nvim_create_user_command('Rg', function(arg)
   vim.cmd('grep '.. vim.fn.join(arg.fargs, ' '))
   vim.cmd('Telescope quickfix')
