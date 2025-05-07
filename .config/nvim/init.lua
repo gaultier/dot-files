@@ -207,6 +207,15 @@ vim.call('plug#end')
 vim.api.nvim_command('colorscheme gruvbox')
 vim.api.nvim_command('syntax enable')
 
+-- Configure Telescope.
+require('telescope').setup({
+  defaults = {
+    layout_config = {padding=0}
+      -- other layout configuration here
+    },
+  -- other configuration values here
+})
+
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
