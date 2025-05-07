@@ -221,13 +221,12 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local lspconfig = require('lspconfig')
 
--- lspconfig.denols.setup{}
 lspconfig.clangd.setup{}
 lspconfig.zls.setup{}
 lspconfig.gopls.setup({
     settings = {
       gopls = {
-        buildFlags = { "-tags=rabbitmq_test,db_tests,dev,e2e_tests,property_tests,transfer_tests,integration_tests" },
+        buildFlags = { "-tags=''" },
         directoryFilters = {"-**/out"}
     }
   }
@@ -253,8 +252,6 @@ lspconfig.rust_analyzer.setup{
 local cmp = require 'cmp'
 cmp.setup {
   mapping = cmp.mapping.preset.insert({
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
@@ -301,7 +298,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-    -- vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
     vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
     vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
     vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
@@ -336,6 +332,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 -- Search with `rg` and show preview in floating window.
+-- NOTE: `:Telescope grep_string` does the same with the word under the cursor
+-- or currently visually selected.
 vim.api.nvim_create_user_command('Rg', function(arg)
   vim.cmd('grep '.. vim.fn.join(arg.fargs, ' '))
   vim.cmd('Telescope quickfix')
