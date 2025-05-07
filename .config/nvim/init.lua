@@ -201,6 +201,7 @@ Plug 'nvim-lua/plenary.nvim'
 Plug('nvim-telescope/telescope.nvim',  { tag= '0.1.8' })
 Plug 'https://github.com/tpope/vim-abolish'
 Plug 'morhetz/gruvbox'
+Plug('nvim-telescope/telescope-fzf-native.nvim', { ['do']= 'make' })
 
 vim.call('plug#end')
 vim.api.nvim_command('colorscheme gruvbox')
