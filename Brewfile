@@ -10,11 +10,13 @@ brew "git-delta"
 brew "parallel"
 brew "htop"
 brew "fd"
+brew "fzf"
 
 cask "kitty"
 cask "firefox"
 
 # Ory
+brew "coreutils"
 brew "vale"
 brew "markdownlint-cli"
 brew "gh"
