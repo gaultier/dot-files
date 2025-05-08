@@ -24,6 +24,7 @@ brew "npm"
 brew "kubectl"
 brew "k9s"
 brew "skaffold"
+brew "grype"
 
 cask "google-cloud-sdk"
 cask "docker"
