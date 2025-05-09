@@ -26,7 +26,6 @@ brew "k9s"
 brew "skaffold"
 brew "grype"
 brew "go-jsonnet"
-brew "buf"
 
 cask "google-cloud-sdk"
 cask "docker"
