@@ -29,7 +29,10 @@ abbr --add gd --position command git diff
 abbr --add gcl --position command git clone --recurse --depth 1
 abbr --add d --position command docker
 abbr --add k --position command kubectl
-abbr --add config --position command git --git-dir=$HOME/.cfg/ --work-tree=$HOME
+
+function config
+    git --git-dir=$HOME/.cfg/ --work-tree=$HOME $argv
+end
 
 function xcopy
     if command --query wl-copy
