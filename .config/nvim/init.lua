@@ -21,6 +21,10 @@ vim.o.errorbells = false
 vim.o.expandtab = true
 vim.o.fillchars = 'stlnc:-,vert:│'
 vim.o.foldcolumn = '0'
+-- vim.o.foldmethod = "indent"
+-- vim.o.foldmethod = "expr"
+-- vim.o.foldenable = true
+-- vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 vim.o.grepprg = 'rg --vimgrep'
 vim.o.hidden = true
 vim.o.history = 10000 
@@ -207,6 +211,7 @@ vim.call('plug#end')
 vim.api.nvim_command('colorscheme gruvbox')
 vim.api.nvim_command('syntax enable')
 
+
 -- Configure Telescope.
 require('telescope').setup({
   defaults = {
@@ -304,6 +309,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set({ 'n', 'v' }, '<space>f', vim.lsp.buf.format, opts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
 
+    -- Highligh all usages of the variable under the cursor,
+    -- if the LSP supports it.
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
     if client.server_capabilities.documentHighlightProvider then
       vim.cmd [[
