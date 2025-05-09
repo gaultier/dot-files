@@ -13,73 +13,23 @@ set GOROOT $HOME/go
 set GOPATH $HOME/go-workspace
 set PATH /opt/homebrew/bin/ /usr/sbin/ $ODIN_ROOT /home/pg/not-my-code/ols/ ~/.cargo/bin/ ~/go/bin/ /usr/local/go/bin/ /home/pg/.local/bin $PATH
 
-function e
-    nvim $argv
-end
-
-function g
-    git $argv
-end
-
-function gco
-    git checkout $argv
-end
-
-function gst
-    git status $argv
-end
-
-function gp
-    git push $argv
-end
-
-function gcam
-    git commit -am $argv
-end
-
-function gca
-    git commit -a $argv
-end
-
-function gl
-    git pull $argv
-end
-
-function l
-    ls -latr $argv
-end
-
-function gsu
-    git submodule update --init --recursive $argv
-end
-
-function gb
-    git branch $argv
-end
-
-function gc
-    git clone --recurse $argv
-end
-
-function gd
-    git diff $argv
-end
-
-function gcl
-    git clone --recurse --depth 1 $argv
-end
-
-function d
-    docker $argv
-end
-
-function k
-    kubectl $argv
-end
-
-function config
-    git --git-dir=$HOME/.cfg/ --work-tree=$HOME $argv
-end
+abbr --add e --position command nvim
+abbr --add g --position command git
+abbr --add gco --position command git checkout
+abbr --add gst --position command git status
+abbr --add gp --position command git push
+abbr --add gcam --position command git commit -am
+abbr --add gca --position command git commit -a
+abbr --add gl --position command git pull
+abbr --add l --position command ls -latr
+abbr --add gsu --position command git submodule update --init --recursive
+abbr --add gb --position command git branch
+abbr --add gc --position command git clone --recurse
+abbr --add gd --position command git diff
+abbr --add gcl --position command git clone --recurse --depth 1
+abbr --add d --position command docker
+abbr --add k --position command kubectl
+abbr --add config --position command git --git-dir=$HOME/.cfg/ --work-tree=$HOME
 
 function xcopy
     if command --query wl-copy
@@ -88,7 +38,7 @@ function xcopy
         xclip -i -select clipboard
     else if command --query pbcopy
         pbcopy
-    else
+    else 
         false
     end
 end
