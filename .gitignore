@@ -26,3 +26,4 @@ __pycache__
 *.so
 *.dylib
 *.o
+.config/nvim/autoload/plug.vim
