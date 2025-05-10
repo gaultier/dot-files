@@ -1,0 +1,17 @@
+build-essential
+clang
+clangd
+cmake
+fd-find
+fish
+fzf
+git
+git-delta
+htop
+jq
+kitty
+lld
+neovim
+ninja-build
+parallel
+ripgrep
