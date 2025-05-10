@@ -22,7 +22,7 @@ source ~/.config/fish/config.fish
 
 # ctrl + shift + f5 to reload kitty
 
-mkdir ~/not-my-code ~/my-code ~/company-code
+mkdir ~/not-my-code ~/my-code ~/company-code ~/scratch
 curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 nvim -c ":PlugInstall" -c ":qa"
 ```
