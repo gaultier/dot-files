@@ -29,6 +29,14 @@ nvim -c ":PlugInstall" -c ":qa"
 
 How to: https://www.atlassian.com/git/tutorials/dotfiles
 
+## Linux specific setup
+
+Ubuntu: 
+
+```sh
+$ xargs < ~/apt.txt -- sudo apt install --yes
+```
+
 
 ## Macos specific setup
 
