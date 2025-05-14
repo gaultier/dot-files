@@ -1,7 +1,6 @@
 # brew bundle install --file=~/Brewfile [--cleanup]
 
 
-tap "hashicorp/tap"
 
 brew "difftastic"
 brew "fd"
@@ -14,6 +13,7 @@ brew "htop"
 brew "jq"
 brew "neovim"
 brew "parallel"
+brew "qemu"
 brew "ripgrep"
 
 cask "firefox"
