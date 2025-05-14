@@ -30,6 +30,10 @@ abbr --add gcl --position command git clone --recurse --depth 1
 abbr --add d --position command docker
 abbr --add k --position command kubectl
 
+function brew_reconcile
+    brew bundle install --file=~/Brewfile --cleanup
+end
+
 function config
     git --git-dir=$HOME/.cfg/ --work-tree=$HOME $argv
 end
