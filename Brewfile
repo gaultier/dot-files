@@ -38,3 +38,4 @@ cask "docker"
 cask "google-cloud-sdk"
 cask "vagrant"
 cask "virtualbox"
+cask "wine-stable", args: { no_quarantine: true }

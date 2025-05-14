@@ -8,7 +8,7 @@
 [push]
 	autoSetupRemote = true
 [core]
-	excludesfile = /home/pg/.gitignore
+	excludesfile = ~/.gitignore
 	pager = delta
 	editor = nvim
 [color]
