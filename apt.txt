@@ -1,7 +1,9 @@
+# `sudo apt install $(awk '! /^#/ {printf "%s ", $1}' < ~/apt.txt)`
 build-essential
 clang
 clangd
 cmake
+entr
 fd-find
 fish
 fzf
