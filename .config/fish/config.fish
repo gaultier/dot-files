@@ -63,7 +63,7 @@ function xpaste
 end
 
 
-if command --query gsettings
+if type -q gsettings; and test (uname -s) = Linux
     gsettings set org.gnome.desktop.input-sources xkb-options "['caps:escape']"
 end
 

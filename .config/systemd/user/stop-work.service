@@ -1,8 +1,0 @@
-[Unit]
-Description=Stop work
-
-[Service]
-ExecStart=sh -c 'docker ps | awk \'NR > 1 {print | "docker stop -t 0 " $1}\''
-
-[Install]
-WantedBy=multi-user.target
