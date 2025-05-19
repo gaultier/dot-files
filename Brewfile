@@ -1,6 +1,6 @@
 # brew bundle install --file=~/Brewfile [--cleanup]
 
-
+tap "cockroachdb/tap"
 
 brew "difftastic"
 brew "fd"
@@ -21,6 +21,7 @@ cask "kitty"
 
 # Ory
 
+brew "cockroach"
 brew "coreutils"
 brew "delve"
 brew "gh"
