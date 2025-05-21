@@ -102,6 +102,7 @@ end,
 {force=true, range=false, nargs=0, desc='Copy to clipboard: `<file>:<line>`'})
 
 -- Copy a git forge link to the current line or visual range, to the clipboard.
+-- TODO: Add an argument to do this for the tip commit of the main branch.
 vim.keymap.set({'v', 'n'}, '<leader>x', ':GitWebUiUrlCopy<CR>')
 vim.api.nvim_create_user_command('GitWebUiUrlCopy', function(arg)
   local file_path_abs = vim.fn.expand('%:p')
