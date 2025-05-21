@@ -1,4 +1,4 @@
-# `sudo apt install $(awk '! /^#/ {printf "%s ", $1}' < ~/apt.txt)`
+# `awk '! /^#/ {print $1}' < ~/apt.txt | xargs sudo apt install -y`
 bpftrace
 build-essential
 clang
@@ -18,4 +18,6 @@ neovim
 ninja-build
 parallel
 ripgrep
+shellcheck
 unzip
+valgrind
