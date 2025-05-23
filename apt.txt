@@ -24,4 +24,6 @@ valgrind
 
 
 # Work
-# docker.io
+# Also run after: sudo usermod -aG docker
+# docker.io 
+
