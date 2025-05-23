@@ -44,10 +44,10 @@ function fish_prompt --description 'Write out the prompt'
         set suffix '$'
     end
 
-    # PWD
     set_color $color_cwd
-    # echo -n (prompt_pwd)
+    printf '[%s] ' (prompt_hostname)
     echo -n (date +"%T.%3N") (prompt_pwd)
+
     set_color normal
 
     printf '%s ' (fish_vcs_prompt)

@@ -38,25 +38,6 @@ Ubuntu:
 $ awk '! /^#/ {print $1}' < ~/apt.txt | xargs sudo apt install -y
 ```
 
-## VM specific setup
-
-```
-diff --git a/.config/fish/functions/fish_prompt.fish b/.config/fish/functions/fish_prompt.fish
-index 933cea3..9150f75 100644
---- a/.config/fish/functions/fish_prompt.fish
-+++ b/.config/fish/functions/fish_prompt.fish
-@@ -48,6 +48,8 @@ function fish_prompt --description 'Write out the prompt'
-     set_color $color_cwd
-     # echo -n (prompt_pwd)
-     echo -n (date +"%T.%3N") (prompt_pwd)
-+    printf '[%s]' (prompt_hostname)
-+
-     set_color normal
- 
-     printf '%s ' (fish_vcs_prompt)
-```
-
-
 ## Macos specific setup
 
 ### Sudo with Touchid
