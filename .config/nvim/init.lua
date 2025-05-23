@@ -232,7 +232,7 @@ lspconfig.zls.setup{}
 lspconfig.gopls.setup({
     settings = {
       gopls = {
-        buildFlags = { "-tags=''" },
+        buildFlags = { "-tags='sqlite'" },
         directoryFilters = {"-**/out"}
     }
   }

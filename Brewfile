@@ -1,6 +1,7 @@
 # brew bundle install --file=~/Brewfile [--cleanup]
 
 
+brew "ag"
 brew "difftastic"
 brew "fd"
 brew "fish"
@@ -14,6 +15,7 @@ brew "neovim"
 brew "parallel"
 brew "qemu"
 brew "ripgrep"
+brew "sd"
 brew "tokei"
 brew "xsv"
 
@@ -35,8 +37,9 @@ brew "k9s"
 brew "kubectl"
 brew "markdownlint-cli"
 brew "mysql-client@8.0"
-brew "openjdk@11"
 brew "npm"
+brew "openjdk@11"
+brew "pkcs11-tools"
 brew "skaffold"
 brew "vale"
 
