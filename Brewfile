@@ -41,6 +41,7 @@ brew "npm"
 brew "openjdk@11"
 brew "pkcs11-tools"
 brew "skaffold"
+brew "softhsm"
 brew "vale"
 
 cask "docker"

@@ -4,7 +4,8 @@ Setup:
 ```
 mkdir ~/.ssh
 ssh-keygen -t ed25519 -C 'philigaultier@gmail.com'
-sh -c 'eval "$(ssh-agent -s)" && ssh-add [--apple-use-keychain] ~/.ssh/id_ed25519'
+# On macOS: add `--apple-use-keychain` 
+sh -c 'eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_ed25519'
 chsh -s "$(which fish)" "$(whoami)"
 ```
 
@@ -34,7 +35,25 @@ How to: https://www.atlassian.com/git/tutorials/dotfiles
 Ubuntu: 
 
 ```sh
-$ xargs < ~/apt.txt -- sudo apt install --yes
+$ awk '! /^#/ {print $1}' < ~/apt.txt | xargs sudo apt install -y
+```
+
+## VM specific setup
+
+```
+diff --git a/.config/fish/functions/fish_prompt.fish b/.config/fish/functions/fish_prompt.fish
+index 933cea3..9150f75 100644
+--- a/.config/fish/functions/fish_prompt.fish
++++ b/.config/fish/functions/fish_prompt.fish
+@@ -48,6 +48,8 @@ function fish_prompt --description 'Write out the prompt'
+     set_color $color_cwd
+     # echo -n (prompt_pwd)
+     echo -n (date +"%T.%3N") (prompt_pwd)
++    printf '[%s]' (prompt_hostname)
++
+     set_color normal
+ 
+     printf '%s ' (fish_vcs_prompt)
 ```
 
 
@@ -58,9 +77,13 @@ Host *
 ```
 
 ### Brew
-
 After installing brew and the dotfiles, do:
 
 ```
 brew bundle install --file=~/Brewfile --cleanup
+```
+
+### Neovim
+
+```sh
 ```
