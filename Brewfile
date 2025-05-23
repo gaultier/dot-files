@@ -25,6 +25,7 @@ cask "wine-stable", args: { no_quarantine: true }
 
 # Ory
 tap "cockroachdb/tap"
+tap "microsoft/git"
 
 brew "cockroach"
 brew "coreutils"
@@ -36,6 +37,7 @@ brew "grype"
 brew "k9s"
 brew "kubectl"
 brew "markdownlint-cli"
+brew "microsoft-git"
 brew "mysql-client@8.0"
 brew "npm"
 brew "openjdk@11"
