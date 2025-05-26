@@ -67,4 +67,13 @@ brew bundle install --file=~/Brewfile --cleanup
 ### Neovim
 
 ```sh
+cd ~/not-my-code
+git clone --recurse https://github.com/neovim/neovim
+cd neovim
+make
+sudo make install
+nvim --version
+# sudo apt remove neovim
+# brew uninstall neovim
 ```
+
