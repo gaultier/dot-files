@@ -21,11 +21,6 @@
 	side-by-side = false
 [init]
 	defaultBranch = master
-[credential]
-	helper = 
-	helper = /usr/local/share/gcm-core/git-credential-manager
-[credential "https://dev.azure.com"]
-	useHttpPath = true
 [scalar]
 	repo = /Users/philippe.gaultier/company-code/cloud
 	repo = /Users/philippe.gaultier/company-code/cloud2/src
