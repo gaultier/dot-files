@@ -29,6 +29,8 @@ cask "wine-stable", args: { no_quarantine: true }
 
 # Ory
 
+brew "caddy"
+brew "cmake"
 brew "cockroach"
 brew "coreutils"
 brew "delve"
