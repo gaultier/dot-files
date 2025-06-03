@@ -2,11 +2,11 @@ set -U EDITOR nvim
 set -U GIT_EDITOR nvim
 set -U CMAKE_CXX_COMPILER_LAUNCHER ccache
 set -U CMAKE_C_COMPILER_LAUNCHER ccache
-set DFT_BACKGROUND "light "
+set -U DFT_BACKGROUND "light "
 set -U ODIN_ROOT "/home/pg/not-my-code/Odin"
 
-set BAT_THEME "ansi"
-set FZF_DEFAULT_COMMAND 'fd --type f --hidden --follow --exclude .git'
+set -U BAT_THEME "ansi"
+set -U FZF_DEFAULT_COMMAND 'fd --type f --hidden --follow --exclude .git'
 set FZF_DEFAULT_OPTS '--height 40% --layout=reverse --border'
 
 set GOROOT $HOME/go
@@ -26,6 +26,7 @@ abbr --add gsu --position command git submodule update --init --recursive
 abbr --add gb --position command git branch
 abbr --add gc --position command git clone --recurse
 abbr --add gd --position command git diff
+abbr --add gdft --position command DFT_BACKGROUND=light GIT_EXTERNAL_DIFF=difft git diff
 abbr --add gcl --position command git clone --recurse --depth 1
 abbr --add d --position command docker
 abbr --add k --position command kubectl
