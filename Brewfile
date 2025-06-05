@@ -24,6 +24,7 @@ brew "tokei"
 brew "xsv"
 
 cask "firefox"
+cask "karabiner-elements"
 cask "kitty"
 cask "rectangle"
 cask "wine-stable", args: { no_quarantine: true }
