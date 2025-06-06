@@ -5,6 +5,7 @@ tap "cockroachdb/tap"
 tap "microsoft/git"
 
 brew "ag"
+brew "ast-grep"
 brew "difftastic"
 brew "fd"
 brew "fish"
