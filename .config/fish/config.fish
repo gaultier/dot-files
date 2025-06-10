@@ -81,6 +81,11 @@ function gwip
     git add . && git commit -am "[wip]"
 end
 
+# Search and Replace.
+function snr -a search replace
+    sd "$search" "$replace" $(rg -uu "$search" --files-with-matches $argv[-2..-1])
+end
+
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
