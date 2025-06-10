@@ -83,7 +83,7 @@ end
 
 # Search and Replace.
 function snr -a search replace
-    sd "$search" "$replace" $(rg -uu "$search" --files-with-matches $argv[-2..-1])
+    sd "$search" "$replace" $(rg "$search" --files-with-matches $argv[-2..-1])
 end
 
 
