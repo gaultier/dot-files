@@ -13,6 +13,7 @@ set GOROOT $HOME/go
 set GOPATH $HOME/go-workspace
 set PATH /opt/homebrew/bin/ /usr/sbin/ $ODIN_ROOT /home/pg/not-my-code/ols/ ~/.cargo/bin/ ~/go/bin/ /usr/local/go/bin/ /home/pg/.local/bin $PATH
 
+abbr --add hm --position command history merge
 abbr --add e --position command nvim
 abbr --add g --position command git
 abbr --add gco --position command git checkout
