@@ -25,6 +25,7 @@ brew "ripgrep"
 brew "sd"
 brew "tokei"
 brew "xsv"
+brew "zig"
 
 cask "firefox"
 cask "karabiner-elements"

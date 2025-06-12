@@ -311,7 +311,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set({ 'n', 'v' }, '<space>f', vim.lsp.buf.format, opts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
 
-    -- Highligh all usages of the variable under the cursor,
+    -- Highlight all usages of the variable under the cursor,
     -- if the LSP supports it.
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
     if client.server_capabilities.documentHighlightProvider then
