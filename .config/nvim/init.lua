@@ -89,6 +89,14 @@ vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
   desc = 'Treat .nasm files as .asm files',
 })
 
+vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
+  pattern = '*.dtrace',
+  callback = function()
+    vim.cmd('set ft=awk')
+  end,
+  desc = 'Treat .dtrace files as .awk files',
+})
+
 
 -- Copy the current `file:line` to the clipboard to easily set
 -- a debugger breakpoint in gdb.
