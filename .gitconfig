@@ -27,3 +27,9 @@
 [maintenance]
 	repo = /Users/philippe.gaultier/company-code/cloud
 	repo = /Users/philippe.gaultier/company-code/cloud2/src
+
+# Add in the git repository a `.gitattributes` file with e.g.:
+# `*.bin binary diff=hex`
+[diff "hex"]
+    textconv = hexdump -v -C
+		binary = true
