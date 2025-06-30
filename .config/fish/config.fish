@@ -84,7 +84,7 @@ end
 
 # Search and Replace.
 function snr -a search replace
-    sd "$search" "$replace" $(rg "$search" --files-with-matches $argv[-2..-1])
+    rg "$search" --files-with-matches . $argv[-2..-1] | xargs -I {} sed -i '' -e "s/$search/$replace/g" {}
 end
 
 
