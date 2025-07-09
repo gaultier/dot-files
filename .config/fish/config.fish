@@ -84,8 +84,9 @@ end
 
 # Search and Replace.
 function snr -a search replace
-    rg "$search" --files-with-matches . $argv[-2..-1] | xargs -I {} sed -i '' -e "s/$search/$replace/g" {}
-end
+    set fish_trace true
+    rg $search $PWD --files-with-matches $argv[3..] | parallel "sed -i '' -e \"s/$search/$replace/g\" {}"
+end 
 
 
 if status is-interactive
