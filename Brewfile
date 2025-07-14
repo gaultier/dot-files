@@ -5,6 +5,7 @@ tap "cockroachdb/tap"
 tap "microsoft/git"
 
 brew "ag"
+brew "age"
 brew "ast-grep"
 brew "cargo-flamegraph"
 brew "difftastic"
@@ -33,7 +34,6 @@ brew "zig"
 cask "firefox"
 cask "karabiner-elements"
 cask "kitty"
-cask "rectangle"
 cask "wine-stable", args: { no_quarantine: true }
 
 # Ory
