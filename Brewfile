@@ -55,6 +55,7 @@ brew "openjdk@11"
 brew "pkcs11-tools"
 brew "skaffold"
 brew "softhsm"
+brew "sponge"
 brew "vale"
 
 cask "docker-desktop"
