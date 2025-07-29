@@ -6,7 +6,6 @@ tap "microsoft/git"
 
 brew "ag"
 brew "age"
-brew "ast-grep"
 brew "cargo-flamegraph"
 brew "difftastic"
 brew "entr"
