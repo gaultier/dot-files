@@ -58,6 +58,7 @@ brew "softhsm"
 brew "vale"
 
 cask "docker-desktop"
+cask "gcloud-cli"
 cask "google-cloud-sdk"
 cask "microsoft-git"
 cask "virtualbox"

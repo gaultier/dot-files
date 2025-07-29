@@ -70,7 +70,7 @@ if type -q gsettings; and test (uname -s) = Linux
 end
 
 function dstop
-    docker ps | awk 'NR > 1 {system("docker rm -f " $1)}'
+    docker ps --all | awk 'NR > 1 {system("docker rm -f " $1)}'
 end
 
 function dnuke

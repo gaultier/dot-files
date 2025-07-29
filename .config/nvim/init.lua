@@ -62,7 +62,6 @@ vim.api.nvim_command('filetype plugin indent on')
 vim.api.nvim_command('highlight VertSplit cterm=NONE gui=NONE')
 vim.api.nvim_command('highlight WinSeparator cterm=NONE gui=NONE')
 
-vim.keymap.set('n', '<leader>c', ':cnext<CR>')
 vim.keymap.set('n', '<leader>el', ':vs ~/.config/nvim/init.lua<CR>')
 vim.keymap.set('n', '<leader>sl', ':luafile ~/.config/nvim/init.lua<CR>')
 vim.keymap.set('n', '<c-p>', ':Telescope find_files<CR>')
@@ -193,28 +192,46 @@ local Plug = vim.fn['plug#']
 
 vim.call('plug#begin', PlugDir)
 
-Plug 'https://github.com/mbbill/undotree'
-Plug 'https://github.com/tpope/vim-abolish'
+-- Undo tree.
+Plug 'https://github.com/mbbill/undotree' 
+-- Change casing/spelling.
+-- `crs`: snake_case.
+-- `crm`: MixedCase.
+-- `crc`: camelCase.
+-- `cru`: UPPER_CASE.
+-- `cr-`: dash-case.
+-- `cr.`: dot.case.
+-- `:Subvert/child{,ren}/adult{,s}/g`.
+Plug 'https://github.com/tpope/vim-abolish' 
+-- Comment lines out.
+-- `gc` to (un)comment a visual region.
+-- `gcc` to (un)comment the current line.
 Plug 'https://github.com/tpope/vim-commentary'
+-- UNIX commands in vim. E.g. `:Rename`, `:Remove` etc.
 Plug 'https://github.com/tpope/vim-eunuch'
+-- Exchange 2 regions.
+-- `cxiw` twice exchanges 2 words.
 Plug 'https://github.com/tommcdo/vim-exchange'
+-- Show lines changes via git.
 Plug 'https://github.com/airblade/vim-gitgutter'
+-- TODO: Remove?
 Plug 'https://github.com/kana/vim-operator-user'
+-- Lots of cool shortcuts. See `:h unimpaired.txt`.
 Plug 'https://github.com/tpope/vim-unimpaired'
-Plug 'wellle/targets.vim'
+Plug 'https://github.com/wellle/targets.vim'
 Plug 'https://github.com/tpope/vim-surround'
 Plug 'https://github.com/nvim-treesitter/nvim-treesitter'
 Plug('https://github.com/hrsh7th/nvim-cmp')
 Plug('https://github.com/hrsh7th/cmp-nvim-lsp')
 Plug('https://github.com/neovim/nvim-lspconfig', {['dir'] = PlugDir .. '/lspconfig.nvim'})
-Plug 'sheerun/vim-polyglot'
-Plug 'fatih/vim-go'
+Plug 'https://github.com/sheerun/vim-polyglot'
+Plug 'https://github.com/fatih/vim-go'
 Plug 'https://github.com/tpope/vim-fugitive'
-Plug 'nvim-lua/plenary.nvim'
-Plug('nvim-telescope/telescope.nvim',  { tag= '0.1.8' })
-Plug 'https://github.com/tpope/vim-abolish'
-Plug 'morhetz/gruvbox'
-Plug('nvim-telescope/telescope-fzf-native.nvim', { ['do']= 'make' })
+Plug 'https://github.com/nvim-lua/plenary.nvim'
+Plug('https://github.com/nvim-telescope/telescope.nvim',  { tag= '0.1.8' })
+Plug 'https://github.com/https://github.com/tpope/vim-abolish'
+Plug 'https://github.com/morhetz/gruvbox'
+Plug('https://github.com/nvim-telescope/telescope-fzf-native.nvim', { ['do']= 'make' })
 
 vim.call('plug#end')
 vim.api.nvim_command('colorscheme gruvbox')
@@ -291,6 +308,15 @@ cmp.setup {
     { name = 'nvim_lsp' },
   }),
 }
+
+
+-- Prefer `//` over `/* ... */` for commenting.
+vim.api.nvim_create_autocmd('FileType', {
+   pattern = {'*.odin', '*.ts', '*.tsx', '*.cpp', '*.c', '*.h'},
+   callback = function() 
+     vim.opt_local.commentstring = '// %s'
+   end,
+})
 
 -- Format on save.
 vim.api.nvim_create_autocmd('BufWritePre', {
