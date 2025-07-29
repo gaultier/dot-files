@@ -218,13 +218,12 @@ Plug 'https://github.com/airblade/vim-gitgutter'
 Plug 'https://github.com/tpope/vim-unimpaired'
 -- Work on pairs of quotes, brackets, parentheses, etc.
 Plug 'https://github.com/tpope/vim-surround'
-
--- ?
+-- Suggestions engine.
 Plug('https://github.com/hrsh7th/nvim-cmp')
--- ?
+-- TAB suggestions based on LSP.
 Plug('https://github.com/hrsh7th/cmp-nvim-lsp')
+-- Configure various LSPs.
 Plug('https://github.com/neovim/nvim-lspconfig', {['dir'] = PlugDir .. '/lspconfig.nvim'})
-
 -- Syntax highlighting for lots of languages including niche ones.
 Plug 'https://github.com/sheerun/vim-polyglot'
 -- Golang tools.
@@ -334,6 +333,7 @@ vim.api.nvim_create_autocmd('BufWritePre', {
    end,
 })
 
+-- Set up various LSP-based shortcuts e.g. rename, goto implementation, etc.
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
   callback = function(ev)
