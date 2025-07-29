@@ -214,24 +214,32 @@ Plug 'https://github.com/tpope/vim-eunuch'
 Plug 'https://github.com/tommcdo/vim-exchange'
 -- Show lines changes via git.
 Plug 'https://github.com/airblade/vim-gitgutter'
--- TODO: Remove?
-Plug 'https://github.com/kana/vim-operator-user'
 -- Lots of cool shortcuts. See `:h unimpaired.txt`.
 Plug 'https://github.com/tpope/vim-unimpaired'
-Plug 'https://github.com/wellle/targets.vim'
+-- Work on pairs of quotes, brackets, parentheses, etc.
 Plug 'https://github.com/tpope/vim-surround'
-Plug 'https://github.com/nvim-treesitter/nvim-treesitter'
+
+-- ?
 Plug('https://github.com/hrsh7th/nvim-cmp')
+-- ?
 Plug('https://github.com/hrsh7th/cmp-nvim-lsp')
 Plug('https://github.com/neovim/nvim-lspconfig', {['dir'] = PlugDir .. '/lspconfig.nvim'})
+
+-- Syntax highlighting for lots of languages including niche ones.
 Plug 'https://github.com/sheerun/vim-polyglot'
+-- Golang tools.
 Plug 'https://github.com/fatih/vim-go'
+-- Git commands.
+-- `:Git blame`, mostly.
 Plug 'https://github.com/tpope/vim-fugitive'
+-- ?
 Plug 'https://github.com/nvim-lua/plenary.nvim'
+-- Pop-up to search and explore.
 Plug('https://github.com/nvim-telescope/telescope.nvim',  { tag= '0.1.8' })
-Plug 'https://github.com/https://github.com/tpope/vim-abolish'
-Plug 'https://github.com/morhetz/gruvbox'
+-- Faster fuzzy search using native.
 Plug('https://github.com/nvim-telescope/telescope-fzf-native.nvim', { ['do']= 'make' })
+-- Color theme.
+Plug 'https://github.com/morhetz/gruvbox'
 
 vim.call('plug#end')
 vim.api.nvim_command('colorscheme gruvbox')
