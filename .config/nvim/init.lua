@@ -27,7 +27,7 @@ vim.o.foldcolumn = '0'
 -- vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 vim.o.grepprg = 'rg --vimgrep'
 vim.o.hidden = true
-vim.o.history = 10000 
+vim.o.history = 10000
 vim.o.ignorecase = true
 vim.o.laststatus = 3
 vim.o.matchpairs = vim.o.matchpairs .. ',<:>'
@@ -56,6 +56,8 @@ vim.o.visualbell = false
 vim.o.wildoptions = 'pum'
 vim.o.writebackup = false
 
+vim.diagnostic.setqflist()
+
 vim.api.nvim_command('highlight Comment cterm=italic')
 vim.api.nvim_command('highlight clear SignColumn')
 vim.api.nvim_command('filetype plugin indent on')
@@ -75,8 +77,9 @@ vim.keymap.set('n', '<c-l>', '<C-w>l')
 vim.keymap.set('n', '<c-g>', ':Telescope grep_string<CR>')
 vim.keymap.set('n', '<leader>l', ':nohl<CR>:lclose<CR>:cclose<CR>')
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
-vim.keymap.set('n', '[g', vim.diagnostic.goto_prev)
-vim.keymap.set('n', ']g', vim.diagnostic.goto_next)
+vim.keymap.set('n', '[g', function() vim.diagnostic.jump({count = -1, float = true}) end)
+vim.keymap.set('n', ']g', function() vim.diagnostic.jump({count = 1, float = true}) end)
+vim.keymap.set('n', ']d', ':Telescope diagnostics<CR>')
 
 
 
@@ -100,7 +103,7 @@ vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
 -- Copy the current `file:line` to the clipboard to easily set
 -- a debugger breakpoint in gdb.
 vim.keymap.set({ 'n'}, '<leader>m', ':FileLineCopy<CR>')
-vim.api.nvim_create_user_command('FileLineCopy', function(arg)
+vim.api.nvim_create_user_command('FileLineCopy', function()
   local file_path = vim.fn.expand('%')
   local line = vim.fn.line('.')
   local res = file_path .. ':' .. line
@@ -114,21 +117,30 @@ vim.keymap.set({'v', 'n'}, '<leader>x', ':GitWebUiUrlCopy<CR>')
 vim.api.nvim_create_user_command('GitWebUiUrlCopy', function(arg)
   local file_path_abs = vim.fn.expand('%:p')
   local file_path_rel_cmd = io.popen('git ls-files --full-name "' .. file_path_abs .. '"')
+  if file_path_rel_cmd == nil then
+    return
+  end
   local file_path_relative_to_git_root = file_path_rel_cmd:read('*a')
   file_path_relative_to_git_root = string.gsub(file_path_relative_to_git_root, "%s+$", "")
-  file_path_rel_cmd.close()
+  file_path_rel_cmd:close()
 
   local line_start = arg.line1
   local line_end = arg.line2
 
-  local cmd_handle = io.popen('git remote get-url origin')
-  local git_origin = cmd_handle:read('*a')
-  cmd_handle.close()
+  local cmd_handle_get_url = io.popen('git remote get-url origin')
+  if cmd_handle_get_url == nil then
+    return
+  end
+  local git_origin = cmd_handle_get_url:read('*a')
+  cmd_handle_get_url:close()
   git_origin = string.gsub(git_origin, "%s+$", "")
 
-  local cmd_handle = io.popen('git rev-parse HEAD')
-  local git_commit = cmd_handle:read('*a')
-  cmd_handle.close()
+  local cmd_handle_head = io.popen('git rev-parse HEAD')
+  if cmd_handle_head == nil then
+    return
+  end
+  local git_commit = cmd_handle_head:read('*a')
+  cmd_handle_head:close()
   git_commit = string.gsub(git_commit, "%s+$", "")
 
   local url = ''
@@ -181,7 +193,7 @@ vim.api.nvim_create_user_command('JqFmt', function(arg)
     vim.fn.setqflist({{lnum=line_start, end_lnum=line_end, type='E', text = 'Failed to format JSON'}}, 'r')
     vim.cmd [[ :cc ]]
   end
-end, 
+end,
 {force=true, range=true, nargs=0, bang=true, desc='Format JSON snippet'})
 vim.keymap.set({'v', 'n'}, '<leader>j', ':JqFmt<CR>')
 
@@ -193,7 +205,7 @@ local Plug = vim.fn['plug#']
 vim.call('plug#begin', PlugDir)
 
 -- Undo tree.
-Plug 'https://github.com/mbbill/undotree' 
+Plug 'https://github.com/mbbill/undotree'
 -- Change casing/spelling.
 -- `crs`: snake_case.
 -- `crm`: MixedCase.
@@ -202,11 +214,11 @@ Plug 'https://github.com/mbbill/undotree'
 -- `cr-`: dash-case.
 -- `cr.`: dot.case.
 -- `:Subvert/child{,ren}/adult{,s}/g`.
-Plug 'https://github.com/tpope/vim-abolish' 
+Plug 'https://github.com/tpope/vim-abolish'
 -- Comment lines out.
 -- `gc` to (un)comment a visual region.
 -- `gcc` to (un)comment the current line.
-Plug 'https://github.com/tpope/vim-commentary'
+-- Plug 'https://github.com/tpope/vim-commentary'
 -- UNIX commands in vim. E.g. `:Rename`, `:Remove` etc.
 Plug 'https://github.com/tpope/vim-eunuch'
 -- Exchange 2 regions.
@@ -237,6 +249,7 @@ Plug 'https://github.com/nvim-lua/plenary.nvim'
 Plug('https://github.com/nvim-telescope/telescope.nvim',  { tag= '0.1.8' })
 -- Faster fuzzy search using native.
 Plug('https://github.com/nvim-telescope/telescope-fzf-native.nvim', { ['do']= 'make' })
+Plug 'https://github.com/nvim-treesitter/nvim-treesitter'
 -- Color theme.
 Plug 'https://github.com/morhetz/gruvbox'
 
@@ -254,11 +267,35 @@ require('telescope').setup({
   -- other configuration values here
 })
 
--- Add additional capabilities supported by nvim-cmp
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local lspconfig = require('lspconfig')
 
+lspconfig.lua_ls.setup {
+  settings = {
+    Lua = {
+      runtime = {
+        -- Tell the language server which version of Lua you're using
+        -- (most likely LuaJIT in the case of Neovim)
+        version = 'LuaJIT',
+      },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = {
+          'vim',
+          'require'
+        },
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+      -- Do not send telemetry data containing a randomized but unique identifier
+      telemetry = {
+        enable = false,
+      },
+    },
+  },
+}
 lspconfig.ts_ls.setup{}
 lspconfig.clangd.setup{}
 lspconfig.zls.setup{}
@@ -320,7 +357,7 @@ cmp.setup {
 -- Prefer `//` over `/* ... */` for commenting.
 vim.api.nvim_create_autocmd('FileType', {
    pattern = {'*.odin', '*.ts', '*.tsx', '*.cpp', '*.c', '*.h'},
-   callback = function() 
+   callback = function()
      vim.opt_local.commentstring = '// %s'
    end,
 })
@@ -328,7 +365,7 @@ vim.api.nvim_create_autocmd('FileType', {
 -- Format on save.
 vim.api.nvim_create_autocmd('BufWritePre', {
    pattern = {'*.json', '*.rs', '*.odin', '*.ts', '*.tsx', '*.cpp', '*.c', '*.h'},
-   callback = function() 
+   callback = function()
      vim.lsp.buf.format {async=false}
    end,
 })
@@ -356,6 +393,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- Highlight all usages of the variable under the cursor,
     -- if the LSP supports it.
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
+    if client == nil then
+      return
+    end
     if client.server_capabilities.documentHighlightProvider then
       vim.cmd [[
         hi! LspReferenceRead cterm=bold ctermbg=235 guibg=LightYellow
@@ -393,6 +433,9 @@ end,
   force=true,
   range=false,
   nargs='*',
-  bang=true, 
+  bang=true,
   desc='Search with rg',
 })
+
+vim.api.nvim_command('highlight NormalFloat guibg=#fe8019')
+
