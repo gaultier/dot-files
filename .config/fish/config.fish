@@ -85,7 +85,7 @@ end
 # Search and Replace.
 function snr -a search replace
     set fish_trace true
-    rg $search $PWD --files-with-matches $argv[3..] | parallel "sed -i '' -E -e \"s/$search/$replace/g\" {}"
+    rg $search $PWD --files-with-matches $argv[3..] | parallel sed -i '' -E -e $(printf '\'s/%s/%s/g\'' $search $replace) {}
 end 
 
 
