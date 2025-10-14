@@ -53,6 +53,7 @@ brew "node@22"
 brew "openjdk@11"
 brew "pkcs11-tools"
 brew "rust"
+brew "shellcheck"
 brew "skaffold"
 brew "softhsm"
 
