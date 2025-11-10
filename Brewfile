@@ -29,20 +29,15 @@ brew "parallel"
 brew "qemu"
 brew "ripgrep"
 brew "samply"
-brew "tokei"
 brew "tree"
 brew "xsv"
-brew "zig"
 
 cask "firefox"
-cask "karabiner-elements"
 cask "kitty"
-cask "wine-stable", args: { no_quarantine: true }
 
 # Ory
 
 brew "caddy"
-brew "cmake"
 brew "cockroach"
 brew "coreutils"
 brew "delve"
@@ -54,12 +49,9 @@ brew "node@22"
 brew "openjdk@11"
 brew "pkcs11-tools"
 brew "postgresql@16"
-brew "rust"
 brew "shellcheck"
 brew "skaffold"
 brew "softhsm"
 
 cask "docker-desktop"
 cask "gcloud-cli"
-cask "google-cloud-sdk"
-cask "virtualbox"
