@@ -56,8 +56,6 @@ vim.o.visualbell = false
 vim.o.wildoptions = 'pum'
 vim.o.writebackup = false
 
-vim.diagnostic.setqflist()
-
 vim.api.nvim_command('highlight Comment cterm=italic')
 vim.api.nvim_command('highlight clear SignColumn')
 vim.api.nvim_command('filetype plugin indent on')
@@ -77,9 +75,8 @@ vim.keymap.set('n', '<c-l>', '<C-w>l')
 vim.keymap.set('n', '<c-g>', ':Telescope grep_string<CR>')
 vim.keymap.set('n', '<leader>l', ':nohl<CR>:lclose<CR>:cclose<CR>')
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
-vim.keymap.set('n', '[g', function() vim.diagnostic.jump({count = -1, float = true}) end)
-vim.keymap.set('n', ']g', function() vim.diagnostic.jump({count = 1, float = true}) end)
-vim.keymap.set('n', ']d', ':Telescope diagnostics<CR>')
+vim.keymap.set('n', '[g', function() vim.diagnostic.jump({count = -1}) end)
+vim.keymap.set('n', ']g', function() vim.diagnostic.jump({count = 1}) end)
 
 
 
@@ -145,9 +142,13 @@ vim.api.nvim_create_user_command('GitWebUiUrlCopy', function(arg)
 
   local url = ''
   if string.match(git_origin, 'github') then
-    for host, user, project in string.gmatch(git_origin, 'git@([^:]+):([^/]+)/([^/]+)%.git') do
-      url = 'https://' .. host .. '/' .. user .. '/' .. project .. '/blob/' .. git_commit .. '/' .. file_path_relative_to_git_root .. '#L' .. line_start .. '-L' .. line_end
-      break
+    if string.match(git_origin, 'git@') then
+      for host, user, project in string.gmatch(git_origin, 'git@([^:]+):([^/]+)/([^/]+)%.git') do
+        url = 'https://' .. host .. '/' .. user .. '/' .. project .. '/blob/' .. git_commit .. '/' .. file_path_relative_to_git_root .. '#L' .. line_start .. '-L' .. line_end
+        break
+      end
+    elseif string.match(git_origin, 'https://') then
+      url = git_origin:sub(1, #git_origin-4) .. '/blob/' .. git_commit .. '/' .. file_path_relative_to_git_root .. '#L' .. line_start .. '-L' .. line_end
     end
   elseif string.match(git_origin, 'azure.com') then
     -- End is exclusive in that case hence the `+ 1`.
@@ -394,7 +395,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- if the LSP supports it.
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
     if client == nil then
-      return
+      do return end
     end
     if client.server_capabilities.documentHighlightProvider then
       vim.cmd [[
@@ -436,6 +437,3 @@ end,
   bang=true,
   desc='Search with rg',
 })
-
-vim.api.nvim_command('highlight NormalFloat guibg=#fe8019')
-

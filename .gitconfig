@@ -11,6 +11,7 @@
 	excludesfile = ~/.gitignore
 	pager = delta
 	editor = nvim
+	autocrlf = input
 [color]
 	pager = no
 [delta]
