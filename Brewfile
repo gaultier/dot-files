@@ -30,11 +30,13 @@ brew "qemu"
 brew "ripgrep"
 brew "rust-analyzer"
 brew "samply"
+brew "sd"
 brew "tree"
 brew "xsv"
 
 cask "firefox"
 cask "kitty"
+cask "xquartz"
 
 # Ory
 
@@ -56,4 +58,6 @@ brew "skaffold"
 brew "softhsm"
 
 cask "docker-desktop"
+cask "flutter"
 cask "gcloud-cli"
+cask "utm"
