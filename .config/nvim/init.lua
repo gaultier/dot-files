@@ -363,7 +363,7 @@ cmp.setup {
 
 -- Prefer `//` over `/* ... */` for commenting.
 vim.api.nvim_create_autocmd('FileType', {
-   pattern = {'*.odin', '*.ts', '*.tsx', '*.cpp', '*.c', '*.h'},
+   pattern = {'*.odin', '*.ts', '*.tsx', '*.cpp', '*.c', '*.h', '*.d'},
    callback = function()
      vim.opt_local.commentstring = '// %s'
    end,
