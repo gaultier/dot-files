@@ -265,7 +265,13 @@ require('telescope').setup({
     layout_config = {width=0.999, height=0.999}
       -- other layout configuration here
     },
-  -- other configuration values here
+  pickers = {
+    find_files = {
+      hidden = true,
+      -- Optional: if you also want to see files ignored by .gitignore
+      -- no_ignore = true, 
+    }
+  }
 })
 
 
@@ -299,7 +305,7 @@ lspconfig.lua_ls.setup {
 }
 lspconfig.ts_ls.setup{}
 lspconfig.clangd.setup{}
-lspconfig.zls.setup{}
+-- lspconfig.zls.setup{}
 lspconfig.gopls.setup({
     settings = {
       gopls = {
@@ -309,11 +315,11 @@ lspconfig.gopls.setup({
   }
 })
 
-lspconfig.ols.setup({
-    init_options = {
-      checker_args = "-strict-style",
-  },
-})
+-- lspconfig.ols.setup({
+--     init_options = {
+--       checker_args = "-strict-style",
+--   },
+-- })
 
 lspconfig.rust_analyzer.setup{
   settings = {
