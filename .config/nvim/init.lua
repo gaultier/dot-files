@@ -1,4 +1,3 @@
-
 if vim.treesitter and not vim.treesitter.language.ft_to_lang then
   vim.treesitter.language.ft_to_lang = function(ft)
     return vim.treesitter.get_lang(ft) or ft
@@ -313,17 +312,21 @@ setup_lsp('lua_ls', {
 })
 
 setup_lsp('ts_ls', {
+  filetypes = { 'ts' },
   cmd = { 'typescript-language-server', '--stdio' },
   root_markers = { 'package.json', 'tsconfig.json', '.git' }
 })
 
 setup_lsp('clangd', {
+  cmd = { 'gopls' },
+  filetypes = { 'c', 'cpp' },
   cmd = { 'clangd' },
   root_markers = { '.clang-format', 'compile_commands.json', '.git' }
 })
 
 setup_lsp('gopls', {
   cmd = { 'gopls' },
+  filetypes = { 'go' },
   root_markers = { 'go.mod', '.git' },
   settings = {
     gopls = {
@@ -335,6 +338,7 @@ setup_lsp('gopls', {
 
 setup_lsp('rust_analyzer', {
   cmd = { 'rust-analyzer' },
+  filetypes = { 'rust' },
   root_markers = { 'Cargo.toml', '.git' },
   settings = {
     ['rust-analyzer'] = {
@@ -417,7 +421,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- if the LSP supports it.
         -- Native Completion (The nvim-cmp replacement)
     if client:supports_method('textDocument/completion') then
-      vim.lua.print('enabling completion')
       vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
     end
 
