@@ -9,6 +9,7 @@ vim.g.loaded_ruby_provider = 0
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+vim.o.autocomplete = true
 vim.o.autoread = true
 vim.o.autowrite = true
 vim.o.background = 'light'
@@ -231,10 +232,6 @@ Plug 'https://github.com/airblade/vim-gitgutter'
 Plug 'https://github.com/tpope/vim-unimpaired'
 -- Work on pairs of quotes, brackets, parentheses, etc.
 Plug 'https://github.com/tpope/vim-surround'
--- Suggestions engine.
-Plug('https://github.com/hrsh7th/nvim-cmp')
--- TAB suggestions based on LSP.
-Plug('https://github.com/hrsh7th/cmp-nvim-lsp')
 -- Configure various LSPs.
 Plug('https://github.com/neovim/nvim-lspconfig', {['dir'] = PlugDir .. '/lspconfig.nvim'})
 -- Syntax highlighting for lots of languages including niche ones.
@@ -391,11 +388,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
-    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
-    vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
     vim.keymap.set({ 'n', 'v' }, '<space>f', vim.lsp.buf.format, opts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
 
     -- Highlight all usages of the variable under the cursor,
     -- if the LSP supports it.
