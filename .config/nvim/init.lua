@@ -1,3 +1,10 @@
+
+if vim.treesitter and not vim.treesitter.language.ft_to_lang then
+  vim.treesitter.language.ft_to_lang = function(ft)
+    return vim.treesitter.get_lang(ft) or ft
+  end
+end
+
 vim.env.BAT_THEME='ansi'
 vim.g.gitgutter_enabled = 1
 vim.g.go_doc_keywordprg_enabled = 0
@@ -16,6 +23,7 @@ vim.o.background = 'light'
 vim.o.backup = false
 vim.o.clipboard = 'unnamedplus'
 vim.o.cmdheight = 2
+vim.o.completeopt = 'menu,menuone,noselect,fuzzy' -- 'fuzzy' is a great 0.12 addition
 vim.o.cursorline = false
 vim.o.encoding = 'utf-8'
 vim.o.errorbells = false
@@ -37,7 +45,7 @@ vim.o.modelines = 0
 vim.o.mouse = 'a'
 vim.o.relativenumber = true
 vim.o.number = true
--- vim.o.omnifunc = true
+vim.o.pumheight = 10                             -- Don't let the menu grow too tall
 vim.o.scrolloff = 5
 vim.o.selection = 'inclusive'
 vim.o.shiftwidth = 0
@@ -232,8 +240,6 @@ Plug 'https://github.com/airblade/vim-gitgutter'
 Plug 'https://github.com/tpope/vim-unimpaired'
 -- Work on pairs of quotes, brackets, parentheses, etc.
 Plug 'https://github.com/tpope/vim-surround'
--- Configure various LSPs.
-Plug('https://github.com/neovim/nvim-lspconfig', {['dir'] = PlugDir .. '/lspconfig.nvim'})
 -- Syntax highlighting for lots of languages including niche ones.
 Plug 'https://github.com/sheerun/vim-polyglot'
 -- Golang tools.
@@ -271,10 +277,15 @@ require('telescope').setup({
   }
 })
 
+-- 1. Helper to register and enable
+local function setup_lsp(name, config)
+  -- This registers the "template" so Neovim knows what 'lua_ls' is
+  vim.lsp.config[name] = vim.tbl_extend('force', vim.lsp.config[name] or {}, config or {})
+  -- This tells Neovim to actually use it for the current/future buffers
+  vim.lsp.enable(name)
+end
 
-local lspconfig = require('lspconfig')
-
-lspconfig.lua_ls.setup {
+setup_lsp('lua_ls', {
   settings = {
     Lua = {
       runtime = {
@@ -299,64 +310,70 @@ lspconfig.lua_ls.setup {
       },
     },
   },
-}
-lspconfig.ts_ls.setup{}
-lspconfig.clangd.setup{}
--- lspconfig.zls.setup{}
-lspconfig.gopls.setup({
-    settings = {
-      gopls = {
-        buildFlags = { "-tags='sqlite'" },
-        directoryFilters = {"-**/out"}
+})
+
+setup_lsp('ts_ls', {
+  cmd = { 'typescript-language-server', '--stdio' },
+  root_markers = { 'package.json', 'tsconfig.json', '.git' }
+})
+
+setup_lsp('clangd', {
+  cmd = { 'clangd' },
+  root_markers = { '.clang-format', 'compile_commands.json', '.git' }
+})
+
+setup_lsp('gopls', {
+  cmd = { 'gopls' },
+  root_markers = { 'go.mod', '.git' },
+  settings = {
+    gopls = {
+      buildFlags = { "-tags='sqlite'" },
+      directoryFilters = { "-**/out" }
     }
   }
 })
 
--- lspconfig.ols.setup({
---     init_options = {
---       checker_args = "-strict-style",
---   },
--- })
-
-lspconfig.rust_analyzer.setup{
+setup_lsp('rust_analyzer', {
+  cmd = { 'rust-analyzer' },
+  root_markers = { 'Cargo.toml', '.git' },
   settings = {
     ['rust-analyzer'] = {
-      cargo = {
-        features = "all"
-      }
+      cargo = { features = "all" }
     }
   }
-}
+})
 
--- nvim-cmp setup
-local cmp = require 'cmp'
-cmp.setup {
-  mapping = cmp.mapping.preset.insert({
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    },
-    ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-  }),
-  sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-  }),
-}
+-- Register Enter to use the current completion.
+vim.keymap.set('i', '<CR>', function()
+  if vim.fn.pumvisible() ~= 0 then
+    -- Check if an item is already highlighted
+    if vim.fn.complete_info({'selected'}).selected ~= -1 then
+      return '<C-y>'
+    else
+      -- If nothing is highlighted, select the first one (<C-n>) and confirm (<C-y>)
+      return '<C-n><C-y>'
+    end
+  else
+    return '<CR>'
+  end
+end, { expr = true })
 
+-- Use Tab/Shift+Tab to navigate completions.
+vim.keymap.set('i', '<Tab>', function()
+  if vim.fn.pumvisible() ~= 0 then
+    return '<C-n>'
+  else
+    return '<Tab>'
+  end
+end, { expr = true })
+
+vim.keymap.set('i', '<S-Tab>', function()
+  if vim.fn.pumvisible() ~= 0 then
+    return '<C-p>'
+  else
+    return '<S-Tab>'
+  end
+end, { expr = true })
 
 -- Prefer `//` over `/* ... */` for commenting.
 vim.api.nvim_create_autocmd('FileType', {
@@ -378,8 +395,14 @@ vim.api.nvim_create_autocmd('BufWritePre', {
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
   callback = function(ev)
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+    if not client then return end
+
+    if client:supports_method('textDocument/completion') then
+          vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+    end
     -- Enable completion triggered by <c-x><c-o>
-    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+    -- vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
     -- Buffer local mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -392,10 +415,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     -- Highlight all usages of the variable under the cursor,
     -- if the LSP supports it.
-    local client = vim.lsp.get_client_by_id(ev.data.client_id)
-    if client == nil then
-      do return end
+        -- Native Completion (The nvim-cmp replacement)
+    if client:supports_method('textDocument/completion') then
+      vim.lua.print('enabling completion')
+      vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
     end
+
     if client.server_capabilities.documentHighlightProvider then
       vim.cmd [[
         hi! LspReferenceRead cterm=bold ctermbg=235 guibg=LightYellow
