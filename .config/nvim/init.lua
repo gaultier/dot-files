@@ -1,9 +1,3 @@
-if vim.treesitter and not vim.treesitter.language.ft_to_lang then
-  vim.treesitter.language.ft_to_lang = function(ft)
-    return vim.treesitter.get_lang(ft) or ft
-  end
-end
-
 vim.env.BAT_THEME='ansi'
 vim.g.gitgutter_enabled = 1
 vim.g.go_doc_keywordprg_enabled = 0
@@ -249,7 +243,7 @@ Plug 'https://github.com/tpope/vim-fugitive'
 -- ?
 Plug 'https://github.com/nvim-lua/plenary.nvim'
 -- Pop-up to search and explore.
-Plug('https://github.com/nvim-telescope/telescope.nvim',  { tag= '0.1.8' })
+Plug('https://github.com/nvim-telescope/telescope.nvim')
 -- Faster fuzzy search using native.
 Plug('https://github.com/nvim-telescope/telescope-fzf-native.nvim', { ['do']= 'make' })
 Plug 'https://github.com/nvim-treesitter/nvim-treesitter'
