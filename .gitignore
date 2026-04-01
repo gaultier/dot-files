@@ -30,3 +30,5 @@ __pycache__
 .cfg
 *.exe
 *.test
+a.out
+*.bin

@@ -11,6 +11,7 @@
 	excludesfile = ~/.gitignore
 	pager = delta
 	editor = nvim
+	autocrlf = input
 [color]
 	pager = no
 [delta]
@@ -21,14 +22,17 @@
 	side-by-side = false
 [init]
 	defaultBranch = master
-[credential]
-	helper = 
-	helper = /usr/local/share/gcm-core/git-credential-manager
-[credential "https://dev.azure.com"]
-	useHttpPath = true
 [scalar]
 	repo = /Users/philippe.gaultier/company-code/cloud
 	repo = /Users/philippe.gaultier/company-code/cloud2/src
 [maintenance]
 	repo = /Users/philippe.gaultier/company-code/cloud
 	repo = /Users/philippe.gaultier/company-code/cloud2/src
+	repo = /Users/philippe.gaultier/my-code/blog
+	repo = /Users/philippe.gaultier/company-code/cloud3
+
+# Add in the git repository a `.gitattributes` file with e.g.:
+# `*.bin binary diff=hex`
+[diff "hex"]
+    textconv = hexdump -v -C
+		binary = true

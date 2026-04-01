@@ -2,17 +2,18 @@ set -U EDITOR nvim
 set -U GIT_EDITOR nvim
 set -U CMAKE_CXX_COMPILER_LAUNCHER ccache
 set -U CMAKE_C_COMPILER_LAUNCHER ccache
-set DFT_BACKGROUND "light "
+set -U DFT_BACKGROUND "light "
 set -U ODIN_ROOT "/home/pg/not-my-code/Odin"
 
-set BAT_THEME "ansi"
-set FZF_DEFAULT_COMMAND 'fd --type f --hidden --follow --exclude .git'
+set -U BAT_THEME "ansi"
+set -U FZF_DEFAULT_COMMAND 'fd --type f --hidden --follow --exclude .git'
 set FZF_DEFAULT_OPTS '--height 40% --layout=reverse --border'
 
 set GOROOT $HOME/go
 set GOPATH $HOME/go-workspace
 set PATH /opt/homebrew/bin/ /usr/sbin/ $ODIN_ROOT /home/pg/not-my-code/ols/ ~/.cargo/bin/ ~/go/bin/ /usr/local/go/bin/ /home/pg/.local/bin $PATH
 
+abbr --add hm --position command history merge
 abbr --add e --position command nvim
 abbr --add g --position command git
 abbr --add gco --position command git checkout
@@ -26,6 +27,7 @@ abbr --add gsu --position command git submodule update --init --recursive
 abbr --add gb --position command git branch
 abbr --add gc --position command git clone --recurse
 abbr --add gd --position command git diff
+abbr --add gdft --position command DFT_BACKGROUND=light GIT_EXTERNAL_DIFF=difft git diff
 abbr --add gcl --position command git clone --recurse --depth 1
 abbr --add d --position command docker
 abbr --add k --position command kubectl
@@ -68,7 +70,7 @@ if type -q gsettings; and test (uname -s) = Linux
 end
 
 function dstop
-    docker ps | awk 'NR > 1 {system("docker rm -f " $1)}'
+    docker ps --all | awk 'NR > 1 {system("docker rm -f " $1)}'
 end
 
 function dnuke
@@ -80,7 +82,16 @@ function gwip
     git add . && git commit -am "[wip]"
 end
 
+# Search and Replace.
+function snr -a search replace
+    set fish_trace true
+    rg $search $PWD --files-with-matches $argv[3..] | parallel sed -i '' -E -e $(printf '\'s/%s/%s/g\'' $search $replace) {}
+end 
+
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
 end
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/opt/homebrew/share/google-cloud-sdk/path.fish.inc' ]; . '/opt/homebrew/share/google-cloud-sdk/path.fish.inc'; end
