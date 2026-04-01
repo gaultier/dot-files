@@ -21,9 +21,12 @@ ripgrep
 shellcheck
 unzip
 valgrind
+wireguard-tools
 
 
 # Work
 # Also run after: sudo usermod -aG docker
 # docker.io 
 
+wl-clipboard
+mpv
