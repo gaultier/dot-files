@@ -1,7 +1,5 @@
 # brew bundle install --file=~/Brewfile [--cleanup]
 
-# Ory
-tap "cockroachdb/tap"
 
 brew "ag"
 brew "age"
@@ -40,7 +38,7 @@ cask "kitty"
 # Ory
 
 brew "caddy"
-brew "cockroach"
+brew "cockroachdb/tap/cockroach"
 brew "coreutils"
 brew "delve"
 brew "gh"
