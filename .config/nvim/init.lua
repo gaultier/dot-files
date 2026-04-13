@@ -405,6 +405,17 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- Buffer local mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local opts = { buffer = ev.buf }
+    --  These GLOBAL keymaps are created unconditionally when Nvim starts:
+    -- "gra" (Normal and Visual mode) is mapped to vim.lsp.buf.code_action()
+    -- "gri" is mapped to vim.lsp.buf.implementation()
+    -- "grn" is mapped to vim.lsp.buf.rename()
+    -- "grr" is mapped to vim.lsp.buf.references()
+    -- "grt" is mapped to vim.lsp.buf.type_definition()
+    -- "grx" is mapped to vim.lsp.codelens.run()
+    -- "gO" is mapped to vim.lsp.buf.document_symbol()
+    -- CTRL-S (Insert mode) is mapped to vim.lsp.buf.signature_help()
+    -- v_an and v_in fall back to LSP vim.lsp.buf.selection_range() if treesitter is not active.
+    -- gx handles textDocument/documentLink. Example: with gopls, invoking gx on "os" in this Go code will open documentation externally:
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
