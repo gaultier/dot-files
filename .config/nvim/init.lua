@@ -458,3 +458,9 @@ end,
   bang=true,
   desc='Search with rg',
 })
+
+vim.lsp.config["dtrace"] = {
+  filetypes={'d'},
+cmd={'/Users/philippe.gaultier/my-code/dtrace-rs/target/debug/examples/cli', 'lsp'},
+}
+  vim.lsp.enable("dtrace")

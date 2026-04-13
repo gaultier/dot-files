@@ -36,7 +36,6 @@ brew "xsv"
 
 cask "firefox"
 cask "kitty"
-cask "xquartz"
 
 # Ory
 
@@ -44,7 +43,6 @@ brew "caddy"
 brew "cockroach"
 brew "coreutils"
 brew "delve"
-brew "gemini-cli"
 brew "gh"
 brew "k9s"
 brew "kubectl"
@@ -56,11 +54,11 @@ brew "postgresql@16"
 brew "shellcheck"
 brew "skaffold"
 brew "softhsm"
-brew "zig"
 
 cask "claude"
 cask "claude-code"
 cask "docker-desktop"
 cask "flutter"
 cask "gcloud-cli"
+cask "ollama-app"
 cask "utm"
