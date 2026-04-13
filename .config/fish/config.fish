@@ -3,7 +3,6 @@ set -U GIT_EDITOR nvim
 set -U CMAKE_CXX_COMPILER_LAUNCHER ccache
 set -U CMAKE_C_COMPILER_LAUNCHER ccache
 set -U DFT_BACKGROUND "light "
-set -U ODIN_ROOT "/home/pg/not-my-code/Odin"
 
 set -U BAT_THEME "ansi"
 set -U FZF_DEFAULT_COMMAND 'fd --type f --hidden --follow --exclude .git'
@@ -11,7 +10,7 @@ set FZF_DEFAULT_OPTS '--height 40% --layout=reverse --border'
 
 set GOROOT $HOME/go
 set GOPATH $HOME/go-workspace
-set PATH /opt/homebrew/bin/ /usr/sbin/ $ODIN_ROOT /home/pg/not-my-code/ols/ ~/.cargo/bin/ ~/go/bin/ /usr/local/go/bin/ /home/pg/.local/bin $PATH
+set PATH /opt/homebrew/bin/ /usr/sbin/ ~/.cargo/bin/ ~/go/bin/ /usr/local/go/bin/ /home/pg/.local/bin $PATH
 
 abbr --add hm --position command history merge
 abbr --add e --position command nvim
