@@ -422,12 +422,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
     vim.keymap.set({ 'n', 'v' }, '<space>f', vim.lsp.buf.format, opts)
 
-    -- Highlight all usages of the variable under the cursor,
-    -- if the LSP supports it.
-        -- Native Completion (The nvim-cmp replacement)
-    if client:supports_method('textDocument/completion') then
-      vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
-    end
 
     if client.server_capabilities.documentHighlightProvider then
       vim.cmd [[
@@ -474,4 +468,12 @@ vim.lsp.config["dtrace"] = {
   filetypes={'d'},
 cmd={'/Users/philippe.gaultier/my-code/dtrace-rs/target/debug/examples/cli', 'lsp'},
 }
-  vim.lsp.enable("dtrace")
+vim.lsp.enable("dtrace")
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'TelescopePrompt',
+  callback = function(ev)
+    vim.bo[ev.buf].complete = ''
+  end,
+  desc = 'Disable completion in Telescope prompt',
+})
