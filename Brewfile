@@ -34,6 +34,7 @@ brew "xsv"
 
 cask "firefox"
 cask "kitty"
+cask "zed"
 
 # Ory
 

@@ -218,10 +218,6 @@ Plug 'https://github.com/mbbill/undotree'
 -- `cr.`: dot.case.
 -- `:Subvert/child{,ren}/adult{,s}/g`.
 Plug 'https://github.com/tpope/vim-abolish'
--- Comment lines out.
--- `gc` to (un)comment a visual region.
--- `gcc` to (un)comment the current line.
--- Plug 'https://github.com/tpope/vim-commentary'
 -- UNIX commands in vim. E.g. `:Rename`, `:Remove` etc.
 Plug 'https://github.com/tpope/vim-eunuch'
 -- Exchange 2 regions.
@@ -375,9 +371,9 @@ end, { expr = true })
 
 -- Prefer `//` over `/* ... */` for commenting.
 vim.api.nvim_create_autocmd('FileType', {
-   pattern = {'*.odin', '*.ts', '*.tsx', '*.cpp', '*.c', '*.h', '*.d'},
+   pattern = {'odin', 'ts', 'tsx', 'cpp', 'c', 'h', 'd'},
    callback = function()
-     vim.opt_local.commentstring = '// %s'
+     vim.bo.commentstring = '// %s'
    end,
 })
 
