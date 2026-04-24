@@ -308,7 +308,6 @@ setup_lsp('ts_ls', {
 })
 
 setup_lsp('clangd', {
-  cmd = { 'gopls' },
   filetypes = { 'c', 'cpp' },
   cmd = { 'clangd' },
   root_markers = { '.clang-format', 'compile_commands.json', '.git' }
@@ -379,7 +378,7 @@ vim.api.nvim_create_autocmd('FileType', {
 
 -- Format on save.
 vim.api.nvim_create_autocmd('BufWritePre', {
-   pattern = {'*.json', '*.rs', '*.odin', '*.ts', '*.tsx', '*.cpp', '*.c', '*.h'},
+   pattern = {'*.json', '*.rs', '*.odin', '*.ts', '*.tsx', '*.cpp', '*.c', '*.h', '*.d'},
    callback = function()
      vim.lsp.buf.format {async=false}
    end,
