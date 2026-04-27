@@ -53,6 +53,7 @@ brew "postgresql@16"
 brew "shellcheck"
 brew "skaffold"
 brew "softhsm"
+brew "cirruslabs/cli/tart"
 
 cask "claude"
 cask "claude-code"
