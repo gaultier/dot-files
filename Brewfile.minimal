@@ -1,0 +1,24 @@
+# brew bundle install --file=~/Brewfile [--cleanup]
+
+
+brew "ag"
+brew "cloc"
+brew "difftastic"
+brew "entr"
+brew "fd"
+brew "fish"
+brew "fzf"
+brew "git"
+brew "git-delta"
+brew "golang"
+brew "hyperfine"
+brew "htop"
+brew "jq"
+brew "neovim"
+brew "parallel"
+brew "ripgrep"
+brew "sd"
+brew "tree"
+brew "xsv"
+
+
