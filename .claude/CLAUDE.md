@@ -1,0 +1,1 @@
+- git: Never rebase, always merge.
