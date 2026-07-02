@@ -32,3 +32,5 @@ __pycache__
 *.test
 a.out
 *.bin
+
+**/.claude/settings.local.json

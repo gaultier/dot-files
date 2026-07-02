@@ -1,1 +1,3 @@
 - git: Never rebase, always merge.
+- git: Never rewrite the history.
+- git: Never force push.
