@@ -1,12 +1,10 @@
 # brew bundle install --file=~/Brewfile [--cleanup]
 
 
-brew "ag"
-brew "age"
+# brew "age"
 brew "cargo-flamegraph"
 brew "cloc"
 brew "difftastic"
-brew "entr"
 brew "fd"
 brew "fish"
 brew "fzf"
@@ -18,13 +16,10 @@ brew "graphviz"
 brew "hyperfine"
 brew "htop"
 brew "jq"
-brew "lld"
-brew "llvm"
 brew "lua-language-server"
-brew "nasm"
+# brew "nasm"
 brew "neovim"
 brew "parallel"
-brew "qemu"
 brew "ripgrep"
 brew "rust-analyzer"
 brew "samply"
@@ -34,7 +29,6 @@ brew "xsv"
 
 cask "firefox"
 cask "kitty"
-cask "zed"
 
 # Ory
 
@@ -56,10 +50,9 @@ brew "shellcheck"
 brew "skaffold"
 brew "softhsm"
 
-# cask "claude"
 cask "claude-code"
 cask "docker-desktop"
-cask "flutter"
+# cask "flutter"
 cask "gcloud-cli"
 # cask "ollama-app"
 # cask "utm"
