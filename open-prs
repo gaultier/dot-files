@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# List all my open non-draft PRs across GitHub as Slack-ready bullet points.
+set -euo pipefail
+
+gh search prs --author "@me" --state open --draft=false \
+  --json title,url,repository --limit 100 |
+  jq -r 'sort_by(.repository.nameWithOwner, .url) | .[] |
+    "- \(.title): \(.url)"'
