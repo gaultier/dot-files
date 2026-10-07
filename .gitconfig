@@ -22,14 +22,10 @@
 	side-by-side = false
 [init]
 	defaultBranch = master
-[scalar]
-	repo = /Users/philippe.gaultier/company-code/cloud
-	repo = /Users/philippe.gaultier/company-code/cloud2/src
 [maintenance]
 	repo = /Users/philippe.gaultier/company-code/cloud
-	repo = /Users/philippe.gaultier/company-code/cloud2/src
 	repo = /Users/philippe.gaultier/my-code/blog
-	repo = /Users/philippe.gaultier/company-code/cloud3
+	repo = /Users/philippe.gaultier/company-code/cloud4
 
 # Add in the git repository a `.gitattributes` file with e.g.:
 # `*.bin binary diff=hex`

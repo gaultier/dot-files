@@ -1,3 +1,7 @@
+# The following lines were added by Docker Desktop to add commands to your PATH.
+export PATH="$PATH:/Users/philippe.gaultier/.docker/bin"
+# End of Docker Desktop section.
+
 set -U EDITOR nvim
 set -U GIT_EDITOR nvim
 set -U CMAKE_CXX_COMPILER_LAUNCHER ccache

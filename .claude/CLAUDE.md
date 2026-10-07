@@ -1,3 +1,4 @@
 - git: Never rebase, always merge.
 - git: Never rewrite the history.
 - git: Never force push.
+- git: Github stacks (`gh stack`) are an exception, they are fine to rebase since Github requires it

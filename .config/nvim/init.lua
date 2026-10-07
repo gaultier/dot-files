@@ -245,6 +245,7 @@ Plug('https://github.com/nvim-telescope/telescope-fzf-native.nvim', { ['do']= 'm
 Plug 'https://github.com/nvim-treesitter/nvim-treesitter'
 -- Color theme.
 Plug 'https://github.com/morhetz/gruvbox'
+Plug 'ziglang/zig.vim'
 
 vim.call('plug#end')
 vim.api.nvim_command('colorscheme gruvbox')
