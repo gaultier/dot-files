@@ -2,3 +2,4 @@
 - git: Never rewrite the history.
 - git: Never force push.
 - git: Github stacks (`gh stack`) are an exception, they are fine to rebase since Github requires it
+- github comments: Always prefix your comments in PRs with `[Claude] `
